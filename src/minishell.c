@@ -1,9 +1,4 @@
 #include "minishell.h"
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 // void loop()
 // {
@@ -12,8 +7,19 @@
 // 	int status;
 // }
 
-int main(int ac, char **av)
+// pid_t id;
+
+// id = fork();
+// typeof(id) idi;
+// printf("Hello\n");
+// printf("2: %d\n", id);
+
+// // printf("3: %d\n", fork());
+// return (0);
+
+int main()
 {
+	t_msh *msh; // основная структура
 	int str[3];
 	int len;
 
@@ -22,7 +28,8 @@ int main(int ac, char **av)
 		len = read(0, &str, 3);
 		if (str == '\4')
 			break;
-	// 	else if (len > 0)
+		else if (len > 0)
+			return (0);
 	}
 	return (0);
 }

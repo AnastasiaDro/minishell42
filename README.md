@@ -1,6 +1,6 @@
 Тут начинается minishell
-gets
-execve
-termcap:::
 
-fflush()
+fork() - 
+execve() - 
+wait() - 
+chdir() - 

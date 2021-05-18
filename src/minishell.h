@@ -6,10 +6,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "../libft/libft.h"
 
 typedef struct s_msh // main struct
 {
 	int fd;
 }t_msh;
 
+// parsing
+void	ft_parse(t_msh *msh, char *str, int len);
+
+// builtin
+void	ft_echo(t_msh *msh, int arguments);
 #endif

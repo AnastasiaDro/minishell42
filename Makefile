@@ -1,13 +1,14 @@
 NAME = minishell
 
-SRCS = src/minishell.c
+SRCS =	src/minishell.c src/parse.c \
+		# src/ft_echo.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all:		$(NAME)
 

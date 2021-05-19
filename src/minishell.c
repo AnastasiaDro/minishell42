@@ -20,8 +20,10 @@ int main()
 			break ;
 		if (len > 0)
 			ft_parse(&msh, str, len);
-		if (str[0] == '\n');
-		if (str[0] == '\177');
+		if (str[0] == '\n')
+			break ;
+		if (str[0] == '\177')
+			break ;
 	}
 	return (0);
 }

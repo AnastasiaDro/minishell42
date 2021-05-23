@@ -20,7 +20,7 @@ $(NAME): 	$(OBJS)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
 	
 run:		$(NAME)
-			./$(NAME)
+			@./$(NAME)
 
 clean:
 			$(RM) $(OBJS)
@@ -30,7 +30,6 @@ fclean:		clean
 			@$(RM) $(NAME)
 			@make fclean -C libft
 
-re:
-			fclean all
+re:			fclean all
 
 .PHONY: 	all run clean fclean re

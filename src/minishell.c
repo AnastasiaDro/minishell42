@@ -1,29 +1,87 @@
 #include "minishell.h"
 
-void	ft_prompt(void)
+void lamashell(void)
+{
+ft_putendl_fd("                                            \n", 2);
+ft_putendl_fd("                                            \n", 2);
+ft_putendl_fd("                                         .  \n", 2);
+ft_putendl_fd("                                     ....   \n", 2);
+ft_putendl_fd("                                     ....   \n", 2);
+ft_putendl_fd("                                   .    .   \n", 2);
+ft_putendl_fd("                                      .   . \n", 2);
+ft_putendl_fd("                                           .\n", 2);
+ft_putendl_fd("                                .          .\n", 2);
+ft_putendl_fd("                                .    . .... \n", 2);
+ft_putendl_fd("                                .     .     \n", 2);
+ft_putendl_fd("                                      .     \n", 2);
+ft_putendl_fd("                                      .     \n", 2);
+ft_putendl_fd("                                      .     \n", 2);
+ft_putendl_fd("   .   .                              .     \n", 2);
+ft_putendl_fd("        .                      .            \n", 2);
+ft_putendl_fd("        . ..   ...             .            \n", 2);
+ft_putendl_fd(" . ...  .         .............        .    \n", 2);
+ft_putendl_fd(". .  .                      ..         .    \n", 2);
+ft_putendl_fd(". .                                    .    \n", 2);
+ft_putendl_fd("                                       .    \n", 2);
+ft_putendl_fd("   .                                 ..     \n", 2);
+ft_putendl_fd("                                     ..     \n", 2);
+ft_putendl_fd("  .         .                        .      \n", 2);
+ft_putendl_fd("  .                                  .      \n", 2);
+ft_putendl_fd("    .                                       \n", 2);
+ft_putendl_fd("    .                                       \n", 2);
+ft_putendl_fd("  . .                               .       \n", 2);
+ft_putendl_fd("  .                                 .       \n", 2);
+ft_putendl_fd("     .     .     .                 .        \n", 2);
+ft_putendl_fd("   . .     ..     .      .        .         \n", 2);
+ft_putendl_fd("   .         .      .    .      ..          \n", 2);
+ft_putendl_fd("      .       ..      ....     .            \n", 2);
+ft_putendl_fd("    . .         ...... .       .            \n", 2);
+ft_putendl_fd("     ..                .  .    .            \n", 2);
+ft_putendl_fd("     .    .            .   .   .            \n", 2);
+ft_putendl_fd("     .                 .   .                \n", 2);
+ft_putendl_fd("         .                 .                \n", 2);
+ft_putendl_fd("        ..                 .                \n", 2);
+ft_putendl_fd("     .  ..              .  .                \n", 2);
+ft_putendl_fd("     .  ..              . .   .             \n", 2);
+ft_putendl_fd("        ..              .                   \n", 2);
+ft_putendl_fd("      . .               .                   \n", 2);
+ft_putendl_fd("      . . .            .                    \n", 2);
+ft_putendl_fd("      . .              . .   .              \n", 2);
+ft_putendl_fd("       . . ..           . .                 \n", 2);
+ft_putendl_fd("       .. .                 .  .            \n", 2);
+ft_putendl_fd("        ...                  ..             \n", 2);
+ft_putendl_fd("                                            \n", 2);
+ft_putendl_fd("                                            \n", 2);}
+
+void ft_prompt(void)
 {
 	write(1, "msh:", 4);
 }
 
 int main()
 {
-	t_msh	msh; 		// основная структура
-	char	str[4];		// char **str;
-	int		len;
-
+	t_msh msh;	 // основная структура
+	char str[1]; // char **str;
+	int len;
+	lamashell();
+	ft_memset(&msh, 0, sizeof(msh));
 	ft_prompt();
-	ft_bzero(str, sizeof(char) * 4);
+	msh.line = NULL;
 	while (1)
 	{
-		len = read(0, &str, 3);
+		len = read(0, str, 1);
 		if (str[0] == '\4')
-			break ;
-		if (len > 0)
-			ft_parse(&msh, str, len);
-		if (str[0] == '\n')
-			break ;
-		if (str[0] == '\177')
-			break ;
+			break;
+		else if (str[0] == '\n')
+		{
+			str[0] = '\0';
+			printf("Line: %s\n", msh.line);
+		}
+		else if (str[0] != '\t' && str[0] != '\n')
+			ft_parse(&msh, str[0], len);
+
+		// if (str[0] == '\177')
+		// 	break ;
 	}
 	return (0);
 }

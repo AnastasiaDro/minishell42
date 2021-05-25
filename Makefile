@@ -13,17 +13,17 @@ CFLAGS = -Wall -Wextra -Werror -g
 all:		$(NAME)
 
 %.o: %.c
-			$(CC) $(CFLAGS) -c -I./libft/ $< -o $(<:.c=.o)
+			@$(CC) $(CFLAGS) -c -I./libft/ $< -o $(<:.c=.o)
 
 $(NAME): 	$(OBJS)
-			@make -C libft
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
+			@make bonus -C libft
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
 	
-run:
-	@./$(NAME)
+run:		$(NAME)
+			@./$(NAME)
 
 clean:
-			$(RM) $(OBJS)
+			@$(RM) $(OBJS)
 			@make clean -C libft
 
 fclean:		clean

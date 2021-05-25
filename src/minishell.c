@@ -1,34 +1,16 @@
 #include "minishell.h"
 
-void minishell(void)
-{
-	ft_putendl_fd("░░░░░░██████░░░░░░", 2);
-	ft_putendl_fd("░░░░░█░░░░░░█░░░░░", 2);
-	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
-	ft_putendl_fd("░░░██░░░██░░░██░░░", 2);
-	ft_putendl_fd("░░░█░░░████░░░█░░░", 2);
-	ft_putendl_fd("░░░█░░░░██░░░░█░░░", 2);
-	ft_putendl_fd("░░░█░░░░░░░░░░█░░░", 2);
-	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
-	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
-	ft_putendl_fd("░░░░░█░░░░░░█░░░░░", 2);
-	ft_putendl_fd("░░░░░██░░░░██░░░░░", 2);
-	ft_putendl_fd("░░░░░░█░░░░█░░░░░░", 2);
-	ft_putendl_fd("░░░░░░░█░░█░░░░░░░", 2);
-	ft_putendl_fd("░░░░░░░░██░░░░░░░░", 2);
-}
-
 void ft_prompt(void)
 {
 	write(1, "msh:", 4);
 }
 
+// int main(int ac, char **av, char **env)
 int main()
 {
 	t_msh msh;	 // основная структура
 	char str[1]; // char **str;
 	int len;
-	minishell();
 	ft_memset(&msh, 0, sizeof(msh));
 	ft_prompt();
 	msh.line = NULL;
@@ -36,7 +18,7 @@ int main()
 	{
 		len = read(0, str, 1);
 		if (str[0] == '\4')
-			break;
+			break ;
 		else if (str[0] == '\n')
 		{
 			str[0] = '\0';

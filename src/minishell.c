@@ -1,57 +1,22 @@
 #include "minishell.h"
 
-void lamashell(void)
+void minishell(void)
 {
-ft_putendl_fd("                                            \n", 2);
-ft_putendl_fd("                                            \n", 2);
-ft_putendl_fd("                                         .  \n", 2);
-ft_putendl_fd("                                     ....   \n", 2);
-ft_putendl_fd("                                     ....   \n", 2);
-ft_putendl_fd("                                   .    .   \n", 2);
-ft_putendl_fd("                                      .   . \n", 2);
-ft_putendl_fd("                                           .\n", 2);
-ft_putendl_fd("                                .          .\n", 2);
-ft_putendl_fd("                                .    . .... \n", 2);
-ft_putendl_fd("                                .     .     \n", 2);
-ft_putendl_fd("                                      .     \n", 2);
-ft_putendl_fd("                                      .     \n", 2);
-ft_putendl_fd("                                      .     \n", 2);
-ft_putendl_fd("   .   .                              .     \n", 2);
-ft_putendl_fd("        .                      .            \n", 2);
-ft_putendl_fd("        . ..   ...             .            \n", 2);
-ft_putendl_fd(" . ...  .         .............        .    \n", 2);
-ft_putendl_fd(". .  .                      ..         .    \n", 2);
-ft_putendl_fd(". .                                    .    \n", 2);
-ft_putendl_fd("                                       .    \n", 2);
-ft_putendl_fd("   .                                 ..     \n", 2);
-ft_putendl_fd("                                     ..     \n", 2);
-ft_putendl_fd("  .         .                        .      \n", 2);
-ft_putendl_fd("  .                                  .      \n", 2);
-ft_putendl_fd("    .                                       \n", 2);
-ft_putendl_fd("    .                                       \n", 2);
-ft_putendl_fd("  . .                               .       \n", 2);
-ft_putendl_fd("  .                                 .       \n", 2);
-ft_putendl_fd("     .     .     .                 .        \n", 2);
-ft_putendl_fd("   . .     ..     .      .        .         \n", 2);
-ft_putendl_fd("   .         .      .    .      ..          \n", 2);
-ft_putendl_fd("      .       ..      ....     .            \n", 2);
-ft_putendl_fd("    . .         ...... .       .            \n", 2);
-ft_putendl_fd("     ..                .  .    .            \n", 2);
-ft_putendl_fd("     .    .            .   .   .            \n", 2);
-ft_putendl_fd("     .                 .   .                \n", 2);
-ft_putendl_fd("         .                 .                \n", 2);
-ft_putendl_fd("        ..                 .                \n", 2);
-ft_putendl_fd("     .  ..              .  .                \n", 2);
-ft_putendl_fd("     .  ..              . .   .             \n", 2);
-ft_putendl_fd("        ..              .                   \n", 2);
-ft_putendl_fd("      . .               .                   \n", 2);
-ft_putendl_fd("      . . .            .                    \n", 2);
-ft_putendl_fd("      . .              . .   .              \n", 2);
-ft_putendl_fd("       . . ..           . .                 \n", 2);
-ft_putendl_fd("       .. .                 .  .            \n", 2);
-ft_putendl_fd("        ...                  ..             \n", 2);
-ft_putendl_fd("                                            \n", 2);
-ft_putendl_fd("                                            \n", 2);}
+	ft_putendl_fd("░░░░░░██████░░░░░░", 2);
+	ft_putendl_fd("░░░░░█░░░░░░█░░░░░", 2);
+	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
+	ft_putendl_fd("░░░██░░░██░░░██░░░", 2);
+	ft_putendl_fd("░░░█░░░████░░░█░░░", 2);
+	ft_putendl_fd("░░░█░░░░██░░░░█░░░", 2);
+	ft_putendl_fd("░░░█░░░░░░░░░░█░░░", 2);
+	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
+	ft_putendl_fd("░░░░█░░░░░░░░█░░░░", 2);
+	ft_putendl_fd("░░░░░█░░░░░░█░░░░░", 2);
+	ft_putendl_fd("░░░░░██░░░░██░░░░░", 2);
+	ft_putendl_fd("░░░░░░█░░░░█░░░░░░", 2);
+	ft_putendl_fd("░░░░░░░█░░█░░░░░░░", 2);
+	ft_putendl_fd("░░░░░░░░██░░░░░░░░", 2);
+}
 
 void ft_prompt(void)
 {
@@ -63,7 +28,7 @@ int main()
 	t_msh msh;	 // основная структура
 	char str[1]; // char **str;
 	int len;
-	lamashell();
+	minishell();
 	ft_memset(&msh, 0, sizeof(msh));
 	ft_prompt();
 	msh.line = NULL;

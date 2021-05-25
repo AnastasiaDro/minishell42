@@ -19,8 +19,8 @@ $(NAME): 	$(OBJS)
 			@make -C libft
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
 	
-run:		$(NAME)
-			@./$(NAME)
+run:
+	@./$(NAME)
 
 clean:
 			$(RM) $(OBJS)

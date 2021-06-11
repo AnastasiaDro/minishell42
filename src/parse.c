@@ -15,7 +15,7 @@ void	ft_parse(t_msh *msh, char str, int len)
 	else
 	{
 		msh->len += len;
-		msh->line = ft_realloc(msh->line, msh->len + 1);
+		msh->line = realloc(msh->line, msh->len + 1);
 		msh->line[msh->len - 1] = str;
 		msh->line[msh->len] = '\0';
 	}

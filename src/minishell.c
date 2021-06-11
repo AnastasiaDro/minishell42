@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "../libft/libft.h"
 
 void ft_prompt(void)
 {

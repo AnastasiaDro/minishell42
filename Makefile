@@ -17,7 +17,7 @@ all:		$(NAME)
 
 $(NAME): 	$(OBJS)
 			@make bonus -C libft
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -ltermcap -lreadline
 	
 run:		$(NAME)
 			@./$(NAME)

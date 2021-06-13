@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../libft/libft.h"
+#include "errno.h"
 
 typedef struct s_msh // main struct
 {

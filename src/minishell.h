@@ -17,6 +17,7 @@ typedef struct s_msh // main struct
 
 // parsing
 void	ft_parse(t_msh *msh, char str, int len);
+void rl_replace_line();
 //void ft_parser(t_msh *msh);
 
 // builtin

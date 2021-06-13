@@ -33,7 +33,7 @@ void ft_parser(t_msh *msh)
 
 void ft_prompt(void)
 {
-	write(1, "msh:", 4);
+	write(1, "\nmsh: ", 5);
 }
 
 
@@ -42,12 +42,12 @@ void cntrl_c(int num)
 {
     if(num == SIGINT)
     {
-        //write(1, "\n", 1);
+        rl_replace_line("", 0);
+        write(1, "\n", 1);
+        rl_on_new_line();
         rl_redisplay();
-        //ft_prompt();
-        signal(SIGINT, cntrl_c);
+        errno = 0;
     }
-
 }
 
 
@@ -63,7 +63,7 @@ void cntrl_c(int num)
     ///Нужно проверить все эти функции на возвращаемое значение!!!
     tcgetattr(0, &term);
     //term.c_lflag &= ~(ECHO);
-   term.c_lflag &= ~(ICANON);
+    term.c_lflag &= ~(ICANON);
     tcsetattr(0, TCSANOW, &term);
 
     tgetent(0, term_name); //для термкапа отправляем
@@ -81,8 +81,9 @@ void cntrl_c(int num)
 
     while (1)
     {
-
+       // signal(SIGINT, cntrl_c);
         msh.line = readline("msh: ");
+
         msh.len = ft_strlen(msh.line);
         if (msh.len > 0)
         {

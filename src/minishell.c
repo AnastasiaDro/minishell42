@@ -46,7 +46,17 @@ void cntrl_c(int num)
         write(1, "\n", 1);
         rl_on_new_line();
         rl_redisplay();
-        errno = 0;
+        errno = 1;
+    }
+}
+
+void check_exit(t_msh *msh) //при cnt
+{
+    if (msh->line == NULL || !ft_strncmp("exit", msh->line, 8))
+    {
+        printf("exit\n");
+        exit(0);
+        ///TODO: добавить чистку всего!!!
     }
 }
 
@@ -55,19 +65,19 @@ void cntrl_c(int num)
 {
 
     ///
-    struct termios term;
+  //  struct termios term;
     char *term_name;
 
     term_name = "xterm-256color";
 
     ///Нужно проверить все эти функции на возвращаемое значение!!!
-    tcgetattr(0, &term);
-    //term.c_lflag &= ~(ECHO);
-    term.c_lflag &= ~(ICANON);
-    tcsetattr(0, TCSANOW, &term);
-
-    tgetent(0, term_name); //для термкапа отправляем
-    ///
+//    tcgetattr(0, &term);
+//  //  term.c_lflag &= ~(ECHO);
+//  //  term.c_lflag &= ~(ICANON);
+//
+//    tcsetattr(0, TCSANOW, &term);
+//    tgetent(0, term_name); //для термкапа отправляем
+//    ///
 
     t_msh msh;
     char *tmp;
@@ -81,9 +91,10 @@ void cntrl_c(int num)
 
     while (1)
     {
+
        // signal(SIGINT, cntrl_c);
         msh.line = readline("msh: ");
-
+        check_exit(&msh); //
         msh.len = ft_strlen(msh.line);
         if (msh.len > 0)
         {

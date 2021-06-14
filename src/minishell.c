@@ -31,15 +31,9 @@ void ft_parser(t_msh *msh)
 
 
 
-
-void ft_prompt(void)
-{
-	write(1, "\nmsh: ", 5);
-}
-
-
+///1 добавила тут
 ///обработка ctrl_C
-void cntrl_c(int num)
+void ctrl_c(int num)
 {
     if(num == SIGINT)
     {
@@ -73,8 +67,20 @@ void cntrl_c(int num)
         errno = 1;
     }
 }
+///конец изменений
 
 
+///2 добавила тут
+int ctrl_d(t_msh *msh)
+{
+    if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
+    {
+        printf("exit\n");
+        return (1);
+    }
+    return (0);
+}
+///конец изменений
 
  int main(int ac, char **av, char **env)
 {
@@ -83,19 +89,19 @@ void cntrl_c(int num)
     (void)ac;
     (void)av;
     (void)env;
-    signal(SIGINT, cntrl_c);
-
+///3 добавила тут
+    signal(SIGINT, ctrl_c);
+///конец изменений
      ft_memset(&msh, 0, sizeof(msh));
      msh.line = NULL;
 
     while (1)
     {
         msh.line = readline("msh: ");
-        if (msh.line == NULL || !ft_strncmp("exit", msh.line, 8))
-        {
-            printf("exit\n");
+    ///4 добавила тут
+        if (ctrl_d(&msh))
             break;
-        }
+    ///конец изменений
         msh.len = ft_strlen(msh.line);
         if (msh.len > 0)
         {
@@ -103,7 +109,7 @@ void cntrl_c(int num)
             ft_parser(&msh);
         }
         free(msh.line);
-        msh.line = "NULL";
+        msh.line = NULL;
     }
     return (0);
 }

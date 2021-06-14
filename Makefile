@@ -1,7 +1,6 @@
 NAME = minishell
 
-SRCS =	src/minishell.c src/parse.c \
-		# src/ft_echo.c
+SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -17,7 +16,7 @@ all:		$(NAME)
 
 $(NAME): 	$(OBJS)
 			@make bonus -C libft
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -lreadline
 	
 run:		$(NAME)
 			@./$(NAME)

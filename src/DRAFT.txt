@@ -1,0 +1,27 @@
+int	gSignal;
+
+void ft_signal(int signal)
+{
+	if (signal == SIGINT)
+	{
+		write(1, "\nmsh: ", 6);
+		gSignal = 1;
+	}
+}
+
+if (gSignal == 1)
+{
+			gSignal = 0;
+			msh.len = 0;
+			// free(msh.line);
+			// msh.line = NULL;
+			msh->ret = 1;
+}
+
+
+#include "libft.h"
+
+int	ft_iseven(int n)
+{
+	return ((-1 * n) % 2);
+}

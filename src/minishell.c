@@ -1,34 +1,24 @@
 #include "minishell.h"
 
-void ft_prompt(void)
+int main(int ac, char **av, char **envp)
 {
-	write(1, "msh:", 4);
-}
-
-// int main(int ac, char **av, char **env)
-int main()
-{
-	t_msh msh;	 // основная структура
-	char str[1]; // char **str;
-	int len;
+	t_msh msh;
+	(void)ac;
+	(void)av;
+	(void)envp;
+	ft_init(&msh);
 	ft_memset(&msh, 0, sizeof(msh));
-	ft_prompt();
-	msh.line = NULL;
 	while (1)
 	{
-		len = read(0, str, 1);
-		if (str[0] == '\4')
-			break ;
-		else if (str[0] == '\n')
+		msh.line = readline("msh: ");
+		msh.len = ft_strlen(msh.line);
+		if (msh.len > 0)
 		{
-			str[0] = '\0';
-			printf("Line: %s\n", msh.line);
+			add_history(msh.line);
+			ft_parser(&msh);
 		}
-		else if (str[0] != '\t' && str[0] != '\n')
-			ft_parse(&msh, str[0], len);
-
-		// if (str[0] == '\177')
-		// 	break ;
+		free(msh.line);
+		msh.line = NULL;
 	}
 	return (0);
 }

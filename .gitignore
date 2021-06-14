@@ -6,3 +6,5 @@
 libft/*.o
 libft_main
 minishell
+.idea
+aa

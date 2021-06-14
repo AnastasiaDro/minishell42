@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ft_exit(t_msh *msh, int noerr)
+void	ft_exit()
 {
-	exit(noerr);
+	exit(errno);
 }

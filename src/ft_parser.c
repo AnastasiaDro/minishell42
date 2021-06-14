@@ -3,6 +3,7 @@
 //
 
 #include "minishell.h"
+#include "exit_codes.h"
 
 void ft_parser(t_msh *msh)
 {
@@ -22,6 +23,7 @@ void ft_parser(t_msh *msh)
                 j++;
         }
         i++;
+
     }
     // printf("after msh->line: %s\n", msh->line);
     // printf("after msh->len: %d\n", msh->len);

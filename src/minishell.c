@@ -78,35 +78,12 @@ void cntrl_c(int num)
 
  int main(int ac, char **av, char **env)
 {
-
-  //  struct termios term;
-    ///Нужно проверить все эти функции на возвращаемое значение!!!
-    //получаем атрибуты терминала
-//    tcgetattr(0, &term);
-//    //выключаем чета-там, что символ не отображается
-//    term.c_lflag &= ~(ICANON);
-//    tcsetattr(0, TCSANOW, &term);
-
-//    struct termios term;
-//    char *term_name;
-//
-//    term_name = "xterm-256color";
-//
-//    ///Нужно проверить все эти функции на возвращаемое значение!!!
-//    tcgetattr(0, &term);
-//  term.c_lflag &= ~(ECHO);
-// term.c_lflag &= ~(ICANON);
-//
-//    tcsetattr(0, TCSANOW, &term);
-//    tgetent(0, term_name); //для термкапа отправляем
-//    ///
-
     t_msh msh;
-   // char *tmp;
+
     (void)ac;
     (void)av;
     (void)env;
-  signal(SIGINT, cntrl_c);
+    signal(SIGINT, cntrl_c);
 
      ft_memset(&msh, 0, sizeof(msh));
      msh.line = NULL;
@@ -119,7 +96,6 @@ void cntrl_c(int num)
             printf("exit\n");
             break;
         }
-
         msh.len = ft_strlen(msh.line);
         if (msh.len > 0)
         {

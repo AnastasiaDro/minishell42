@@ -26,7 +26,10 @@ typedef struct s_msh // main struct
 	int		len;
 	char	*line;
 	int		quote;
-}t_msh;
+//добавила Настя
+	t_list *envp_list; //список переменных среды
+    int     envp_len;  //длина списка переменных среды
+}               t_msh;
 
 // parsing
 void	ft_readl(t_msh *msh);
@@ -36,7 +39,8 @@ void	ft_parser(t_msh *msh);
 void	ft_error(ssize_t err_no, const char *msg);
 
 // init
-void	ft_init(t_msh *msh);
+//void	ft_init(t_msh *msh);
+void ft_init(t_msh *msh, char **envp);
 
 // builtin
 void	ft_exit();

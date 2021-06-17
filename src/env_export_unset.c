@@ -3,6 +3,7 @@
 //
 //#include "stdio.h"
 #include "../libft/libft.h"
+#include "minishell.h"
 #define EXP_PREFIX "declare -x "
 
 int ft_env(char **envp)
@@ -32,12 +33,13 @@ void insert_var(t_list **vars, char *new_content)
 }
 
 
-int ft_export(char **envp)
+int ft_export(char **envp, t_msh *msh)
 {
     int i;
     t_list *vars;
 
-    vars = ft_lst_new(envp[0]);
+    vars = msh->envp_list;
+
 
     i = 0;
     while(envp[i])
@@ -45,6 +47,5 @@ int ft_export(char **envp)
         insert_var(&vars, envp[i]);
         i++;
     }
-
     return (i);
 }

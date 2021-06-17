@@ -6,5 +6,6 @@
 # define ENV_EXPORT_UNSET_H
 
 int ft_env(char **envp);
-
+void insert_var(t_list **envp_list, char *var);
+int init_envp_list(t_list **envp_list, char **envp);
 #endif

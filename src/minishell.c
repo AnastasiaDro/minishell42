@@ -56,7 +56,9 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 	signal(SIGINT, ctrl_c);
-	ft_init(&msh);
+	ft_init(&msh, envp);
+    //ft_init(&msh);
+
 	ft_memset(&msh, 0, sizeof(msh));
     ft_env(envp);
 	while (1)

@@ -14,9 +14,9 @@ all:		$(NAME)
 %.o: %.c
 			@$(CC) $(CFLAGS) -c -I./libft/ $< -o $(<:.c=.o)
 
-$(NAME): 	$(OBJS)
-			@make bonus -C libft
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -lreadline
+$(NAME):	$(OBJS)
+	@make bonus -C libft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -ltermcap -L/Users/jkeitha/.brew/Cellar/readline/8.1/lib/ -I/Users/jkeitha/.brew/Cellar/readline/8.1/include -lreadline
 	
 run:		$(NAME)
 			@./$(NAME)

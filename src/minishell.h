@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <ncurses.h>
 #include <errno.h>
+#include "exit_codes.h"
 #include "../libft/libft.h"
 
 #define SQUOTES 1
@@ -40,5 +41,11 @@ void	ft_init(t_msh *msh);
 // builtin
 void	ft_exit();
 
+// readline
+void	rl_replace_line();
+
 // void	ft_echo(t_msh *msh, int arguments);
+
+
+
 #endif

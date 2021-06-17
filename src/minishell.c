@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "env_export_unset.h"
 
 int ctrl_d(t_msh *msh)
 {
@@ -47,6 +48,9 @@ void ctrl_c(int num)
 
 int main(int ac, char **av, char **envp)
 {
+
+    printf("strncmp %d\n", ft_strncmp("A", "B", 2));
+
 	t_msh msh;
 	(void)ac;
 	(void)av;
@@ -54,6 +58,7 @@ int main(int ac, char **av, char **envp)
 	signal(SIGINT, ctrl_c);
 	ft_init(&msh);
 	ft_memset(&msh, 0, sizeof(msh));
+    ft_env(envp);
 	while (1)
 	{
 		msh.line = readline("msh: ");

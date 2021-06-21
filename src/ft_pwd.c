@@ -1,8 +1,10 @@
 #include "minishell.h"
 
-void	ft_pwd(t_msh *msh, char *dir)
+void	ft_pwd(void)
 {
-	int	len = ft_strlen(dir);
-	dir = getcwd(dir, len + 1);
-	write(msh->fd, dir, len);
+	char	*buf;
+	char	*dir;
+
+	dir = getcwd(buf, 4096);
+	printf("%s\n", dir);
 }

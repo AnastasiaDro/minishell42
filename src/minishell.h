@@ -20,12 +20,22 @@
 #define SQUOTES 1
 #define DQUOTES 2
 
+// builtin привести к одному регистру
+#define FT_ECHO		"echo"
+#define FT_CD		"cd"
+#define FT_PWD		"pwd"
+#define	FT_EXPORT	"export"
+#define FT_UNSET	"unset"
+#define FT_ENV		"env"
+#define FT_EXIT		"exit"
+
 typedef struct s_msh // main struct
 {
 	int		fd;
 	int		len;
-	char	*line;
 	int		quote;
+	char	*line;
+	char	**tokens;
 }t_msh;
 
 // parsing
@@ -40,6 +50,7 @@ void	ft_init(t_msh *msh);
 
 // builtin
 void	ft_exit();
+// void	ft_echo(t_msh *msh, int arguments);
 
 // readline
 void	rl_replace_line();

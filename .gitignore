@@ -1,10 +1,2 @@
-.vscode
-.a
-*.dSYM
-*.out
-*.o
-libft/*.o
-libft_main
-minishell
-.idea
-aa
+# Project exclude paths
+/cmake-build-debug/

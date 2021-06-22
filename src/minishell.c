@@ -1,6 +1,8 @@
 #include "minishell.h"
 #include "env_export_unset.h"
 
+
+
 int ctrl_d(t_msh *msh)
 {
 	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
@@ -56,22 +58,31 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 	signal(SIGINT, ctrl_c);
-	ft_init(&msh, envp);
-    //ft_init(&msh);
 
-	ft_memset(&msh, 0, sizeof(msh));
-    ft_env(envp);
+    //ft_init(&msh);
+//	ft_memset(&msh, 0, sizeof(msh));
+	ft_init(&msh, envp);
+    //ft_env(envp);
 	while (1)
 	{
 		msh.line = readline("msh: ");
 		if (ctrl_d(&msh))
             break;
 		msh.len = ft_strlen(msh.line);
+		printf("msh.line = %s\n", msh.line);
+
+		//новое
+		if (!ft_strncmp("export", msh.line, 6))
+			ft_print_export(&msh);
+
 		if (msh.len > 0)
 		{
 			add_history(msh.line);
 			ft_parser(&msh);
 		}
+
+		//тест
+
 		free(msh.line);
 		msh.line = NULL;
 	}

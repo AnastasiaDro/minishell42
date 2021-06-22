@@ -37,7 +37,6 @@ int init_envp_list(char **arr, t_list **list)
 			arr_len++;
 
 		j = 1;
-		i = 1;
 		str = arr[0];
 		while (j< arr_len)
 		{
@@ -57,7 +56,8 @@ int init_envp_list(char **arr, t_list **list)
 				}
 				i++;
 			}
-			ft_lstadd_back(list, ft_lstnew(ft_strdup(str)));
+			if (str != NULL)
+				ft_lstadd_back(list, ft_lstnew(ft_strdup(str)));
 			arr[index] = NULL;
 			str = &c;
 			j++;
@@ -70,12 +70,14 @@ int init_envp_list(char **arr, t_list **list)
 void ft_print_export( t_msh *msh)
 {
     t_list *vars;
+    char *content;
 
     vars = msh->envp_list;
-
 	while (vars)
 	{
-		printf("declare -x %s\n", (char *)vars->content);
+		content = (char *)vars->content;
+		if (content != NULL)
+			printf("declare -x %s\n", (char *)vars->content);
 		vars = vars->next;
 	}
 }

@@ -25,3 +25,17 @@ int	ft_iseven(int n)
 {
 	return ((-1 * n) % 2);
 }
+
+
+
+void singleQuotes(char **line)
+{
+	char *close_quote;
+
+	++*line;
+	close_quote = ft_strchr(*line, '\'');
+	if (close_quote)
+		*line = close_quote + 1;
+	else
+		ft_error(1, "NOT_INTERPRETED_UNCOVERED_QOUTATION_MARKS");
+}

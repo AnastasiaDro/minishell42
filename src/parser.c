@@ -1,74 +1,59 @@
 #include "minishell.h"
 
-void ft_lexer(t_msh *msh, int j, int i)
+void inQuotes(char **line)
 {
-	char *token = NULL;
-	// int i = -1;
-	// while (msh->line[++i])
-	// {
-	// if (msh->line[++i] == '\'' || msh->line[++i] == '\"')
-	token = ft_substr(msh->line, j + 1, (i - j) - 1);
-	printf("tokenLen: %zu\n", ft_strlen(token));
-	printf("token:|%s|\n", token);
-	// }
+	char sym;
+
+	sym = **line;
+
+	++*line;
+	printf("sym: %c\n", **line);
+	printf("++*line: %s\n", *line);
+	while (*line && **line && **line != sym)
+	{
+		// if (*(*line + 1) == sym)
+		// {
+		// 	// ++*line;
+		// 	printf("closedQuote: %c\n", **line);
+		// }
+		// else
+		++*line;
+	}
+	if (**line == '\0')
+		ft_error(1, "NOT_INTERPRETED_UNCOVERED_QOUTATION_MARKS");
+	else
+		++*line;
 }
 
-void ft_parser(t_msh *msh)
+char *ft_lexer(char **line)
 {
-	int i = -1;
-	int j = 0;
-	int k = 0;
-	char *tmp = NULL;
-	while (msh->line[++i])
+	char		*newToken;
+	const char	*start = *line;
+	printf("*line: %s\n", *line);
+	printf("*start: %s\n", start);
+	while (*line && **line && !ft_strchr(" >|<", **line))
 	{
-		if (ft_isprint(msh->line[i]))
-		{
-			k = i;
-			if ((msh->line[i]) == '\'')
-			{
-				if (!msh->quote)
-				{
-					msh->quote = 1;
-					j = i;
-				}
-				else if (msh->quote == 1)
-				{
-					ft_lexer(msh, j, i);
-					msh->quote = 0;
-				}
-			}
-			else if ((msh->line[i]) == '"')
-			{
-				if (!msh->quote)
-				{
-					msh->quote = 2;
-					j = i;
-				}
-				else if (msh->quote == 2)
-				{
-					ft_lexer(msh, j, i);
-					msh->quote = 0;
-				}
-			}
-		}
-		else if (msh->line[i] == ' ')
-		{
-			tmp = ft_substr(msh->line, k, msh->len - i);
-			printf("tmp: |%s|\n", tmp);
-		}
+		if (**line == '\'' || **line == '\"')
+			inQuotes(line);
+		else
+			++*line;
+	}
 
-		// else
-		// 	i++;
-	}
-	// printf("tmp: |%s|\n", *tmp);
-	printf("len: %d\n", msh->len);
-	printf("j1: %d\n", j);
-	printf("j: %d\n", msh->len - j);
-	if (msh->quote == 1 || msh->quote == 2)
+	newToken = ft_substr(start, 0, *line - start);
+	if (newToken == NULL)
+		return (NULL);
+	return (newToken);
+}
+
+void ft_parser(t_msh *msh, char *line)
+{
+	char *token;
+
+	while (line && *line)
 	{
-		ft_error(1, "NOT_INTERPRETED_UNCOVERED_QOUTATION_MARKS");
-		msh->quote = 0;
+		while (*line == ' ')
+			line++;
+		token = ft_lexer(&line);
+		printf("token: |%s| len: |%d|\n", token, msh->len);
 	}
-	printf("after msh->line: %s\n", msh->line);
-	// ft_lexer(msh);
 }

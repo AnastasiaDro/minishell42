@@ -34,13 +34,15 @@ typedef struct s_msh // main struct
 	int		fd;
 	int		len;
 	int		quote;
-	char	*line;
 	char	**tokens;
 }t_msh;
 
 // parsing
 void	ft_readl(t_msh *msh);
-void	ft_parser(t_msh *msh);
+void	ft_parser(t_msh *msh, char *line);
+
+// lexer
+// char *ft_lexer(char **line);
 
 // errors
 void	ft_error(ssize_t err_no, const char *msg);

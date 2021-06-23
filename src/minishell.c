@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-int ctrl_d(t_msh *msh)
+int ctrl_d(char *line)
 {
-	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
+	if (line == NULL || !ft_strncmp("exit", line, ft_strlen(line)))
 	{
 		printf("exit\n");
 		return (1);
@@ -48,6 +48,7 @@ void ctrl_c(int num)
 int main(int ac, char **av, char **envp)
 {
 	t_msh msh;
+	char *line;
 	(void)ac;
 	(void)av;
 	(void)envp;
@@ -56,17 +57,15 @@ int main(int ac, char **av, char **envp)
 	ft_memset(&msh, 0, sizeof(msh));
 	while (1)
 	{
-		msh.line = readline("msh: ");
-		if (ctrl_d(&msh))
-            break;
-		msh.len = ft_strlen(msh.line);
+		line = readline("msh: ");
+		msh.len = ft_strlen(line);
 		if (msh.len > 0)
 		{
-			add_history(msh.line);
-			ft_parser(&msh);
+			add_history(line);
+			ft_parser(&msh, line);
 		}
-		free(msh.line);
-		msh.line = NULL;
+		free(line);
+		line = NULL;
 	}
 	return (0);
 }

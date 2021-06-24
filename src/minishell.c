@@ -62,7 +62,7 @@ int main(int ac, char **av, char **envp)
 		if (msh.len > 0)
 		{
 			add_history(line);
-			ft_parser(&msh, line);
+			parser(&msh, line);
 		}
 		free(line);
 		line = NULL;

@@ -35,7 +35,7 @@ typedef struct s_msh // main struct
 	int		len;
 	int		quote;
 	char	**tokens;
-	// int		countTokens;
+	int		countTokens;
 }t_msh;
 
 // parsing

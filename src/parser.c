@@ -43,13 +43,17 @@ char *lexer(t_msh *msh, char **line)
 
 void parser(t_msh *msh, char *line)
 {
-	char *token;
+	t_list *token = NULL;
 
 	while (line && *line)
 	{
 		while (*line == ' ') // пропускаю пробелы в начале
 			line++;
-		token = lexer(msh, &line); // лексер возвращает токен
-		printf("token: |%s| len: |%d|\n", token, msh->len);
+		ft_lstadd_back(&token, ft_lstnew(lexer(msh, &line))); // lexer->token->newList->ListAddBack
+	}
+	while (token)
+	{
+		printf("content: |%s|\n", token->content);
+		token = token->next;
 	}
 }

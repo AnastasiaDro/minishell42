@@ -1,34 +1,33 @@
 #include "minishell.h"
 
-// void ft_echo(t_msh *msh, int arguments)
-// {
-// 	int nflag;
-
-// 	if ()
-// 		write(msh->fd, arguments, sizeof(arguments));
-// }
-
-int main(int argc, char *argv[])
+void	ft_echo(char **av)
 {
+	int	i;
 	int nflag;
 
-	/* This utility may NOT do getopt(3) option parsing. */
-	if (*++argv && !strcmp(*argv, "-n"))
+	while (*++av && !strncmp(*av, "-n", 2))
 	{
-		++argv;
-		nflag = 1;
+		i = 1;
+		while((*av)[i] == 'n')
+			i++;
+		if ((*av)[i] == '\0')
+			nflag = 1;
+		else 
+			break;
 	}
-	else
-		nflag = 0;
-
-	while (*argv)
+	while (*av)
 	{
-		(void)fputs(*argv, stdout);
-		if (*++argv)
-			putchar(' ');
+		write(STDOUT_FILENO, *av, strlen(*av));
+		if (*++av)
+			write(STDOUT_FILENO, " ", 1);
 	}
 	if (!nflag)
-		putchar('\n');
-
-	return 0;
+		write(STDOUT_FILENO, "\n", 1);
 }
+
+// int main(int ac, char **av)
+// {
+// 	(void)ac;
+// 	ft_echo(av);
+// 	return (0);
+// }

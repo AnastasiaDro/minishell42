@@ -134,29 +134,33 @@ void ft_add_envarr(t_msh *t_msh, t_en_list *list)
 		return;
 	i = 0;
 	j = 0;
-	tmp = t_msh->envp_arr;
 	arr_len = ft_arrlen(t_msh->envp_arr);
 	new_arr = malloc((arr_len + 2) * sizeof(char *));
-	
+	tmp = t_msh->envp_arr;
 	write(1, "2HERE add envvar!\n", ft_strlen("2HERE add envvar!\n"));
 	new_arr[arr_len + 1] = NULL;
 	write(1, "3HERE add envvar!\n", ft_strlen("3HERE add envvar!\n"));
 	while (t_msh->envp_arr[i])
 	{
 		new_arr[i] = t_msh->envp_arr[i];
+		new_arr[i] = malloc((ft_strlen(list->name) + ft_strlen(list->value) + 2)*sizeof(char));
+	new_arr[i][ft_strlen(list->name) + ft_strlen(list->value) + 2] = '\0';
 		i++;
 	}
 	
-	new_arr[i] = malloc((ft_strlen(list->name) + ft_strlen(list->value) + 2)*sizeof(char));
-	new_arr[i][ft_strlen(list->name) + ft_strlen(list->value) + 2] = '\0';
+	// new_arr[i] = malloc((ft_strlen(list->name) + ft_strlen(list->value) + 2)*sizeof(char));
+	// new_arr[i][ft_strlen(list->name) + ft_strlen(list->value) + 2] = '\0';
 	write(1, "4HERE add envvar!\n", ft_strlen("4HERE add envvar!\n"));
 	////TODO
-	while (list->name)
+	i = 0;
+	while (new_arr[i][j])
 	{
 		write(1, "0HERE add envvar!\n", ft_strlen("0HERE add envvar!\n"));
-		new_arr[i][j] = *(list->name);
+		//new_arr[i][j] = *(list->name);
+		new_arr[i][j] = 'u';
 		j++;
-		(list->name)++;
+		list->name++;
+		printf("%s\n", list->name);
 		write(1, "5HERE add envvar!\n", ft_strlen("5HERE add envvar!\n"));
 	}
 	write(1, "51HERE add envvar!\n", ft_strlen("51HERE add envvar!\n"));

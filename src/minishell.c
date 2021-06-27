@@ -74,8 +74,14 @@ int main(int ac, char **av, char **envp)
 		printf("msh.line = %s\n", msh.line);
 
 		//новое
+		if (!ft_strncmp("export new", msh.line, 10))
+			ft_add_envlist(&msh, "TELE=UUU");
+	
+			
 		if (!ft_strncmp("export", msh.line, 6))
 			ft_print_export(&msh);
+		//пример
+		
 		if (!ft_strncmp("env", msh.line, 3))
 			ft_env(envp);
 		if (msh.len > 0)

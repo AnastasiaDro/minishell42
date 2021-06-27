@@ -23,13 +23,14 @@
 
 typedef struct s_msh // main struct
 {
-	int		fd;
-	int		len;
-	char	*line;
-	int		quote;
+	int			fd;
+	int			len;
+	char		*line;
+	int			quote;
 //добавила Настя
-	t_en_list *envp_list; //список переменных среды
-    int     envp_len;  //длина списка переменных среды
+	t_en_list 	*envp_list; //список переменных среды
+	char 		**envp_arr;
+    int     	envp_len;  //длина списка переменных среды
 }               t_msh;
 
 

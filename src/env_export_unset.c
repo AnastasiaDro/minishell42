@@ -22,6 +22,23 @@ int ft_env(char **envp)
 }
 
 
+char **copy_arr(char **arr, int arr_len)
+{
+	char **copy;
+	int i;
+
+	i = 0;
+	arr_len = ft_arrlen(arr);
+	copy = ft_calloc(arr_len + 1, sizeof(char *));
+	while (i < arr_len)
+	{
+		copy[i] = arr[i];
+		i++;
+	}
+	return (copy);
+	
+}
+
 
 int init_envp_list(char **arr, t_list **list)
 {
@@ -31,26 +48,29 @@ int init_envp_list(char **arr, t_list **list)
 		int j;
 		int arr_len;
 		char c = (char)255;
+		char **arr_copy;
 
-		arr_len = 0;
-		while (arr[arr_len])
-			arr_len++;
+
+		arr_len = ft_arrlen(arr);
+		arr_copy = copy_arr(arr, arr_len);
+		// while (arr[arr_len])
+		// 	arr_len++;
 
 		j = 1;
-		str = arr[0];
+		str = arr_copy[0];
 		while (j< arr_len)
 		{
 			i = 0;
 			while (i < arr_len) {
-				if (arr[i] == NULL)
+				if (arr_copy[i] == NULL)
 				{
 					i++;
 					continue;
 				}
 				else {
-					if (ft_strncmp(arr[i], str, ft_strlen(arr[i])) <= 0)
+					if (ft_strncmp(arr_copy[i], str, ft_strlen(arr_copy[i])) <= 0)
 					{
-						str = arr[i];
+						str = arr_copy[i];
 						index = i;
 					}
 				}
@@ -58,10 +78,11 @@ int init_envp_list(char **arr, t_list **list)
 			}
 			if (str != NULL)
 				ft_lstadd_back(list, ft_lstnew(ft_strdup(str)));
-			arr[index] = NULL;
+			arr_copy[index] = NULL;
 			str = &c;
 			j++;
 		}
+		
 		return (arr_len);
     //вернем длину количества аргументов
 }
@@ -81,3 +102,24 @@ void ft_print_export( t_msh *msh)
 		vars = vars->next;
 	}
 }
+
+// void ft_add_export(t_msh *msh, char *var, char *value)
+// {
+// 	t_list *tmp;
+// 	t_list *before;
+
+// 	before = NULL;
+// 	tmp = msh->envp_list;
+// 	while(tmp)
+// 	{
+// 		if (ft_strncmp(tmp->content, var, ft_strlen(var)) > 0)
+// 		{
+// 			before->next = ft_lstnew(var);
+// 			before->next->next = tmp;
+
+// 		}
+		
+// 		before = tmp;
+// 		tmp = tmp->next;
+// 	}
+// }

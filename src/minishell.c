@@ -13,11 +13,14 @@ int ctrl_d(t_msh *msh)
 	return (0);
 }
 
+//ф-я стат должна выдать ноль, когда происходит совпадение
+
 void ctrl_c(int num)
 {
 	if (num == SIGINT)
 	{
-		//структура, куда сохраним настройки терминала, самому делать не надо, она из библиотеки #include <sys/termios.h>
+		//структура, куда сохраним настройки терминала, самому делать не надо, 
+		//она из библиотеки #include <sys/termios.h>
 		struct termios term;
 		// char *term_name;
 
@@ -62,10 +65,11 @@ int main(int ac, char **av, char **envp)
     //ft_init(&msh);
 //	ft_memset(&msh, 0, sizeof(msh));
 	ft_init(&msh, envp);
-    //ft_env(envp);
+    
 	while (1)
 	{
 		msh.line = readline("msh: ");
+		ft_env(envp);
 		if (ctrl_d(&msh))
             break;
 		msh.len = ft_strlen(msh.line);

@@ -69,7 +69,7 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		msh.line = readline("msh: ");
-		ft_env(envp);
+		
 		if (ctrl_d(&msh))
             break;
 		msh.len = ft_strlen(msh.line);
@@ -78,7 +78,8 @@ int main(int ac, char **av, char **envp)
 		//новое
 		if (!ft_strncmp("export", msh.line, 6))
 			ft_print_export(&msh);
-
+		if (!ft_strncmp("env", msh.line, 3))
+			ft_env(envp);
 		if (msh.len > 0)
 		{
 			add_history(msh.line);

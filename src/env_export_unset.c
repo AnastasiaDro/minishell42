@@ -82,7 +82,7 @@ int init_envp_list(char **arr, t_list **list)
 			str = &c;
 			j++;
 		}
-		
+		free(arr_copy);
 		return (arr_len);
     //вернем длину количества аргументов
 }

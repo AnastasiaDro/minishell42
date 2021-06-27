@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c src/env_export_unset.c
+SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c src/env_export_unset.c src/env_list.c
 
 OBJS = $(SRCS:.c=.o)
 

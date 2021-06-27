@@ -6,6 +6,7 @@
 #include "../libft/libft.h"
 #include "minishell.h"
 #define EXP_PREFIX "declare -x "
+#include "env_list.h"
 
 int ft_env(char **envp)
 {
@@ -40,7 +41,9 @@ char **copy_arr(char **arr, int arr_len)
 }
 
 
-int init_envp_list(char **arr, t_list **list)
+
+
+int init_envp_list(char **arr, t_en_list **list)
 {
 		int index;
 		char *str;
@@ -53,9 +56,6 @@ int init_envp_list(char **arr, t_list **list)
 
 		arr_len = ft_arrlen(arr);
 		arr_copy = copy_arr(arr, arr_len);
-		// while (arr[arr_len])
-		// 	arr_len++;
-
 		j = 1;
 		str = arr_copy[0];
 		while (j< arr_len)
@@ -77,7 +77,7 @@ int init_envp_list(char **arr, t_list **list)
 				i++;
 			}
 			if (str != NULL)
-				ft_lstadd_back(list, ft_lstnew(ft_strdup(str)));
+				env_lstadd_back(list, env_lstnew(str));
 			arr_copy[index] = NULL;
 			str = &c;
 			j++;
@@ -90,36 +90,43 @@ int init_envp_list(char **arr, t_list **list)
 
 void ft_print_export( t_msh *msh)
 {
-    t_list *vars;
-    char *content;
+    t_en_list *vars;
+    char *name;
+	char *value;
 
     vars = msh->envp_list;
 	while (vars)
 	{
-		content = (char *)vars->content;
-		if (content != NULL)
-			printf("declare -x %s\n", (char *)vars->content);
+		name = vars->name;
+		value = vars->value;
+		if (value != NULL)
+			printf("declare -x %s=%s\n", vars->name, vars->value);
+		else
+		{
+			if (vars->name)
+			{
+				printf("declare -x %s\n", vars->name);
+			}
+		}
 		vars = vars->next;
 	}
 }
 
-// void ft_add_export(t_msh *msh, char *var, char *value)
+
+
+// //узнать, есть ли такая переменная
+// int is_var_created(t_msh *msh, char *var)
 // {
-// 	t_list *tmp;
-// 	t_list *before;
+	
+// }
 
-// 	before = NULL;
-// 	tmp = msh->envp_list;
-// 	while(tmp)
-// 	{
-// 		if (ft_strncmp(tmp->content, var, ft_strlen(var)) > 0)
-// 		{
-// 			before->next = ft_lstnew(var);
-// 			before->next->next = tmp;
 
-// 		}
-		
-// 		before = tmp;
-// 		tmp = tmp->next;
-// 	}
+// void ft_add_envvar(t_msh *msh, char *str)
+// {
+	
+// 	//узнать, есть ли уже такая переменная
+// 		//если да - изменить значение
+// 		//если нет - добавить ее в export лист
+	
+
 // }

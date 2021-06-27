@@ -62,8 +62,6 @@ int main(int ac, char **av, char **envp)
 	(void)envp;
 	signal(SIGINT, ctrl_c);
 
-    //ft_init(&msh);
-//	ft_memset(&msh, 0, sizeof(msh));
 	ft_init(&msh, envp);
     
 	while (1)
@@ -85,9 +83,6 @@ int main(int ac, char **av, char **envp)
 			add_history(msh.line);
 			ft_parser(&msh);
 		}
-
-		//тест
-
 		free(msh.line);
 		msh.line = NULL;
 	}

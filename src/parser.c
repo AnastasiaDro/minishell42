@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "env_export_unset.h"
 
 void inQuotes(char **line)
 {
@@ -58,6 +59,7 @@ void parser(t_msh *msh, char *line)
 	while (token)
 	{
 		cmd[++k] = strdup(token->content);
+		printf("cmd: %s token: %s\n", cmd[k], token->content);
 		token = token->next;
 	}
 	k = 0;
@@ -73,5 +75,15 @@ void parser(t_msh *msh, char *line)
 	{
 		printf("k: %s\n", ft_strjoin(cmd[0], cmd[1]));
 		ft_pwd("cd ..");
+	}
+	else if (!strncmp(cmd[k], "env", 3))
+	{
+		printf("here3\n");
+		ft_env(msh->envp_arr);
+	}
+	else if (!strncmp(cmd[k], "export", 6))
+	{
+		printf("here3\n");
+		ft_print_export(msh);
 	}
 }

@@ -1,4 +1,7 @@
 #include "minishell.h"
+#include "env_export_unset.h"
+
+
 
 int ctrl_d(char *line)
 {
@@ -10,11 +13,14 @@ int ctrl_d(char *line)
 	return (0);
 }
 
+//ф-я стат должна выдать ноль, когда происходит совпадение
+
 void ctrl_c(int num)
 {
 	if (num == SIGINT)
 	{
-		//структура, куда сохраним настройки терминала, самому делать не надо, она из библиотеки #include <sys/termios.h>
+		//структура, куда сохраним настройки терминала, самому делать не надо, 
+		//она из библиотеки #include <sys/termios.h>
 		struct termios term;
 		// char *term_name;
 
@@ -53,8 +59,9 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 	signal(SIGINT, ctrl_c);
-	ft_init(&msh);
-	ft_memset(&msh, 0, sizeof(msh));
+	printf("HERE\n");
+	ft_init(&msh, envp);
+    printf("HERE1\n");
 	while (1)
 	{
 		line = readline("msh: ");

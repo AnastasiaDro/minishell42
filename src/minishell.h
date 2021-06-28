@@ -16,6 +16,7 @@
 #include <errno.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
+#include "env_list.h"
 
 #define SQUOTES 1
 #define DQUOTES 2
@@ -36,7 +37,13 @@ typedef struct s_msh // main struct
 	int		quote;
 	char	**tokens;
 	int		countTokens;
-}t_msh;
+	//добавила Настя
+	t_en_list 	*envp_list; //список переменных среды
+	char 		**envp_arr;
+    int     	envp_len;  //длина списка переменных среды
+}               t_msh;
+
+
 
 // parsing
 void	parser(t_msh *msh, char *line);
@@ -48,7 +55,8 @@ char	*lexer(t_msh *msh, char **line);
 void	ft_error(ssize_t err_no, const char *msg);
 
 // init
-void	ft_init(t_msh *msh);
+//void	ft_init(t_msh *msh);
+void ft_init(t_msh *msh, char **envp);
 
 // builtin
 void	ft_exit();

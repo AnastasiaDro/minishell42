@@ -13,7 +13,10 @@ void	ft_echo(char **av)
 		if ((*av)[i] == '\0')
 			nflag = 1;
 		else 
+		{
+			nflag = 0;
 			break;
+		}
 	}
 	while (*av)
 	{

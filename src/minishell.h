@@ -52,6 +52,9 @@ void	ft_init(t_msh *msh);
 
 // builtin
 void	ft_exit();
+void	ft_echo(char **av);
+void	ft_pwd();
+void	ft_cd(const char *path);
 // void	ft_echo(t_msh *msh, int arguments);
 
 // readline

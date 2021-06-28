@@ -29,7 +29,7 @@ typedef struct s_msh // main struct
 	int			quote;
 //добавила Настя
 	t_en_list 	*envp_list; //список переменных среды
-	char 		**envp_arr;
+	char 		**envp_arr; //массив переменных
     int     	envp_len;  //длина списка переменных среды
 }               t_msh;
 

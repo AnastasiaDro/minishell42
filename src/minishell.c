@@ -63,7 +63,7 @@ int main(int ac, char **av, char **envp)
 	signal(SIGINT, ctrl_c);
 
 	ft_init(&msh, envp);
-    
+    //после вызова ft-Init у нас уже одновременно есть массив (для env) и есть список (для экспорт) 
 	while (1)
 	{
 		msh.line = readline("msh: ");
@@ -71,7 +71,7 @@ int main(int ac, char **av, char **envp)
 		if (ctrl_d(&msh))
             break;
 		msh.len = ft_strlen(msh.line);
-		printf("msh.line = %s\n", msh.line);
+		//printf("msh.line = %s\n", msh.line);
 
 		//новое
 		if (!ft_strncmp("export new", msh.line, 10))

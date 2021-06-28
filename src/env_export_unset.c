@@ -37,7 +37,6 @@ char **copy_arr(char **arr, int arr_len)
 		i++;
 	}
 	return (copy);
-	
 }
 
 
@@ -88,7 +87,7 @@ int init_envp_list(char **arr, t_en_list **list)
 }
 
 
-void ft_print_export( t_msh *msh)
+void ft_print_export(t_msh *msh)
 {
     t_en_list *vars;
     char *name;

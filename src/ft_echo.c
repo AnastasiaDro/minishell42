@@ -3,7 +3,7 @@
 void	ft_echo(char **av)
 {
 	int	i;
-	int nflag;
+	int nflag = 0;
 
 	while (*++av && !strncmp(*av, "-n", 2))
 	{
@@ -14,7 +14,8 @@ void	ft_echo(char **av)
 			nflag = 1;
 		else 
 		{
-			nflag = 0;
+			if (nflag != 1)
+				nflag = 0;
 			break;
 		}
 	}

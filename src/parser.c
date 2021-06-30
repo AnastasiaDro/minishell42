@@ -21,7 +21,7 @@ char *lexer(t_msh *msh, char **line)
 	char *start;
 	char *newToken;
 	(void)msh->fd; // просто чтобы unuse msh не было
-	start = *line; // запоминаю указатель на страку
+	start = *line; // запоминаю указатель на строку
 	if (!ft_strncmp(*line, ">>", 2) || !ft_strncmp(*line, "<<", 2))
 		*line += 2;
 	else if (**line == '>' || **line == '|' || **line == '<')
@@ -50,7 +50,7 @@ void parser(t_msh *msh, char *line)
 	{
 		while (*line == ' ') // пропускаю пробелы в начале
 			line++;
-		ft_lstadd_back(&token, ft_lstnew(lexer(msh, &line))); // lexer->token->newList->ListAddBack
+		ft_lstadd_back(&token, ft_lstnew(lexer(msh, &line)));
 	}
 	cmd = (char **)malloc(sizeof(char *) * (ft_lstsize(token) + 1));
 	if (!cmd)
@@ -59,7 +59,6 @@ void parser(t_msh *msh, char *line)
 	while (token)
 	{
 		cmd[++k] = strdup(token->content);
-		printf("cmd: %s token: %s\n", cmd[k], token->content);
 		token = token->next;
 	}
 	k = 0;
@@ -71,19 +70,21 @@ void parser(t_msh *msh, char *line)
 	{
 		ft_pwd();
 	}
-	else if (!strncmp(cmd[k], "cd", 3))
-	{
-		printf("k: %s\n", ft_strjoin(cmd[0], cmd[1]));
-		ft_pwd("cd ..");
-	}
+	// else if (!strncmp(cmd[k], "cd", 3))
+	// {
+	// 	printf("k: %s\n", ft_strjoin(cmd[0], cmd[1]));
+	// 	ft_pwd("cd ..");
+	// }
 	else if (!strncmp(cmd[k], "env", 3))
 	{
-		printf("here3\n");
 		ft_env(msh->envp_arr);
+	}
+	else if (!strcmp(cmd[k], "cd"))
+	{
+		ft_cd(msh, "cd ..");
 	}
 	else if (!strncmp(cmd[k], "export", 6))
 	{
-		printf("here3\n");
 		ft_print_export(msh);
 	}
 }

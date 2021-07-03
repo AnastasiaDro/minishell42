@@ -3,9 +3,9 @@
 
 
 
-int ctrl_d(char *line)
+int ctrl_d(t_msh *msh)
 {
-	if (line == NULL || !ft_strncmp("exit", line, ft_strlen(line)))
+	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
 	{
 		printf("exit\n");
 		return (1);
@@ -54,7 +54,6 @@ void ctrl_c(int num)
 int main(int ac, char **av, char **envp)
 {
 	t_msh msh;
-	char *line;
 	(void)ac;
 	(void)av;
 	(void)envp;
@@ -62,15 +61,21 @@ int main(int ac, char **av, char **envp)
 	ft_init(&msh, envp);
 	while (1)
 	{
-		line = readline("msh: ");
-		msh.len = ft_strlen(line);
+		msh.line = readline("msh: ");
+
+        if (ctrl_d(&msh))
+            break;
+
+		msh.len = ft_strlen(msh.line);
+        if (!ft_strncmp("export new", msh.line, 10))
+            ft_add_envlist(&msh, "TELE=UUU");
 		if (msh.len > 0)
 		{
-			add_history(line);
-			parser(&msh, line);
+			add_history(msh.line);
+			parser(&msh, msh.line);
 		}
-		free(line);
-		line = NULL;
+		free(msh.line);
+		msh.line = NULL;
 	}
 	return (0);
 }

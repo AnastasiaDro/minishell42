@@ -53,16 +53,20 @@
 
 typedef struct s_msh // main struct
 {
-	int fd;
-	int len;
-	int quote;
-	char **tokens;
-	int countTokens;
+	int		fd;
+	int		len;
+	int		quote;
+	char	**tokens;
+	int		countTokens;
+	char     *line;
 	//добавила Настя
-	t_en_list *envp_list; //список переменных среды
-	char **envp_arr;
-	int envp_len; //длина списка переменных среды
-} t_msh;
+	t_en_list 	*export_list;//отсортированный список переменных среды
+	t_en_list   *env_list; //несортированный список переменных среды
+	char 		**envp_arr;
+    int     	envp_len;  //длина списка переменных среды
+}               t_msh;
+
+
 
 // parsing
 void parser(t_msh *msh, char *line);
@@ -78,10 +82,10 @@ void ft_error(ssize_t err_no, const char *msg);
 void ft_init(t_msh *msh, char **envp);
 
 // builtin
-void ft_exit();
-void ft_echo(char **av);
-void ft_pwd();
-void	ft_cd(t_msh *msh, const char *path);
+void	ft_exit();
+void	ft_echo(char **av);
+void	ft_pwd();
+void ft_cd(t_msh *msh, const char *path);
 // void	ft_echo(t_msh *msh, int arguments);
 
 // readline

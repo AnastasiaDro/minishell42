@@ -1,5 +1,9 @@
 NAME = minishell
 
+CER	 = cerebus
+
+HOME = home
+
 SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c src/ft_echo.c src/ft_pwd.c \
 		src/ft_cd.c src/env_export_unset.c src/env_list.c
 
@@ -16,9 +20,17 @@ all:		$(NAME)
 			@$(CC) $(CFLAGS) -c -I./libft/ $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
-	@make bonus -C libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -ltermcap -L/Users/jkeitha/.brew/Cellar/readline/8.1/lib/ -I/Users/jkeitha/.brew/Cellar/readline/8.1/include -lreadline
-	
+			@make bonus -C libft
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -ltermcap -L/Users/jkeitha/.brew/Cellar/readline/8.1/lib/ -I/Users/jkeitha/.brew/Cellar/readline/8.1/include -lreadline
+
+
+$(CER):		$(OBJS)
+			@make bonus -C libft
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline
+
+$(HOME):	$(OBJS)
+            @make bonus -C libft
+
 run:		$(NAME)
 			@./$(NAME)
 

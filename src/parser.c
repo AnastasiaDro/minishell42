@@ -79,6 +79,7 @@ void parser(t_msh *msh, char *line)
     else if (!strncmp(cmd[k], "env", 3))
     {
         ft_print_env(msh);
+        printf("печатает лист\n");
     }
     else if (!strcmp(cmd[k], "cd"))
     {

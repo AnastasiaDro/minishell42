@@ -58,10 +58,7 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 	signal(SIGINT, ctrl_c);
-	printf("HERE\n");
 	ft_init(&msh, envp);
-    printf("HERE1\n");
-
 
 	while (1)
 	{

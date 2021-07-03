@@ -49,40 +49,48 @@ int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 		int arr_len;
 		char c = (char)255;
 //		char **arr_copy;
-
 		
-	//	arr_len = (int)ft_arrlen(arr);
+		arr_len = (int)ft_arrlen(arr);
 	//	arr_copy = copy_arr(arr, arr_len);
 		j = 1;
-	//	str = arr_copy[0];
+		i = 0;
+
+		while(i < arr_len)
+        {
+            if (!strncmp(arr[i], "OLDPWD", 6))
+                arr[i] = "OLDPWD";
+
+            env_lstadd_back(env_list, env_lstnew(arr[i]));
+		    i++;
+        }
 	    str = arr[0];
-		while (j< arr_len)
+		while (j < arr_len)
 		{
-            if (arr_copy[j-1] != NULL)
-                env_lstadd_back(env_list, env_lstnew(arr_copy[j-1]));
 			i = 0;
-			while (i < arr_len) {
-				if (arr_copy[i] == NULL)
+			while (i < arr_len)
+			{
+				if (arr[i] == NULL)
 				{
 					i++;
 					continue;
 				}
 				else {
-					if (ft_strncmp(arr_copy[i], str, ft_strlen(arr_copy[i])) <= 0)
+					if (ft_strncmp(arr[i], str, ft_strlen(arr[i])) <= 0)
 					{
-						str = arr_copy[i];
+						str = arr[i];
 						index = i;
 					}
 				}
 				i++;
 			}
 			if (str != NULL)
-				env_lstadd_back(list, env_lstnew(str));
-			arr_copy[index] = NULL;
+            {
+                env_lstadd_back(list, env_lstnew(str));
+            }
+            arr[index] = NULL;
 			str = &c;
 			j++;
 		}
-		free(arr_copy);
 		return (arr_len);
     //вернем длину количества аргументов
 }
@@ -235,5 +243,4 @@ void ft_add_envlist(t_msh *msh, char *str)
 	}
 	env_lstadd_back(&(msh->export_list), new_list);
 	ft_add_envarr(msh, new_list);
-    return ;
 }

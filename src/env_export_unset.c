@@ -88,13 +88,13 @@ int init_envp_list(char **arr, t_en_list **list)
 void ft_print_export( t_msh *msh)
 {
     t_en_list *vars;
-    char *name;
+  //  char *name;
 	char *value;
 
     vars = msh->envp_list;
 	while (vars)
 	{
-		name = vars->name;
+//		name = vars->name;
 		value = vars->value;
 		if (value != NULL)
 			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);

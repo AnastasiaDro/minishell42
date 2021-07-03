@@ -97,8 +97,8 @@ void ft_print_export( t_msh *msh)
 		name = vars->name;
 		value = vars->value;
 		if (value != NULL)
-			//printf("declare -x %s=%s\n", vars->name, vars->value);
-            printf("declare -x %s=\n", vars->name);
+			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);
+            //printf("declare -x %s=\n", vars->name);
 		else
 		{
 			if (vars->name)

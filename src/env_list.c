@@ -64,13 +64,12 @@ void    set_name_value(t_en_list *list, char *str)
     else
     {
         new_str[end] = '\0';
-        list->name = ft_strdup(str);
+        list->name = ft_strdup(new_str);
         new_str[end] = '=';
         list->value = ft_strdup(&new_str[end + 1]);
     }
     free(new_str);
-     
-    return ;
+    new_str = NULL;
 }
 
 

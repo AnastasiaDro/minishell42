@@ -40,7 +40,7 @@ char **copy_arr(char **arr, int arr_len)
 	
 }
 
-int init_envp_list(char **arr, t_en_list **list)
+int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 {
 		int index;
 		char *str;
@@ -48,15 +48,18 @@ int init_envp_list(char **arr, t_en_list **list)
 		int j;
 		int arr_len;
 		char c = (char)255;
-		char **arr_copy;
+//		char **arr_copy;
 
 		
-		arr_len = ft_arrlen(arr);
-		arr_copy = copy_arr(arr, arr_len);
+	//	arr_len = (int)ft_arrlen(arr);
+	//	arr_copy = copy_arr(arr, arr_len);
 		j = 1;
-		str = arr_copy[0];
+	//	str = arr_copy[0];
+	    str = arr[0];
 		while (j< arr_len)
 		{
+            if (arr_copy[j-1] != NULL)
+                env_lstadd_back(env_list, env_lstnew(arr_copy[j-1]));
 			i = 0;
 			while (i < arr_len) {
 				if (arr_copy[i] == NULL)
@@ -91,7 +94,7 @@ void ft_print_export( t_msh *msh)
   //  char *name;
 	char *value;
 
-    vars = msh->envp_list;
+    vars = msh->export_list;
 	while (vars)
 	{
 //		name = vars->name;
@@ -110,6 +113,20 @@ void ft_print_export( t_msh *msh)
 	}
 }
 
+void ft_print_env(t_msh *msh)
+{
+    t_en_list   *vars;
+    char        *value;
+
+    vars = msh->env_list;
+    while (vars)
+    {
+        value = vars->value;
+        if (value != NULL)
+            printf("%s=\"%s\"\n", vars->name, vars->value);
+        vars = vars->next;
+    }
+}
 
 
 // //узнать, есть ли такая переменная
@@ -183,7 +200,7 @@ void ft_add_envlist(t_msh *msh, char *str)
 	t_en_list *new_list;
 	t_en_list *previous;
 	
-	tmp = msh->envp_list;
+	tmp = msh->export_list;
 	write(1, "2HERE add_anvlist!\n", ft_strlen("2HERE add_anvlist!\n"));
 	new_list = env_lstnew(str);
 	write(1, "3HERE add_anvlist!\n", ft_strlen("3HERE add_anvlist!\n"));
@@ -199,7 +216,7 @@ void ft_add_envlist(t_msh *msh, char *str)
 		{
 			if (!previous)
 			{
-				env_lstadd_front(&(msh->envp_list), new_list);
+				env_lstadd_front(&(msh->export_list), new_list);
 				ft_add_envarr(msh, new_list);
 				write(1, "4HERE add_anvlist!\n", ft_strlen("4HERE add_anvlist!\n"));
 				return;
@@ -216,7 +233,7 @@ void ft_add_envlist(t_msh *msh, char *str)
 		tmp = tmp->next;
 		
 	}
-	env_lstadd_back(&(msh->envp_list), new_list);
+	env_lstadd_back(&(msh->export_list), new_list);
 	ft_add_envarr(msh, new_list);
     return ;
 }

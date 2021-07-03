@@ -13,13 +13,13 @@ static void setPwd(t_msh *msh)
     dir = "jkeitha";
     t_en_list *tmp;
 
-    tmp = msh->envp_list;
+    tmp = msh->export_list;
     while (tmp)
     {
         if (!strncmp(tmp->name, "PWD", 3)) // TODO: change strcmp to ft_strcmp
         {
             printf("currentValue: %s\n", tmp->value);
-          //  free(msh->envp_list->value);
+          //  free(msh->export_list->value);
             printf("currentValue:1 %s\n", tmp->value);
             tmp->value = dir;
             printf("currentValue:3 %s\n", tmp->value);

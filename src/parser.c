@@ -78,7 +78,7 @@ void parser(t_msh *msh, char *line)
         // }
     else if (!strncmp(cmd[k], "env", 3))
     {
-        ft_env(msh->envp_arr);
+        ft_print_env(msh);
     }
     else if (!strcmp(cmd[k], "cd"))
     {

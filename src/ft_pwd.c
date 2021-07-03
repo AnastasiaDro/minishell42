@@ -2,9 +2,8 @@
 
 void	ft_pwd(void)
 {
-	char	buf[1024];
 	char	*dir;
 
-	dir = getcwd(buf, 1024);
+	dir = getcwd(NULL, 0);
 	printf("%s\n", dir);
 }

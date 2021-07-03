@@ -84,6 +84,18 @@ t_en_list		*env_lstnew(char *str)
 	return (list);
 }
 
+t_en_list       *env_parsed_lstnew(char *name, char *value)
+{
+    t_en_list	*list;
+
+    if (!(list = (t_en_list *)malloc(sizeof(t_en_list))))
+        return (NULL);
+    list->name = name;
+    list->value = value;
+    list->next = NULL;
+    return (list);
+}
+
 void	env_lstadd_front(t_en_list **lst, t_en_list *new)
 {
 	if (!new)

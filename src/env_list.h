@@ -20,4 +20,6 @@ t_en_list	*env_lstnew(char *str);
 
 void	env_lstadd_front(t_en_list **lst, t_en_list *new);
 
+t_en_list       *env_parsed_lstnew(char *name, char *value);
+
 #endif

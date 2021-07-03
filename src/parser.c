@@ -71,15 +71,9 @@ void parser(t_msh *msh, char *line)
     {
         ft_pwd();
     }
-        // else if (!strncmp(cmd[k], "cd", 3))
-        // {
-        // 	printf("k: %s\n", ft_strjoin(cmd[0], cmd[1]));
-        // 	ft_pwd("cd ..");
-        // }
     else if (!strncmp(cmd[k], "env", 3))
     {
         ft_print_env(msh);
-        printf("печатает лист\n");
     }
     else if (!strcmp(cmd[k], "cd"))
     {

@@ -24,7 +24,6 @@ static void setPwd(t_msh *msh)
             tmp->value = dir;
             printf("currentValue:3 %s\n", tmp->value);
         }
-
         tmp = tmp->next;
     }
 }

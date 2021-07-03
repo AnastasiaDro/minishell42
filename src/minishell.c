@@ -71,7 +71,7 @@ int main(int ac, char **av, char **envp)
 		////TEST
         if (!ft_strncmp("export new", msh.line, 10))
         {
-            ft_add_variable(&msh, "OLDPWD", "UUU");
+            ft_add_variable(&msh, "NEWNEWNEW", NULL);
         }
 
 		if (msh.len > 0)

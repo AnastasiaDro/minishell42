@@ -211,6 +211,5 @@ void ft_add_variable(t_msh *msh, char *name, char *value)
    t_en_list *flag;
 
     flag = ft_add_export_list(msh, name, value);
-    if (value)
-        ft_add_env_list(msh, name, value, flag);
+    ft_add_env_list(msh, name, value, flag);
 }

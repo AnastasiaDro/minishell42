@@ -47,15 +47,29 @@ void parser(t_msh *msh, char *line)
 {
     t_list *token = NULL;
     char **cmd;
+    int list_size;
+
     while (line && *line)
     {
         while (*line == ' ') // пропускаю пробелы в начале
             line++;
         ft_lstadd_back(&token, ft_lstnew(lexer(msh, &line)));
     }
-    cmd = (char **)malloc(sizeof(char *) * (ft_lstsize(token) + 1));
+    list_size = ft_lstsize(token);
+    cmd = (char **)malloc(sizeof(char *) * (list_size + 1));
+  //  cmd[list_size] = NULL;
+//    write(1, "TEST\n", 5);
+//    while(cmd)
+//    {
+//        printf("cmd = %s\n", *cmd);
+//        cmd++;
+//    }
+
     if (!cmd)
         exit(2);
+// хз почему раньше не занулить, но учли занулять до if(!cmd) - ругается
+
+    cmd[list_size] = NULL;
     int k = -1;
     while (token)
     {
@@ -82,5 +96,10 @@ void parser(t_msh *msh, char *line)
     else if (!strncmp(cmd[k], "export", 6))
     {
         ft_print_export(msh);
+    }
+    else if (!strncmp(cmd[k], "unset", ft_strlen(cmd[k])))
+    {
+        if (cmd[k+1] != NULL)
+            ft_unset(msh, &(cmd[k+1]));
     }
 }

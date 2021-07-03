@@ -168,7 +168,6 @@ void    ft_export_add_new(t_en_list *export_list, char *name, char *value)
     {
         if (ft_strncmp(tmp->name, name, ft_strlen(name)) > 0)
         {
-            write(1, "INSERTED\n", 9);
             ft_insert_to_list(previous, tmp, env_parsed_lstnew(name, value));
             return;
         }
@@ -212,4 +211,62 @@ void ft_add_variable(t_msh *msh, char *name, char *value)
 
     flag = ft_add_export_list(msh, name, value);
     ft_add_env_list(msh, name, value, flag);
+}
+
+void delete_var(t_en_list *del, t_en_list *prev)
+{
+    prev->next = del->next;
+    //free(del->name);
+  //  free(del->value);
+//    free(del);
+    del = NULL;
+}
+
+void deleteInList(t_en_list **list, char **names)
+{
+    int i;
+    t_en_list *prev;
+    t_en_list *tmp;
+
+    tmp = *list;
+    prev = NULL;
+    i = 0;
+
+    while (names[i])
+    {
+        tmp = *list;
+        while(tmp)
+        {
+           // if (!ft_strncmp(names[i], tmp->name, ft_strlen(names[i])))
+            if (!ft_strcmp(names[i], tmp->name))
+           {
+                printf("СОВПАЛО! %s\n", tmp->name);
+                if (prev)
+                {
+                    delete_var(tmp, prev);
+                    break;
+                }
+                else
+                {
+                    *list = (*list)->next;
+                    break;
+                }
+            }
+            prev = tmp;
+            tmp = tmp->next;
+        }
+        i++;
+    }
+}
+
+
+void ft_unset(t_msh *msh, char **names)
+{
+    t_en_list *envTmp;
+    t_en_list *expTmp;
+
+    envTmp = msh->env_list;
+    expTmp = msh->export_list;
+    deleteInList(&envTmp, names);
+    deleteInList(&expTmp, names);
 }

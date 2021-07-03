@@ -14,4 +14,6 @@ void ft_print_env(t_msh *msh);
 
 //для введения новой переенной
 void ft_add_variable(t_msh *msh, char *name, char *value);
+
+void ft_unset(t_msh *msh, char **names);
 #endif

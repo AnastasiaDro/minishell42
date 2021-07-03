@@ -37,6 +37,7 @@ typedef struct s_msh // main struct
 	int		quote;
 	char	**tokens;
 	int		countTokens;
+	char     *line;
 	//добавила Настя
 	t_en_list 	*envp_list; //список переменных среды
 	char 		**envp_arr;

@@ -99,17 +99,14 @@ int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 void ft_print_export( t_msh *msh)
 {
     t_en_list *vars;
-  //  char *name;
 	char *value;
 
     vars = msh->export_list;
 	while (vars)
 	{
-//		name = vars->name;
 		value = vars->value;
 		if (value != NULL)
 			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);
-            //printf("declare -x %s=\n", vars->name);
 		else
 		{
 			if (vars->name)
@@ -135,13 +132,6 @@ void ft_print_env(t_msh *msh)
         vars = vars->next;
     }
 }
-
-
-// //узнать, есть ли такая переменная
-// int is_var_created(t_msh *msh, char *var)
-// {
-	
-// }
 
 //проверить, есть ли у новой переменной значение
 void ft_add_envarr(t_msh *t_msh, t_en_list *list)

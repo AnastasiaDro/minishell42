@@ -23,7 +23,7 @@ static void setPwd(t_msh *msh, char *dir)
 	}
 }
 
-void ft_cd(t_msh *msh, const char *path)
+void	ft_cd(t_msh *msh, const char *path)
 {
 	path = "src";
 	char *dir;

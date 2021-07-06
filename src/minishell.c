@@ -1,8 +1,6 @@
 #include "minishell.h"
 #include "env_export_unset.h"
 
-
-
 int ctrl_d(t_msh *msh)
 {
 	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))

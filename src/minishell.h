@@ -56,7 +56,7 @@ typedef struct s_msh // main struct
 	int		fd;
 	int		len;
 	int		quote;
-	char	**tokens;
+	char	**cmd;
 	int		countTokens;
 	char     *line;
 	//добавила Настя

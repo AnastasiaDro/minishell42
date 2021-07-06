@@ -74,6 +74,9 @@ void parser(t_msh *msh, char *line);
 // lexer
 char *lexer(t_msh *msh, char **line);
 
+// exec
+void	exec(t_msh *msh);
+
 // errors
 void ft_error(ssize_t err_no, const char *msg);
 

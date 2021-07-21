@@ -11,14 +11,7 @@ chdir() -
 
 -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline
 
+[//]: #man about expansion
+https://man7.org/linux/man-pages/man1/bash.1.html#EXPANSION
 
-	// {
-	// 	// rl_redisplay();
-	// 	// printf("cd: %s: No such file or directory\n", path);
-	// 	char *s1 = ft_strjoin("cd: ", path);
-	// 	char *s2 = ft_strjoin(s1, ": No such file or directory");
-	// 	rl_replace_line(s2, 0);
-	// 	rl_on_new_line();
-	// 	rl_redisplay();
-	// 	write(1, "\n", 1);
-	// }
+TODO: ${} $() $[]

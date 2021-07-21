@@ -24,11 +24,11 @@ char *lexer(t_msh *msh, char **line)
     start = *line;
     if (!ft_strncmp(*line, ">>", 2) || !ft_strncmp(*line, "<<", 2))
         *line += 2;
-    else if (**line == '>' || **line == '|' || **line == '<')
+    else if (**line == '>' || **line == '|' || **line == '<' || **line == '$')
         ++*line;
     else
     {
-        while (*line && **line && !ft_strchr(" >|<", **line))
+        while (*line && **line && !ft_strchr(" $>|<", **line))
         {
             if (**line == '\'' || **line == '\"')
                 inQuotes(line);

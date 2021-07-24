@@ -43,7 +43,7 @@ void ctrl_c(int num)
 		//снова засетила атрибуты
 		tcsetattr(0, TCSANOW, &term);
 		//дальше уже знакомый код
-		rl_replace_line("", 0);
+		rl_replace_line("no such file", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();
@@ -68,8 +68,22 @@ int main(int ac, char **av, char **envp)
             break;
 
 		msh.len = ft_strlen(msh.line);
-        if (!ft_strncmp("export new", msh.line, 10))
-            ft_add_envlist(&msh, "TELE=UUU");
+		////TEST
+        if (!ft_strncmp("export new", msh.line, 20))
+        {
+         //   ft_add_variable(&msh, "NEWNEWNEW", NULL);
+            ft_add_variable(&msh, "NEWNEWNEW", "TEST");
+        }
+        if (!ft_strncmp("export new1", msh.line, 20))
+        {
+            //   ft_add_variable(&msh, "NEWNEWNEW", NULL);
+            ft_add_variable(&msh, "NEWNEWNEW", NULL);
+        }
+        if (!ft_strncmp("export new2", msh.line, 20))
+        {
+            //   ft_add_variable(&msh, "NEWNEWNEW", NULL);
+            ft_add_variable(&msh, "NEWNEWNEW", "VVVVVV");
+        }
 		if (msh.len > 0)
 		{
 			add_history(msh.line);

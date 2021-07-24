@@ -1,8 +1,6 @@
 #include "minishell.h"
 #include "env_export_unset.h"
 
-
-
 int ctrl_d(t_msh *msh)
 {
 	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
@@ -59,7 +57,6 @@ int main(int ac, char **av, char **envp)
 	(void)envp;
 	signal(SIGINT, ctrl_c);
 	ft_init(&msh, envp);
-
 	while (1)
 	{
 		msh.line = readline("msh: ");
@@ -74,6 +71,7 @@ int main(int ac, char **av, char **envp)
 		{
 			add_history(msh.line);
 			parser(&msh, msh.line);
+			exec(&msh);
 		}
 		free(msh.line);
 		msh.line = NULL;

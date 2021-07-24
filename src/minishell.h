@@ -22,22 +22,45 @@
 #define DQUOTES 2
 
 // builtin привести к одному регистру
-#define FT_ECHO		"echo"
-#define FT_CD		"cd"
-#define FT_PWD		"pwd"
-#define	FT_EXPORT	"export"
-#define FT_UNSET	"unset"
-#define FT_ENV		"env"
-#define FT_EXIT		"exit"
+#define FT_ECHO "echo"
+#define FT_CD "cd"
+#define FT_PWD "pwd"
+#define FT_EXPORT "export"
+#define FT_UNSET "unset"
+#define FT_ENV "env"
+#define FT_EXIT "exit"
+
+// // commandDataStructure
+// typedef struct s_SimpleCommand
+// {
+// 	int numberOfAvailableArguments;
+// 	int numberOfArguments;
+// 	char **arguments;
+// }t_SimpleCommand;
+
+// typedef struct s_Command
+// {
+// 	int numberOfAvailableSimpleCommands;
+// 	int umberOfSimpleCommands;
+// 	t_SimpleCommand **simpleCommands;
+// 	char *outFile;
+// 	char *inFile;
+// 	char *errFile;
+// 	// int background;
+// 	// t_Commanmd currentCommand;
+// 	t_SimpleCommand *currentSimpleCommand;
+// }t_Commanmd;
 
 typedef struct s_msh // main struct
 {
 	int		fd;
 	int		len;
 	int		quote;
-	char	**tokens;
+	char	**cmd;
 	int		countTokens;
 	char     *line;
+	// dollarSign
+
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
 	t_en_list   *env_list; //несортированный список переменных среды
@@ -48,13 +71,16 @@ typedef struct s_msh // main struct
 
 
 // parsing
-void	parser(t_msh *msh, char *line);
+void parser(t_msh *msh, char *line);
 
 // lexer
-char	*lexer(t_msh *msh, char **line);
+char *lexer(t_msh *msh, char **line);
+
+// exec
+void	exec(t_msh *msh);
 
 // errors
-void	ft_error(ssize_t err_no, const char *msg);
+void ft_error(ssize_t err_no, const char *msg);
 
 // init
 //void	ft_init(t_msh *msh);
@@ -68,10 +94,6 @@ void ft_cd(t_msh *msh, const char *path);
 // void	ft_echo(t_msh *msh, int arguments);
 
 // readline
-void	rl_replace_line();
-
-// void	ft_echo(t_msh *msh, int arguments);
-
-
+void rl_replace_line();
 
 #endif

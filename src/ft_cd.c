@@ -1,37 +1,37 @@
 #include "minishell.h"
 
-// static void	setPwd(char *dirName)
-// {
-	
-// }
-
-static void setPwd(t_msh *msh)
+static void setPwd(t_msh *msh, char *dir)
 {
-    char *dir;
-    // char buf[1024];
-
-    dir = "jkeitha";
-    t_en_list *tmp;
-
-    tmp = msh->export_list;
-    while (tmp)
-    {
-        if (!strncmp(tmp->name, "PWD", 3)) // TODO: change strcmp to ft_strcmp
-        {
-            printf("currentValue: %s\n", tmp->value);
-          //  free(msh->export_list->value);
-            printf("currentValue:1 %s\n", tmp->value);
-            tmp->value = dir;
-            printf("currentValue:3 %s\n", tmp->value);
-        }
-        tmp = tmp->next;
-    }
+	char *newDir;
+	newDir = getcwd(NULL, 0);
+	t_en_list *tmpExportList;
+	t_en_list *tmpEnvList;
+	tmpEnvList = msh->env_list;
+	tmpExportList = msh->export_list;
+	while (tmpExportList && tmpEnvList)
+	{
+		if (!ft_strncmp(tmpExportList->name, "OLDPWD", ft_strlen(tmpExportList->name))) // TODO: add 2 flags
+			tmpExportList->value = dir;
+		else if (!ft_strncmp(tmpExportList->name, "PWD", ft_strlen(tmpExportList->name)))
+			tmpExportList->value = newDir;
+		if (!ft_strncmp(tmpEnvList->name, "OLDPWD", ft_strlen(tmpEnvList->name)))
+			tmpEnvList->value = dir;
+		else if (!ft_strncmp(tmpEnvList->name, "PWD", ft_strlen(tmpEnvList->name)))
+			tmpEnvList->value = newDir;
+		tmpExportList = tmpExportList->next;
+		tmpEnvList = tmpEnvList->next;
+	}
 }
 
-void ft_cd(t_msh *msh, const char *path)
+void	ft_cd(t_msh *msh, const char *path)
 {
-    setPwd(msh);
-    path = "/Users/cerebus/projects/minishell42-2/src";
-
-    chdir(path);
+	path = "src";
+	char *dir;
+	dir = getcwd(NULL, 0);
+	if (chdir(path) == 0)
+	{
+		setPwd(msh, dir);
+	}
+	else
+		printf("msh: cd: %s: No such file or directory\n", path);
 }

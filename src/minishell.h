@@ -57,6 +57,7 @@ typedef struct s_msh // main struct
 	int		len;
 	int		quote;
 	char	**cmd;
+	int		cntPipes;
 	int		countTokens;
 	char     *line;
 	// dollarSign

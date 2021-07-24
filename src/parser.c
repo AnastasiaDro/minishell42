@@ -61,11 +61,42 @@ void parser(t_msh *msh, char *line)
         exit(2);
     }
     i = -1;
+
     while (token)
     {
         msh->cmd[++i] = ft_strdup(token->content);
+        if (!ft_strcmp(msh->cmd[i], "|"))
+        {
+            msh->cntPipes++;
+            printf("cntPipes: %d\n", msh->cntPipes);
+        }
         printf("currentToken: %s\n", token->content);
         token = token->next;
     }
-    ft_lstclear(&token, free);
+    i = 0;
+    if (!strncmp(msh->cmd[i], "echo", 4))
+    {
+        ft_echo(msh->cmd);
+    }
+    else if (!strncmp(msh->cmd[i], "pwd", ft_strlen(msh->cmd[i])))
+    {
+        ft_pwd();
+    }
+    else if (!strncmp(msh->cmd[i], "env", 3))
+    {
+        ft_print_env(msh);
+    }
+    else if (!strcmp(msh->cmd[i], "cd"))
+    {
+        ft_cd(msh, "cd ..");
+    }
+    else if (!strncmp(msh->cmd[i], "export", 6))
+    {
+        ft_print_export(msh);
+    }
+    else if (!strncmp(msh->cmd[i], "unset", ft_strlen(msh->cmd[i])))
+    {
+        if (msh->cmd[i+1] != NULL)
+            ft_unset(msh, &(msh->cmd[i+1]));
+    }
 }

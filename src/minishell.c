@@ -43,7 +43,7 @@ void ctrl_c(int num)
 		//снова засетила атрибуты
 		tcsetattr(0, TCSANOW, &term);
 		//дальше уже знакомый код
-		rl_replace_line("no such file", 0);
+		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();

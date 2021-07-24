@@ -1,12 +1,12 @@
 #include "minishell.h"
 #include "env_export_unset.h"
 
-void	execBuiltin(t_msh *msh)
+void execBuiltin(t_msh *msh)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	if (!ft_strncmp(msh->cmd[i], "echo", 4))
+    i = 0;
+    if (!ft_strncmp(msh->cmd[i], "echo", 4))
     {
         ft_echo(msh->cmd);
     }
@@ -29,7 +29,24 @@ void	execBuiltin(t_msh *msh)
     }
 }
 
-void	exec(t_msh *msh)
+void dollarSign(t_msh *msh)
 {
-	execBuiltin(msh);
+    int i;
+    int errNo = 0; //TODO: временно добавил
+
+    i = 0;
+    if (!ft_strncmp(msh->cmd[i], "$", 1))
+    {
+        if (!ft_strncmp(msh->cmd[++i], "?", 1))
+        {
+            ft_putnbr_fd(errNo, 1);
+            ft_putendl_fd(": command not found", 1);
+        }
+    }
+}
+
+void exec(t_msh *msh)
+{
+    dollarSign(msh);
+    execBuiltin(msh);
 }

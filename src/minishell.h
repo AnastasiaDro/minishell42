@@ -59,6 +59,8 @@ typedef struct s_msh // main struct
 	char	**cmd;
 	int		countTokens;
 	char     *line;
+	// dollarSign
+
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
 	t_en_list   *env_list; //несортированный список переменных среды

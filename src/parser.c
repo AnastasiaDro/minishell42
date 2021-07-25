@@ -73,6 +73,7 @@ void parser(t_msh *msh, char *line)
         printf("currentToken: %s\n", token->content);
         token = token->next;
     }
+    msh->cmd[++i] = 0;
     i = 0;
     if (!strncmp(msh->cmd[i], "echo", 4))
     {
@@ -96,7 +97,8 @@ void parser(t_msh *msh, char *line)
     }
     else if (!strncmp(msh->cmd[i], "unset", ft_strlen(msh->cmd[i])))
     {
-        if (msh->cmd[i+1] != NULL)
+
+		if (msh->cmd[i+1] != NULL)
             ft_unset(msh, &(msh->cmd[i+1]));
     }
 }

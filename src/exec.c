@@ -5,27 +5,39 @@ void execBuiltin(t_msh *msh)
 {
     int i;
 
-    i = 0;
-    if (!ft_strncmp(msh->cmd[i], "echo", 4))
+    i = -1;
+    while (msh->cmd[++i])
     {
-        ft_echo(msh->cmd);
-    }
-    else if (!ft_strncmp(msh->cmd[i], "pwd", ft_strlen(msh->cmd[i])))
-    {
-        ft_pwd();
-    }
-    else if (!ft_strncmp(msh->cmd[i], "env", 3))
-    {
-        ft_print_env(msh);
-        printf("печатает лист\n");
-    }
-    else if (!ft_strcmp(msh->cmd[i], "cd"))
-    {
-        ft_cd(msh, "cd ..");
-    }
-    else if (!ft_strncmp(msh->cmd[i], "export", 6))
-    {
-        ft_print_export(msh);
+        if (!ft_strncmp(msh->cmd[i], "echo", 4))
+        {
+            ft_echo(msh->cmd);
+        }
+        else if (!ft_strncmp(msh->cmd[i], "pwd", ft_strlen(msh->cmd[i])))
+        {
+            ft_pwd();
+        }
+        else if (!ft_strncmp(msh->cmd[i], "env", 3))
+        {
+            ft_print_env(msh);
+            printf("печатает лист\n");
+        }
+        else if (!ft_strcmp(msh->cmd[i], "cd"))
+        {
+            ft_cd(msh, "cd ..");
+        }
+        else if (!ft_strcmp(msh->cmd[i], "export"))
+        {
+            if (msh->cmd[i + 1] != NULL)
+            {
+                exportHandler(msh, i);
+            }
+            ft_print_export(msh);
+        }
+        else if (!strncmp(msh->cmd[i], "unset", ft_strlen(msh->cmd[i])))
+        {
+            if (msh->cmd[i + 1] != NULL)
+                ft_unset(msh, &(msh->cmd[i + 1]));
+        }
     }
 }
 

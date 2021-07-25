@@ -16,3 +16,9 @@ https://man7.org/linux/man-pages/man1/bash.1.html#EXPANSION
 
 TODO: ${} $() $[], ||
 
+TODO:
+	cd: unset HOME, cd return(cd: HOME not set)
+
+на потом:
+1) обработать след кейс: export NAME = VALUE (в оригинале с пробелом между "NAME" и "=" не работает)
+

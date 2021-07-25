@@ -97,4 +97,8 @@ void ft_cd(t_msh *msh, const char *path);
 // readline
 void rl_replace_line();
 
+// handlers
+void	exportHandler(t_msh *msh, int i);
+void ft_add_variable(t_msh *msh, char *name, char *value);
+
 #endif

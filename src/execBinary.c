@@ -39,6 +39,4 @@ int execBinary(int i, t_msh *msh, int fdIn, int fdOut)
 		exit(1);
 	}
 	return (pid);
-
-
 }

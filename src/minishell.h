@@ -72,6 +72,7 @@ typedef struct s_msh // main struct
 	t_en_list   *env_list; //несортированный список переменных среды
 	char 		**envp_arr;
     int     	envp_len;  //длина списка переменных среды
+	int			**fdArr;
 }               t_msh;
 
 

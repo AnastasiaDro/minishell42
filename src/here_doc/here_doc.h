@@ -8,7 +8,15 @@
 #include "../minishell.h"
 
 
+int checkHereDoc(int i, t_msh *msh);
+int closeFreeAllFds(int **fd); //закрывает и очищает файловые дескрипторы
 int	getTmpFile(char *limiter);
+int	mFree(char **pathlist);
+void fdPathListClean(int **fd, char **pathlist);
+void	checkFileFd(int fileFd, char *name, int **fd, char **pathList);
+
+
+
 int	getStdin(int out, char *command, int tmpFd, char **pathList);
 char	**getExecArr(char *command, char **pathList);
 char	**pipexSplit(char const *s, char c);

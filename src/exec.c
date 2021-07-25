@@ -23,9 +23,18 @@ void execBuiltin(t_msh *msh)
     {
         ft_cd(msh, "cd ..");
     }
-    else if (!ft_strncmp(msh->cmd[i], "export", 6))
+    else if (!ft_strcmp(msh->cmd[i], "export"))
     {
+//        if (msh->cmd[i + 1] != NULL)
+//        {
+//            //exportHandler(msh, i);
+//        }
         ft_print_export(msh);
+    }
+    else if (!strncmp(msh->cmd[i], "unset", ft_strlen(msh->cmd[i])))
+    {
+        if (msh->cmd[i + 1] != NULL)
+            ft_unset(msh, &(msh->cmd[i + 1]));
     }
 }
 

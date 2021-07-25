@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
-
+#include "here_doc.h"
 
 char	*findCommand(char **pathList, char *command)
 {

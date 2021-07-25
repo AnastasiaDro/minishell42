@@ -16,5 +16,6 @@ char	*findPath(t_en_list *export_list);
 char	**execArrSplit(char const *s, char c, int *arrLen);
 char	*findCommand(char **pathList, char *command);
 void	getBinaryName(char **command);
+void	printError(char *command, int flag);
 
 #endif

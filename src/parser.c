@@ -101,4 +101,9 @@ void parser(t_msh *msh, char *line)
 		if (msh->cmd[i+1] != NULL)
             ft_unset(msh, &(msh->cmd[i+1]));
     }
+    else if (!ft_strcmp(msh->cmd[i], "<<"))
+	{
+		printf("Here!\n");
+		parseHereDoc(i, 1, msh);
+	}
 }

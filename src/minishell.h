@@ -17,6 +17,11 @@
 #include "exit_codes.h"
 #include "../libft/libft.h"
 #include "env_list.h"
+#include "here_doc/here_doc.h"
+# define NAME "msh: "
+# define ARGNUM_ERR "Invalid arguments number!\n"
+# define COMMAND_ERR "command not found"
+
 
 #define SQUOTES 1
 #define DQUOTES 2
@@ -96,5 +101,5 @@ void ft_cd(t_msh *msh, const char *path);
 
 // readline
 void rl_replace_line();
-
+int parseHereDoc(int i,  int out, t_msh *msh);
 #endif

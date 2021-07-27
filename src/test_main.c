@@ -21,7 +21,7 @@ int main()
 	i = 0;
 	char *cmd_str;
 
-	cmd_str = ft_strdup("> file88 echo text2");
+	cmd_str = ft_strdup("> file99");
 	check_ctrl_symbol(cmd_str, &i);
 
 }

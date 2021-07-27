@@ -35,12 +35,37 @@ int parse_red_larg(char *cmd_str, int *i)
 	return (fileFd);
 }
 
-int parse_
+int parse_double_larg(char *cmd_str, int *i)
+{
+	int fileFd;
+	int end;
+	char *fileName;
 
+	move_index(cmd_str, i, ' ');
+	printf("cmd_str[*i] = 22%c22\n", cmd_str[*i]);
+	printf("&cmd_str[*i]%s\n", &cmd_str[*i]);
+	end = *i;
+	while(cmd_str[end] && cmd_str[end] != ' ')
+		end++;
+	printf("end = %d\n", end);
+	printf("cmd_str[end] = %c\n", cmd_str[end]);
+	cmd_str[end] = '\0';
+	printf("cmd_str = %s\n", cmd_str);
+	fileName = ft_strdup(&cmd_str[*i]);
+	cmd_str[end] = ' ';
+	*i = end;
+	fileFd = open(fileName, O_CREAT | O_RDWR, 0644);
+	printf("file fd = %d\n", fileFd);
+	free(fileName);
+	return (fileFd);
+}
 
 int check_ctrl_symbol(char *cmd_str, int *i)
 {
 	move_index(cmd_str, i, ' '); //дошли до начала символов
+	int fd;
+
+	fd = -2;
 	if (cmd_str[*i] == '<')
 	{
 		if (cmd_str[*i + 1] == '<')
@@ -60,6 +85,7 @@ int check_ctrl_symbol(char *cmd_str, int *i)
 		{
 			*i += 2;
 			printf("DOUBLE_LARG i = %d\n", *i);
+			parse_double_larg(cmd_str, i);
 			return (DOUBLE_LARG);
 		}
 		(*i)++;

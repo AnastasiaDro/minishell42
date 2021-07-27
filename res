@@ -1,1 +1,19 @@
+dxfghjserd$
+ewfgrhtr$
+ewgrhtwe$
+cat$
+res$
+ $
+sdfs$
+ds$
+f$
+f$
+d$
+sf$
+ds$
+f$
+dsf$
+cat$
+res$
+re$
 /Users/jkeitha/Desktop/minishell42

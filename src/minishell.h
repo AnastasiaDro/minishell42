@@ -60,7 +60,6 @@ typedef struct s_msh // main struct
 	int		cntPipes;
 	int		countTokens;
 	char     *line;
-	// dollarSign
 
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
@@ -68,8 +67,6 @@ typedef struct s_msh // main struct
 	char 		**envp_arr;
     int     	envp_len;  //длина списка переменных среды
 }               t_msh;
-
-
 
 // parsing
 void parser(t_msh *msh, char *line);

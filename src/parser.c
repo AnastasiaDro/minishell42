@@ -44,7 +44,7 @@ char *lexer(t_msh *msh, char **line)
 
 void parser(t_msh *msh, char *line)
 {
-    int i;
+    char *tmp;
     t_list *token;
 
     token = NULL;
@@ -52,25 +52,28 @@ void parser(t_msh *msh, char *line)
     {
         while (*line == ' ')
             line++;
-        ft_lstadd_back(&token, ft_lstnew(lexer(msh, &line)));
-    }
-    msh->cmd = (char **)malloc(sizeof(char *) * (1 + ft_lstsize(token)));
-    if (!msh->cmd)
-    {
-        printf("Error: malloc[msh->cmd]\n"); //TODO: Usage ft_exit();
-        exit(2);
-    }
-    i = -1;
-    while (token)
-    {
-        msh->cmd[++i] = ft_strdup(token->content);
-        if (!ft_strcmp(msh->cmd[i], "|"))
+        while ((tmp = ft_strsep(&line, "|")) != NULL)
         {
-            msh->cntPipes++;
-            printf("cntPipes: %d\n", msh->cntPipes);
+            ft_lstadd_back(&token, ft_lstnew(tmp));
         }
-        printf("msh->cmd[%d]: %s\n", i, token->content);
-        token = token->next;
     }
-    msh->cmd[i + 1] = NULL;
+
+    int lstsize = ft_lstsize(token);
+    msh->cmd = malloc((lstsize + 1) * sizeof(char *));
+    msh->cmd[lstsize] = NULL;
+    t_list *tmp1 = token;
+    int i = 0;
+    while (tmp1)
+    {
+        msh->cmd[i] = ft_strdup(tmp1->content);
+        i++;
+        tmp1 = tmp1->next;
+    }
+    i = 0;
+    while (msh->cmd[i])
+    {
+        printf("msh->cmd[i] %s\n", msh->cmd[i]);
+        i++;
+    }
+    // TODO: тут оставили утечку
 }

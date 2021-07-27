@@ -64,27 +64,12 @@ int main(int ac, char **av, char **envp)
         if (ctrl_d(&msh))
             break;
 		msh.len = ft_strlen(msh.line);
-		// ////TEST
-        // if (!ft_strncmp("export new", msh.line, 20))
-        // {
-        //  //   ft_add_variable(&msh, "NEWNEWNEW", NULL);
-        //     ft_add_variable(&msh, "NEWNEWNEW", "TEST");
-        // }
-        //if (!ft_strncmp("export new1", msh.line, 20))
-        //{
-          //ft_add_variable(&msh, "NEWNEWNEW", "");
-        //     ft_add_variable(&msh, "NEWNEWNEW", NULL);
-        // }
-        // if (!ft_strncmp("export new2", msh.line, 20))
-        // {
-        //     //   ft_add_variable(&msh, "NEWNEWNEW", NULL);
-        //     ft_add_variable(&msh, "NEWNEWNEW", "VVVVVV");
-        // }
 		if (msh.len > 0)
 		{
 			add_history(msh.line);
 			parser(&msh, msh.line);
 			exec(&msh);
+
 		}
 		free(msh.line);
 		msh.line = NULL;

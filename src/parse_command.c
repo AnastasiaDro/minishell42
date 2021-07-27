@@ -113,7 +113,7 @@ int parse_red_small(char *cmd_str, int *i)
 	cmd_str[end] = ' ';
 	*i = end;
 	fileFd = open(fileName, O_RDONLY);
-	pr
+	//pr
 	free(fileName);
 	return (fileFd);
 

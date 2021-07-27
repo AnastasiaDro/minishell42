@@ -23,6 +23,7 @@ void	ft_init(t_msh *msh, char **envp)
 	msh->countTokens = 0;
 	msh->envp_arr = envp;
 	msh->export_list = NULL;
+	msh->env_list = NULL;
 	msh->envp_len = init_envp_list(envp, &(msh->export_list), &(msh->env_list));
 	s1 = "/Users/";
 	ft_add_variable(msh, "HOME", ft_strjoin(s1, getLOGNAME(msh->export_list)));

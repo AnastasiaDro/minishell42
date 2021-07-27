@@ -48,7 +48,8 @@ int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 		int j;
 		int arr_len;
 		char c = (char)255;
-		
+
+
 		arr_len = (int)ft_arrlen(arr);
 		j = 1;
 		i = 0;

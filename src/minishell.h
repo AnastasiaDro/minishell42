@@ -21,7 +21,8 @@
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"
 # define COMMAND_ERR "command not found"
-
+# define SYNTAX_ERR "syntax error near unexpected token"
+#define NEW_LINE	"newline"
 
 #define SQUOTES 1
 #define DQUOTES 2
@@ -58,7 +59,7 @@
 
 typedef struct s_msh // main struct
 {
-	int		fd;
+//	int		fd;
 	int		len;
 	int		quote;
 	char	**cmd;
@@ -72,10 +73,21 @@ typedef struct s_msh // main struct
 	t_en_list   *env_list; //несортированный список переменных среды
 	char 		**envp_arr;
     int     	envp_len;  //длина списка переменных среды
-	int			**fdArr;
+	int			**fd;
 }               t_msh;
 
+typedef struct  s_command
+{
+	//индекс команды в списке
+	char **fd;
+	int index;
+	int fileIn;
+	char *command;
 
+	int redirInOne;
+	int here_doc;
+	int index;
+}				t_command;
 
 // parsing
 void parser(t_msh *msh, char *line);
@@ -103,4 +115,6 @@ void ft_cd(t_msh *msh, const char *path);
 // readline
 void rl_replace_line();
 int parseHereDoc(int i,  int out, t_msh *msh);
+
+int create_pipes(int arr_len, t_msh *msh);
 #endif

@@ -38,6 +38,8 @@ void execBuiltin(t_msh *msh)
     }
 }
 
+
+
 void dollarSign(t_msh *msh)
 {
     int i;

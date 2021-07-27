@@ -1,1 +1,15 @@
 /pipex-intra/
+.vscode
+.a
+*.dSYM
+*.out
+*.o
+libft/*.o
+libft_main
+minishell
+.idea
+aa
+src/DRAFT.txt
+# Project exclude paths
+/cmake-build-debug/
+pipex-intra

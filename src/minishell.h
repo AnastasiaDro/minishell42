@@ -36,28 +36,24 @@
 #define FT_ENV "env"
 #define FT_EXIT "exit"
 
-// // commandDataStructure
-// typedef struct s_SimpleCommand
-// {
-// 	int numberOfAvailableArguments;
-// 	int numberOfArguments;
-// 	char **arguments;
-// }t_SimpleCommand;
+typedef struct	s_cmd
+{
+	//индекс команды в списке
+	int com_num;
+	int here_doc;
+	int red_smal;
+	int red_larg;
+	int double_larg;
+	int tmpFileFd;
+	int fileInFd;
+	int fileOutFd;
+	int red_larg_fileFd;
+	int red_small_fd;
+	char *command;
+	char **tokens;
+}t_cmd;
 
-// typedef struct s_Command
-// {
-// 	int numberOfAvailableSimpleCommands;
-// 	int umberOfSimpleCommands;
-// 	t_SimpleCommand **simpleCommands;
-// 	char *outFile;
-// 	char *inFile;
-// 	char *errFile;
-// 	// int background;
-// 	// t_Commanmd currentCommand;
-// 	t_SimpleCommand *currentSimpleCommand;
-// }t_Commanmd;
-
-typedef struct s_msh // main struct
+typedef struct s_msh
 {
 //	int		fd;
 	int		len;
@@ -74,23 +70,9 @@ typedef struct s_msh // main struct
     int     	envp_len;  //длина списка переменных среды
 	int			**fd;
 	int 		commands_num;
+	t_cmd		**cmdArr;
 }               t_msh;
 
-typedef struct  s_command
-{
-	//индекс команды в списке
-	int com_num;
-	int here_doc;
-	int red_smal;
-	int red_larg;
-	int double_larg;
-	int tmpFileFd;
-	int fileInFd;
-	int fileOutFd;
-	int red_larg_fileFd;
-	int red_small_fd;
-	char *command;
-}				t_command;
 
 // parsing
 void parser(t_msh *msh, char *line);

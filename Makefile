@@ -5,14 +5,14 @@ CER	 = cerebus
 HOME = home
 
 SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c src/ft_echo.c src/ft_pwd.c \
-		src/env_export_unset.c src/env_list.c  src/ft_cd.c src/exec.c
+		src/env_export_unset.c src/env_list.c  src/ft_cd.c src/exec.c src/handlers.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -g
 
 all:		$(NAME)
 

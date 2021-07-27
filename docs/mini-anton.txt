@@ -1,0 +1,33 @@
+
+ls -la | echo > FILE > F1 | cat  = 5
+**pipe_array - split "|"
+0 < - func_pipe
+*pipe_array[0] = ls -la -  строка
+*pipe_array[1] = echo > FILE > F1 - строка
+ func_pipe -> fork -> preparsing = token -> BIULDIN/EXECVE
+
+
+2 = |
+1-cat
+2-echo
+3-cat
+
+struct data = 3
+token
+char **cmd;
+next -> ; 
+#1
+*cmd[0] = ls
+*cmd[1] = -la
+#2
+*cmd[0] = echo > FILE > F1
+*cmd[1] = >
+
+
+  / |- не учитывается
+
+cat < FILE  = 3
+
+echo -n anton tyt = 4
+
+<< T = 2

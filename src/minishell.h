@@ -66,7 +66,6 @@ typedef struct s_msh // main struct
 	int		cntPipes;
 	int		countTokens;
 	char     *line;
-	// dollarSign
 
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
@@ -120,10 +119,8 @@ void ft_cd(t_msh *msh, const char *path);
 void rl_replace_line();
 int parseHereDoc(int i,  int out, t_msh *msh);
 
-int create_pipes(int arr_len, t_msh *msh);
-int get_fdIn(char  *str, int *i, int o_flag);
-void *setCommandFromStr(char *cmd_str, int *i, t_command *command);
-int getTmpFile(char *cmd_str, int *i);
-void	closeAllFds(int ***fd, int commands_num);
-t_command *new_s_command();
+// handlers
+void	exportHandler(t_msh *msh, int i);
+void ft_add_variable(t_msh *msh, char *name, char *value);
+
 #endif

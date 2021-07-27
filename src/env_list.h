@@ -22,4 +22,6 @@ void	env_lstadd_front(t_en_list **lst, t_en_list *new);
 
 t_en_list       *env_parsed_lstnew(char *name, char *value);
 
+// void ft_add_variable(t_msh *msh, char *name, char *value); // mv to minishell.h
+
 #endif

@@ -75,5 +75,6 @@ void parser(t_msh *msh, char *line)
         printf("msh->cmd[i] %s\n", msh->cmd[i]);
         i++;
     }
+    // мы поделили строку на куски по пайпам, они лежат в минишелл cmd
     // TODO: тут оставили утечку
 }

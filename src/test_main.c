@@ -21,8 +21,8 @@ int main()
 	i = 0;
 	char *cmd_str;
 
-	cmd_str = ft_strdup("< h");
-	printf("command res_small_fd = %d", command.red_small_fd);
+	cmd_str = ft_strdup("> h");
+	printf("command res_small_fd = %d\n", command.red_small_fd);
 	check_ctrl_symbol(cmd_str, &i, &command);
 
 }

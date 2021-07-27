@@ -113,7 +113,8 @@ int parse_red_small(char *cmd_str, int *i)
 	cmd_str[end] = ' ';
 	*i = end;
 	fileFd = open(fileName, O_RDONLY);
-	//pr
+	printf("fileFd = %d\n", fileFd);
+	printf("filename = %s\n", fileName);
 	free(fileName);
 	return (fileFd);
 
@@ -132,6 +133,7 @@ int check_ctrl_symbol(char *cmd_str, int *i, t_command *com_s)
 			printf("HERE_DOC i = %d\n", *i);
 			com_s->here_doc = 1;
 			com_s->fileInFd = getTmpFile(cmd_str, i);
+			printf("tmpFile id = %d\n", com_s->fileInFd);
 			return (HERE_DOC);
 		}
 		(*i)++;
@@ -164,18 +166,72 @@ int check_ctrl_symbol(char *cmd_str, int *i, t_command *com_s)
 int parse_command(t_msh *msh, int com_num)
 {
 	t_command	com_s;
-	char		**pathList;	//массив папок path
+//	char		**pathList;	//массив папок path
 	int			i;			//индекс для прохода по строке
-	int 		res;
-
+//	int 		res;
+	int end;
 
 	i = 0;
-	check_ctrl_symbol(msh->cmd[com_num], &i, &com_s);
+	if(check_ctrl_symbol(msh->cmd[com_num], &i, &com_s))
+		i++;
+
+	printf("cmd[i] = %c\n", msh->cmd[com_num][i]);
+	end = i;
+	while(msh->cmd[com_num][end] && (msh->cmd[com_num][end] != ' ' || msh->cmd[com_num][end] !='<' || msh->cmd[com_num][end] != '>'))
+		end++;
+	char *com = &msh->cmd[com_num][i];
+	execCerBuiltin(msh, com);
 	//обработку файла засунем в check_ctrl_symbol
 //	res =
 	return (i);
 }
 
+
+char **lexer_again(char *s)
+{
+	t_list *lexer_list;
+
+	int start = 0;
+	int end;
+	lexer_list = NULL;
+	int lst_size = 0;
+
+	while(s[start])
+	{
+		move_index(s, &start, ' ');
+		end = start;
+		while(s[end] && s[end] != ' ')
+			end++;
+		ft_lstadd_back(&lexer_list, ft_lstnew(ft_substr(s, start, end - start)));
+		start = end;
+	}
+//	while(lexer_list)
+//	{
+//		printf("lexer_content = %s\n", lexer_list->content);
+//		lexer_list = lexer_list->next;
+//	}
+t_list *tmp = lexer_list;
+	lst_size = ft_lstsize(tmp);
+	char **arr = malloc(sizeof(char *) * lst_size + 1);
+	arr[lst_size] = NULL;
+
+	int i = 0;
+	tmp = lexer_list;
+	while(tmp)
+	{
+		arr[i] = ft_strdup(tmp->content);
+		//printf("lexer_content = %s\n", lexer_list->content);
+		tmp = tmp->next;
+		i++;
+	}
+	i = 0;
+	while(arr[i])
+	{
+		printf("arr[%d] = %s\n", i, arr[i]);
+		i++;
+	}
+	return (arr);
+}
 
 
 //int parseSymbol(char *cmd_str, int *i, t_command *command)

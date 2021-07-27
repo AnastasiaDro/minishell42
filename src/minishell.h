@@ -123,4 +123,8 @@ int parseHereDoc(int i,  int out, t_msh *msh);
 void	exportHandler(t_msh *msh, int i);
 void ft_add_variable(t_msh *msh, char *name, char *value);
 
+int parse_command(t_msh *msh, int com_num);
+int execCerBuiltin(t_msh *msh, char *com);
+//t_list *lexer_again(char *s);
+char **lexer_again(char *s);
 #endif

@@ -9,7 +9,7 @@
 
 #include "minishell.h"
 
-int check_ctrl_symbol(char *cmd_str, int *i);
+int check_ctrl_symbol(char *cmd_str, int *i, t_command *command);
 int parse_command(t_msh *msh, int com_num);
 
 int main()
@@ -21,7 +21,8 @@ int main()
 	i = 0;
 	char *cmd_str;
 
-	cmd_str = ft_strdup("> file99");
-	check_ctrl_symbol(cmd_str, &i);
+	cmd_str = ft_strdup("< h");
+	printf("command res_small_fd = %d", command.red_small_fd);
+	check_ctrl_symbol(cmd_str, &i, &command);
 
 }

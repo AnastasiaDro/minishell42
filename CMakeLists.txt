@@ -8,6 +8,6 @@ add_executable(msh_42 src/minishell.c src/parser.c src/errors.c src/init.c src/f
         src/execArrSplit.c  src/checkHereDoc.c src/execBinary.c
         src/create_pipes.c src/parse_command.c libft/ft_cutstr.c src/utils/move_index.c
         src/getTmpFile.c src/utils/msh_utils.h src/get_fdIn.c src/setCommandFromStr.c src/pipexSplit.c
-        src/exec_cer.c src/test_main.c)
+        src/exec_cer.c src/test_main.c src/new_s_com.c)
 
 target_link_libraries(msh_42 "/Users/cerebus/CLionProjects/msh-42/libft/libft.a" -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline)

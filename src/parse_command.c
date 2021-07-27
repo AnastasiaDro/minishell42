@@ -11,6 +11,44 @@
 #define HERE_DOC	4
 #define CREATE_FILE  O_CREAT | O_RDWR, 0644
 
+int getTmpFile(char *cmd_str, int *i)
+{
+	char	*line;
+	int		tFileFd;
+	char	*tmp;
+	char 	*limiter;
+	int end;
+
+	move_index(cmd_str, i, ' ');
+	printf("cmd_str[*i] = 22%c22\n", cmd_str[*i]);
+	printf("&cmd_str[*i]%s\n", &cmd_str[*i]);
+	end = *i;
+	while(cmd_str[end] && cmd_str[end] != ' ')
+		end++;
+	printf("end = %d\n", end);
+	printf("cmd_str[end] = %c\n", cmd_str[end]);
+	cmd_str[end] = '\0';
+	printf("cmd_str = %s\n", cmd_str);
+	limiter = ft_strdup(&cmd_str[*i]);
+
+	line = NULL;
+	tFileFd = open("tmpFile", O_CREAT | O_RDWR, 0644);
+	write(1, "> ", 2);
+	get_next_line(STDIN_FILENO, &line);
+	while (ft_strcmp(line, limiter))
+	{
+		tmp = line;
+		write(tFileFd, line, ft_strlen(line));
+		write(tFileFd, "\n", 1);
+		write(1, "> ", 2);
+		get_next_line(STDIN_FILENO, &line);
+		free(tmp);
+	}
+	free(line);
+	return (tFileFd);
+}
+
+
 int parse_red_larg(char *cmd_str, int *i)
 {
 	int fileFd;
@@ -60,38 +98,63 @@ int parse_double_larg(char *cmd_str, int *i)
 	return (fileFd);
 }
 
-int check_ctrl_symbol(char *cmd_str, int *i)
+int parse_red_small(char *cmd_str, int *i)
+{
+	int fileFd;
+	int end;
+	char *fileName;
+
+	move_index(cmd_str, i, ' ');
+	end = *i;
+	while(cmd_str[end] && cmd_str[end] != ' ')
+		end++;
+	cmd_str[end] = '\0';
+	fileName = ft_strdup(&cmd_str[*i]);
+	cmd_str[end] = ' ';
+	*i = end;
+	fileFd = open(fileName, O_RDONLY);
+	pr
+	free(fileName);
+	return (fileFd);
+
+}
+
+
+int check_ctrl_symbol(char *cmd_str, int *i, t_command *com_s)
 {
 	move_index(cmd_str, i, ' '); //дошли до начала символов
-	int fd;
 
-	fd = -2;
 	if (cmd_str[*i] == '<')
 	{
 		if (cmd_str[*i + 1] == '<')
 		{
 			*i += 2;
 			printf("HERE_DOC i = %d\n", *i);
+			com_s->here_doc = 1;
+			com_s->fileInFd = getTmpFile(cmd_str, i);
 			return (HERE_DOC);
 		}
 		(*i)++;
 		printf("RED_SMALL i = %d\n", *i);
-
+		com_s->red_smal = 1;
+		com_s->red_small_fd = parse_red_small(cmd_str, i);
 		return (RED_SMALL);
 	}
+
 	if (cmd_str[*i] == '>')
 	{
 		if (cmd_str[*i + 1] == '>')
 		{
 			*i += 2;
 			printf("DOUBLE_LARG i = %d\n", *i);
-			parse_double_larg(cmd_str, i);
+			com_s->fileOutFd = parse_double_larg(cmd_str, i); //
+			com_s->double_larg = 1;
 			return (DOUBLE_LARG);
 		}
 		(*i)++;
 		printf("RED_LARG i = %d\n", *i);
-		printf("cmd_str[*i] = 11%c11\n", cmd_str[*i]);
-		parse_red_larg(cmd_str, i);
+		com_s->red_larg = 1;
+		com_s->red_larg_fileFd = parse_red_larg(cmd_str, i);
 		return (RED_LARG);
 	}
 	return (0);
@@ -100,18 +163,16 @@ int check_ctrl_symbol(char *cmd_str, int *i)
 
 int parse_command(t_msh *msh, int com_num)
 {
-	t_command	command;
+	t_command	com_s;
 	char		**pathList;	//массив папок path
 	int			i;			//индекс для прохода по строке
-	int			symb;
-	int			fileFd;
+	int 		res;
 
 
 	i = 0;
-	symb = check_ctrl_symbol(msh->cmd[com_num], &i);
+	check_ctrl_symbol(msh->cmd[com_num], &i, &com_s);
 	//обработку файла засунем в check_ctrl_symbol
-
-
+//	res =
 	return (i);
 }
 

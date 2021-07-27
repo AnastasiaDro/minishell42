@@ -85,6 +85,11 @@ typedef struct  s_command
 	int red_smal;
 	int red_larg;
 	int double_larg;
+	int tmpFileFd;
+	int fileInFd;
+	int fileOutFd;
+	int red_larg_fileFd;
+	int red_small_fd;
 	char *command;
 }				t_command;
 
@@ -118,6 +123,7 @@ int parseHereDoc(int i,  int out, t_msh *msh);
 int create_pipes(int arr_len, t_msh *msh);
 int get_fdIn(char  *str, int *i, int o_flag);
 void *setCommandFromStr(char *cmd_str, int *i, t_command *command);
-int	getTmpFile(char *limiter);
+int getTmpFile(char *cmd_str, int *i);
 void	closeAllFds(int ***fd, int commands_num);
+t_command *new_s_command();
 #endif

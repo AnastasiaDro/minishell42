@@ -3,7 +3,6 @@
 //
 
 #include "minishell.h"
-#include "here_doc/here_doc.h"
 
 int execBinary(int i, t_msh *msh, int fdIn, int fdOut)
 {

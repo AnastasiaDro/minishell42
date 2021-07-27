@@ -17,7 +17,7 @@
 #include "exit_codes.h"
 #include "../libft/libft.h"
 #include "env_list.h"
-#include "here_doc/here_doc.h"
+#include "utils/msh_utils.h"
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"
 # define COMMAND_ERR "command not found"
@@ -74,19 +74,18 @@ typedef struct s_msh // main struct
 	char 		**envp_arr;
     int     	envp_len;  //длина списка переменных среды
 	int			**fd;
+	int 		commands_num;
 }               t_msh;
 
 typedef struct  s_command
 {
 	//индекс команды в списке
-	char **fd;
-	int index;
-	int fileIn;
-	char *command;
-
-	int redirInOne;
+	int com_num;
 	int here_doc;
-	int index;
+	int red_smal;
+	int red_larg;
+	int double_larg;
+	char *command;
 }				t_command;
 
 // parsing
@@ -117,4 +116,8 @@ void rl_replace_line();
 int parseHereDoc(int i,  int out, t_msh *msh);
 
 int create_pipes(int arr_len, t_msh *msh);
+int get_fdIn(char  *str, int *i, int o_flag);
+void *setCommandFromStr(char *cmd_str, int *i, t_command *command);
+int	getTmpFile(char *limiter);
+void	closeAllFds(int ***fd, int commands_num);
 #endif

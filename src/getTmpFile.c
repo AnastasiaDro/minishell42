@@ -1,12 +1,6 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/file.h>
-#include "../../get_next_line/get_next_line.h"
-#include "../../libft/libft.h"
-
-//#include "libft/libft.h"
-//#include "libft/bonus.h"
-//#include "src/get_next_line/get_next_line.h"
+#include "minishell.h"
 
 int	getTmpFile(char *limiter)
 {

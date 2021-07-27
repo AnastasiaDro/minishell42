@@ -9,12 +9,12 @@
 
 #include "minishell.h"
 
-int check_ctrl_symbol(char *cmd_str, int *i, t_command *command);
+int check_ctrl_symbol(char *cmd_str, int *i, t_cmd *command);
 int parse_command(t_msh *msh, int com_num);
 
 int main()
 {
-	t_command	command;
+	t_cmd		command;
 	char		**pathList;	//массив папок path
 	int			i;			//индекс для прохода по строке
 

@@ -120,7 +120,7 @@ int parse_red_small(char *cmd_str, int *i)
 }
 
 
-int check_ctrl_symbol(char *cmd_str, int *i, t_command *com_s)
+int check_ctrl_symbol(char *cmd_str, int *i, t_cmd *com_s)
 {
 	move_index(cmd_str, i, ' '); //дошли до начала символов
 
@@ -163,7 +163,7 @@ int check_ctrl_symbol(char *cmd_str, int *i, t_command *com_s)
 
 int parse_command(t_msh *msh, int com_num)
 {
-	t_command	com_s;
+	t_cmd		com_s;
 	char		**pathList;	//массив папок path
 	int			i;			//индекс для прохода по строке
 	int 		res;

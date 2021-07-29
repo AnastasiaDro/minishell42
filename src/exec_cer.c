@@ -80,7 +80,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			if (check_ctrl_symbol(cmd_s, &j))
 			{
 				j +=1;
-				printf("fileOutFd = %d\n", cmd_s->fileOutFd);
+				//printf("fileOutFd = %d\n", cmd_s->fileOutFd);
 			}
 			if (j >= arrLen)
 			{
@@ -132,7 +132,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			if(!execCerBuiltin(msh, execArr))
 				execBinary(msh, execArr, cmd_s);
 		}
-		printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
+	//	printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
 //		close(savesrdin);

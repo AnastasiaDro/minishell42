@@ -1,2 +1,46 @@
-/Users/cerebus/CLionProjects/msh-42
-cmd_s->fileOutFd = 13
+cmd_s->fileOutFd = 19
+total 184
+drwxr-xr-x   20 cerebus  student    680 Jul 29 23:40 .
+drwxr-xr-x   10 cerebus  student    340 Jul 29 23:36 ..
+-rw-r--r--    1 cerebus  student   6148 Jul 27 21:08 .DS_Store
+-rw-r--r--    1 cerebus  student  12288 Jul 29 22:33 .file2.swp
+drwxr-xr-x   16 cerebus  student    544 Jul 29 23:37 .git
+-rw-r--r--    1 cerebus  student    151 Jul 27 21:08 .gitignore
+drwxr-xr-x   10 cerebus  student    340 Jul 29 23:35 .idea
+-rw-r--r--    1 cerebus  student    871 Jul 29 22:56 CMakeLists.txt
+-rw-r--r--    1 cerebus  student   1357 Jul 29 23:18 Makefile
+-rw-r--r--    1 cerebus  student   1580 Jul 27 21:05 README.md
+drwxr-xr-x   11 cerebus  student    374 Jul 29 23:35 cmake-build-debug
+drwxr-xr-x    5 cerebus  student    170 Jul 27 21:05 docs
+-rw-r--r--    1 cerebus  student     22 Jul 29 23:40 file1
+-rw-r--r--    1 cerebus  student     57 Jul 29 22:36 file2
+drwxr-xr-x    6 cerebus  student    204 Jul 27 21:08 get_next_line
+drwxr-xr-x  108 cerebus  student   3672 Jul 29 23:38 libft
+-rwxr-xr-x    1 cerebus  student  41084 Jul 29 23:38 minishell
+drwxr-xr-x   40 cerebus  student   1360 Jul 29 23:17 pipex-intra
+drwxr-xr-x   63 cerebus  student   2142 Jul 29 23:38 src
+-rw-r--r--    1 cerebus  student     16 Jul 29 14:53 tmpFile
+cmd_s->fileOutFd = 24
+cmd_s->fileOutFd = 19$
+total 184$
+drwxr-xr-x   20 cerebus  student    680 Jul 29 23:40 .$
+drwxr-xr-x   10 cerebus  student    340 Jul 29 23:36 ..$
+-rw-r--r--    1 cerebus  student   6148 Jul 27 21:08 .DS_Store$
+-rw-r--r--    1 cerebus  student  12288 Jul 29 22:33 .file2.swp$
+drwxr-xr-x   16 cerebus  student    544 Jul 29 23:37 .git$
+-rw-r--r--    1 cerebus  student    151 Jul 27 21:08 .gitignore$
+drwxr-xr-x   10 cerebus  student    340 Jul 29 23:35 .idea$
+-rw-r--r--    1 cerebus  student    871 Jul 29 22:56 CMakeLists.txt$
+-rw-r--r--    1 cerebus  student   1357 Jul 29 23:18 Makefile$
+-rw-r--r--    1 cerebus  student   1580 Jul 27 21:05 README.md$
+drwxr-xr-x   11 cerebus  student    374 Jul 29 23:35 cmake-build-debug$
+drwxr-xr-x    5 cerebus  student    170 Jul 27 21:05 docs$
+-rw-r--r--    1 cerebus  student     22 Jul 29 23:40 file1$
+-rw-r--r--    1 cerebus  student     57 Jul 29 22:36 file2$
+drwxr-xr-x    6 cerebus  student    204 Jul 27 21:08 get_next_line$
+drwxr-xr-x  108 cerebus  student   3672 Jul 29 23:38 libft$
+-rwxr-xr-x    1 cerebus  student  41084 Jul 29 23:38 minishell$
+drwxr-xr-x   40 cerebus  student   1360 Jul 29 23:17 pipex-intra$
+drwxr-xr-x   63 cerebus  student   2142 Jul 29 23:38 src$
+-rw-r--r--    1 cerebus  student     16 Jul 29 14:53 tmpFile$
+cmd_s->fileOutFd = 24$

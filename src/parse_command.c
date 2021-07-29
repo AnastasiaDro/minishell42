@@ -45,8 +45,6 @@ int parse_red_larg(char **tokens, int *j)
 
 	fileName = ft_strdup(tokens[(*j)+1]);
 	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
-	printf("file fd = %d\n", fileFd);
-	printf("filename = %s\n", fileName);
 	free(fileName);
 	return (fileFd);
 
@@ -60,7 +58,6 @@ int parse_double_larg(char **tokens, int *j)
 	write(1, "hh", 2);
 	fileName = ft_strdup(tokens[(*j)+1]);
 
-	printf("FILENAME = %s\n", fileName);
 
 	fileFd = open(fileName, O_CREAT | O_RDWR | O_APPEND, 0644);
 	//printf("file fd = %d\n", fileFd);
@@ -75,8 +72,6 @@ int parse_red_small(char **tokens, int *j)
 
 	fileName = ft_strdup(tokens[(*j)+1]);
 	fileFd = open(fileName, O_RDONLY);
-	printf("fileFd = %d\n", fileFd);
-	printf("filename = %s\n", fileName);
 	free(fileName);
 	return (fileFd);
 }
@@ -86,17 +81,17 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 {
 		if (!ft_strcmp(cmd_s->cmdTokens[*j], "<<"))
 		{
-			printf("HERE_DOC j = %d\n", *j);
+		//	printf("HERE_DOC j = %d\n", *j);
 			cmd_s ->here_doc = 1;
 			cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
-			printf("tmpFile id = %d\n", cmd_s->fileInFd);
+		//	printf("tmpFile id = %d\n", cmd_s->fileInFd);
 			(*j) += 2; //сдвигаем указатель за лимитер
 			return (HERE_DOC);
 		}
 
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], "<"))
 		{
-			printf("RED_SMALL j = %d\n", *j);
+			//printf("RED_SMALL j = %d\n", *j);
 			cmd_s->red_smal = 1;
 			cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
 			(*j) += 1;
@@ -104,7 +99,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		}
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
 		{
-			printf("DOUBLE_LARG j = %d\n", *j);
+			//printf("DOUBLE_LARG j = %d\n", *j);
 			cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
 			cmd_s->double_larg = 1;
 			(*j) += 1;
@@ -154,10 +149,10 @@ char **lexer_again(char *s)
 		i++;
 	}
 	i = 0;
-	while(arr[i])
-	{
-		printf("arr[%d] = %s\n", i, arr[i]);
-		i++;
-	}
+//	while(arr[i])
+//	{
+//		printf("arr[%d] = %s\n", i, arr[i]);
+//		i++;
+//	}
 	return (arr);
 }

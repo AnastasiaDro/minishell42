@@ -210,7 +210,7 @@ char **lexer_again(char *s)
 //		printf("lexer_content = %s\n", lexer_list->content);
 //		lexer_list = lexer_list->next;
 //	}
-t_list *tmp = lexer_list;
+	t_list *tmp = lexer_list;
 	lst_size = ft_lstsize(tmp);
 	char **arr = malloc(sizeof(char *) * lst_size + 1);
 	arr[lst_size] = NULL;
@@ -220,7 +220,6 @@ t_list *tmp = lexer_list;
 	while(tmp)
 	{
 		arr[i] = ft_strdup(tmp->content);
-		//printf("lexer_content = %s\n", lexer_list->content);
 		tmp = tmp->next;
 		i++;
 	}

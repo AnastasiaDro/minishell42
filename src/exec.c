@@ -68,10 +68,13 @@ void exec(t_msh *msh)
 
     i = -1;
 	//parse_command(msh, 0);
-	lexer_again(msh->cmd[0]);
-//    while (msh->cmd[++i])
-//    {
-//        dollarSign(msh);
-//        execBuiltin(msh);
-//    }
+
+    while (msh->cmd[++i])
+    {
+    	lexer_again(msh->cmd[i]);
+       while(msh->cmd[i])
+	   {
+
+	   }
+    }
 }

@@ -135,6 +135,8 @@ void cerExec(t_msh *msh) // не весьchar **fd
 	//	printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
+		if (cmd_s->here_doc)
+			unlink("tmpFile");
 //		close(savesrdin);
 //		close(savestdout);
 		free(cmd_s);

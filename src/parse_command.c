@@ -46,6 +46,7 @@ int parse_red_larg(char **tokens, int *j)
 	fileName = ft_strdup(tokens[(*j)+1]);
 	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
 	printf("file fd = %d\n", fileFd);
+	printf("filename = %s\n", fileName);
 	free(fileName);
 	return (fileFd);
 

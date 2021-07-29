@@ -9,6 +9,9 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 {
 	int i;
 
+
+
+
 	i = 0;
 	if (!ft_strcmp(comArr[i], "echo"))
 	{
@@ -63,15 +66,9 @@ void cerExec(t_msh *msh) // не весьchar **fd
 	int end;
 	char **execArr;
 
-	//parse_command(msh, 0);
-
+	execArr = NULL;
 	while (msh->cmd[++i])
 	{
-
-
-		//< file1 cat -e | ls -la > fileR | ls -la
-		//int **fd и индекс команды i
-		//вход: fd[i][0] выход: fd[i + 1][1]
 		t_cmd *cmd_s = malloc(sizeof (t_cmd));
 		cmd_s->fileInFd = 0;
 		cmd_s->fileOutFd = 1;
@@ -116,14 +113,16 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		int savesrdin = dup(0);
 		dup2(cmd_s->fileInFd, STDIN_FILENO);
 		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
-
-		execCerBuiltin(msh, execArr);
+		close(cmd_s->fileInFd);
+		close(cmd_s->fileOutFd);
+		if (execArr != NULL)
+			execCerBuiltin(msh, execArr);
+		printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
-		if (cmd_s->fileInFd != 0)
-			close(cmd_s->fileInFd);
-		if (cmd_s->fileOutFd != 1)
-			close(cmd_s->fileOutFd);
+		close(savesrdin);
+		close(savestdout);
+
 		free(cmd_s);
 	}
 	waitChildren();

@@ -69,7 +69,6 @@ int main(int ac, char **av, char **envp)
 			add_history(msh.line);
 			parser(&msh, msh.line);
 			cerExec(&msh);
-
 		}
 		free(msh.line);
 		msh.line = NULL;

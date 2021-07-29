@@ -168,7 +168,6 @@ void    ft_export_add_new(t_en_list *export_list, char *name, char *value)
         env_lstadd_front(&export_list, env_parsed_lstnew(name, value));
         return;
     }
-
     while(tmp)
     {
         if (ft_strncmp(tmp->name, name, ft_strlen(name)) > 0)

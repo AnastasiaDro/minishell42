@@ -115,6 +115,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		{
 			cmd_s->red_larg = 1;
 			cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
+			(*j) += 1;
 			return (RED_LARG);
 		}
 		return (0);

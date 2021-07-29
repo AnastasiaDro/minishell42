@@ -134,4 +134,9 @@ void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
 char **lexer_again(char *s);
 t_en_list *getExportVar(t_en_list **export, char *key_name);
+int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s);
+char	*getBinaryName(char *command);
+char	**pipexSplit(char const *s, char c);
+char	*findCommand(char **pathList, char *command);
+void	printError(char *command, int flag);
 #endif

@@ -9,9 +9,6 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 {
 	int i;
 
-
-
-
 	i = 0;
 	if (!ft_strcmp(comArr[i], "echo"))
 	{
@@ -82,7 +79,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			//чекаем управляющие символы
 			if (check_ctrl_symbol(cmd_s, &j))
 			{
-				j +=2;
+				j +=1;
 				printf("fileOutFd = %d\n", cmd_s->fileOutFd);
 			}
 			if (j >= arrLen)
@@ -98,31 +95,48 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			{
 				end++;
 			}
-
+			//end--;
 			execArr = malloc(sizeof (char *) * (end - j + 1));
 			execArr[end - j] = NULL;
 			int u = 0;
 			while(u < (end - j))
 			{
 				execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
+				//printf("HERE execArr[%d] = %s\n", u, execArr[u]);
 				u++;
 			}
 			j = end;
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
-		dup2(cmd_s->fileInFd, STDIN_FILENO);
-		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
-		close(cmd_s->fileInFd);
-		close(cmd_s->fileOutFd);
+//		dup2(cmd_s->fileInFd, STDIN_FILENO);
+//		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+		if (cmd_s->fileInFd != 0)
+		{
+			dup2(cmd_s->fileInFd, STDIN_FILENO);
+			close(cmd_s->fileInFd);
+		}
+		if (cmd_s->fileOutFd != 1)
+		{
+			dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+			close(cmd_s->fileOutFd);
+		}
+		//close(cmd_s->fileInFd);
+//		close(cmd_s->fileOutFd);
+//		execCerBuiltin(msh, execArr);
+
+
+
 		if (execArr != NULL)
-			execCerBuiltin(msh, execArr);
+		{
+			if(!execCerBuiltin(msh, execArr))
+				execBinary(msh, execArr, cmd_s);
+		}
 		printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
-		close(savesrdin);
-		close(savestdout);
-
+//		close(savesrdin);
+//		close(savestdout);
 		free(cmd_s);
 	}
 	waitChildren();

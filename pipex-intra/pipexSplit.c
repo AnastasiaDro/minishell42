@@ -73,7 +73,7 @@ static char	**ft_fill_res(char **res, char const *s, char c, int words_num)
 	return (res);
 }
 
-char	**pipexSplit(char const *s, char c)
+
 {
 	int		words_num;
 	char	**res;

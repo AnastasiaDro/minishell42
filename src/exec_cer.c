@@ -7,6 +7,8 @@
 
 int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j)
 {
+	void *func;
+
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], "echo"))
 	{
 		ft_echo(&cmd_s->cmdTokens[*j]);
@@ -56,9 +58,9 @@ void cerExec(t_msh *msh)
 {
 	int i;
 	int j; //индекс для прохода по строке
-	char **cmdArr;
 
 	i = -1;
+	int end;
 
 	//parse_command(msh, 0);
 
@@ -72,12 +74,35 @@ void cerExec(t_msh *msh)
 		while(cmd_s->cmdTokens[j]) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
-			check_ctrl_symbol(cmd_s, &j);
-			//чекаем билдины
-			execCerBuiltin(msh, cmd_s, &j);
-			j++;
-			//чекаем и/или выполняем бинарники
+			if (check_ctrl_symbol(cmd_s, &j))
+				j++;
+			printf("j = %d\n", j);
+			end = j;
+	//		printf("cmd_s->cmdTokens[j] = %s\n", cmd_s->cmdTokens[j]);
+			//беру массив команды с аргументами
+			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
+			ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
+			{
+				//printf("end = %d\n", end);
+				end++;
+			}
+
+			printf("вышли\n");
+			char **execArr = malloc(sizeof (char *) * (end - j + 1));
+			printf("end - j = %d\n", end - j);
+			execArr[end - j] = NULL;
+			int u = 0;
+			while(u < (end - j))
+			{
+				execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
+				printf("execArr[u] = %s\n", execArr[u]);
+				u++;
+			}
+			j = end;
+
 		}
+
+
 		free(cmd_s);
 
 	}

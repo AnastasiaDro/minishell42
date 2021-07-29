@@ -35,7 +35,6 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	{
 		if (comArr[i + 1] != NULL)
 		{
-			//exportHandler(msh, i);
 			cerExportHandler(msh, comArr);
 			return (1);
 		}
@@ -55,7 +54,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	return (0);
 }
 
-void cerExec(t_msh *msh)
+void cerExec(t_msh *msh) // не весьchar **fd
 {
 	int i;
 	int j; //индекс для прохода по строке
@@ -68,6 +67,11 @@ void cerExec(t_msh *msh)
 
 	while (msh->cmd[++i])
 	{
+
+
+		//< file1 cat -e | ls -la > fileR | ls -la
+		//int **fd и индекс команды i
+		//вход: fd[i][0] выход: fd[i + 1][1]
 		t_cmd *cmd_s = malloc(sizeof (t_cmd));
 		cmd_s->fileInFd = 0;
 		cmd_s->fileOutFd = 1;
@@ -85,14 +89,16 @@ void cerExec(t_msh *msh)
 				printf("fileOutFd = %d\n", cmd_s->fileOutFd);
 			}
 			if (j >= arrLen)
+			{
 				break;
+			}
+
 			end = j;
 	//		printf("cmd_s->cmdTokens[j] = %s\n", cmd_s->cmdTokens[j]);
 			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
 			ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
-				//printf("end = %d\n", end);
 				end++;
 			}
 
@@ -107,7 +113,7 @@ void cerExec(t_msh *msh)
 			j = end;
 		}
 		int savestdout = dup(1);
-		int savesrdin = dup(1);
+		int savesrdin = dup(0);
 		dup2(cmd_s->fileInFd, STDIN_FILENO);
 		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
 

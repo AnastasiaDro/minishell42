@@ -29,27 +29,27 @@ void cerExportHandler(t_msh *msh, char **execArr)
 	char *value;
 	int i;
 
-	i = 0;
+	i = 1;
 	while (execArr[i])
 	{
 		printf("token = %s\n", execArr[i]);
 		//если внутри токена "="
 		//то мы делаем берем имя и значение после знака равно
-		printf("1 cmd_s->cmdTokens[*j + 1] = %s\n", execArr[i + 1]);
-		eq_ptr = ft_strchr(execArr[i + 1], '=');
+		//printf("1 cmd_s->cmdTokens[*j + 1] = %s\n", execArr[i + 1]);
+		eq_ptr = ft_strchr(execArr[i], '=');
 
 		if (eq_ptr)
 		{
 			*eq_ptr = '\0';
 			printf("2 cmd_s->cmdTokens[*j] = %s\n", execArr[i]);
-			name = ft_strdup(execArr[i  + 1]);
+			name = ft_strdup(execArr[i]);
 			value = eq_ptr + 1;
 			*eq_ptr = '=';
-			i++;
+			//i++;
 		}
 		else
 		{
-			i++;
+		//	i++;
 			name = execArr[i];
 			value = NULL;
 			printf("token = %s\n", execArr[i]);

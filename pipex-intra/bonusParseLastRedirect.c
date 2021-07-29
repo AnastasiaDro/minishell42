@@ -19,7 +19,7 @@ int	bonusParseLastRedirect(int **fd, t_bstruct *bS)
 			fileFd = open(bS->argv[bS->argc - 1], O_CREAT | O_RDWR, 0644);
 		checkFileFd(fileFd, bS->argv[bS->argc - 1], bS, fd);
 		dup2(fd[bS->commands_num - 1][0], STDIN_FILENO);
-		dup2(fileFd, STDOUT_FILENO);
+		dup2(fileFd, STDOUT_ILENO);
 		close(fileFd);
 		bonusClean(fd, bS);
 		execve(execArr[0], execArr, NULL);

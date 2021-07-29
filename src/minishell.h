@@ -125,8 +125,10 @@ void ft_add_variable(t_msh *msh, char *name, char *value);
 
 //ищем и выполянем контрольный символ
 int check_ctrl_symbol(t_cmd *cmd_s, int *j);
-int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
-void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
+//int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
+int execCerBuiltin(t_msh *msh, char **comArr);
+//void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
+void cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);

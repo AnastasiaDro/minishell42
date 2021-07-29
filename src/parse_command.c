@@ -56,9 +56,13 @@ int parse_double_larg(char **tokens, int *j)
 	int fileFd;
 	char *fileName;
 
+	write(1, "hh", 2);
 	fileName = ft_strdup(tokens[(*j)+1]);
+
+	printf("FILENAME = %s\n", fileName);
+
 	fileFd = open(fileName, O_CREAT | O_RDWR, 0644);
-	printf("file fd = %d\n", fileFd);
+	//printf("file fd = %d\n", fileFd);
 	free(fileName);
 	return (fileFd);
 }
@@ -93,7 +97,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		{
 			printf("RED_SMALL j = %d\n", *j);
 			cmd_s->red_smal = 1;
-			cmd_s->red_small_fd = parse_red_small(cmd_s->cmdTokens, j);
+			cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
 			(*j) += 1;
 			return (RED_SMALL);
 		}
@@ -109,35 +113,11 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
 		{
 			cmd_s->red_larg = 1;
-			cmd_s->red_larg_fileFd = parse_red_larg(cmd_s->cmdTokens, j);
+			cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
 			return (RED_LARG);
 		}
 		return (0);
 	}
-
-//
-//int parse_command(t_msh *msh, int com_num)
-//{
-//	t_cmd	com_s;
-////	char		**pathList;	//массив папок path
-//	int			i;			//индекс для прохода по строке
-////	int 		res;
-//	int end;
-//
-//	i = 0;
-//	if(check_ctrl_symbol(msh->cmd[com_num], &i, &com_s))
-//		i++;
-//
-//	printf("cmd[i] = %c\n", msh->cmd[com_num][i]);
-//	end = i;
-//	while(msh->cmd[com_num][end] && (msh->cmd[com_num][end] != ' ' || msh->cmd[com_num][end] !='<' || msh->cmd[com_num][end] != '>'))
-//		end++;
-//	char *com = &msh->cmd[com_num][i];
-//	execCerBuiltin(msh, com);
-//	//обработку файла засунем в check_ctrl_symbol
-////	res =
-//	return (i);
-//}
 
 
 char **lexer_again(char *s)
@@ -158,11 +138,6 @@ char **lexer_again(char *s)
 		ft_lstadd_back(&lexer_list, ft_lstnew(ft_substr(s, start, end - start)));
 		start = end;
 	}
-//	while(lexer_list)
-//	{
-//		printf("lexer_content = %s\n", lexer_list->content);
-//		lexer_list = lexer_list->next;
-//	}
 	t_list *tmp = lexer_list;
 	lst_size = ft_lstsize(tmp);
 	char **arr = malloc(sizeof(char *) * lst_size + 1);

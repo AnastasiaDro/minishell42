@@ -18,7 +18,6 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	if (!ft_strcmp(comArr[i], "pwd"))
 	{
 		ft_pwd();
-	//	dup2(STDOUT_FILENO, 1);
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i], "env"))
@@ -29,7 +28,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	}
 	if (!ft_strcmp(comArr[i],  "cd"))
 	{
-		ft_cd(msh, "cd ..");
+		ft_cd(msh, comArr[i + 1]);
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i], "export"))
@@ -108,11 +107,13 @@ void cerExec(t_msh *msh)
 			j = end;
 		}
 		int savestdout = dup(1);
+		int savesrdin = dup(1);
 		dup2(cmd_s->fileInFd, STDIN_FILENO);
 		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
 
 		execCerBuiltin(msh, execArr);
-		dup2(savestdout, 1);
+		dup2(savestdout, STDOUT_FILENO);
+		dup2(savesrdin, STDIN_FILENO);
 		if (cmd_s->fileInFd != 0)
 			close(cmd_s->fileInFd);
 		if (cmd_s->fileOutFd != 1)

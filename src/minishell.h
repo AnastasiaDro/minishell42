@@ -133,4 +133,5 @@ void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
 char **lexer_again(char *s);
+t_en_list *getExportVar(t_en_list **export, char *key_name);
 #endif

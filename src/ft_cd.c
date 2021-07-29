@@ -25,9 +25,11 @@ static void setPwd(t_msh *msh, char *dir)
 
 void	ft_cd(t_msh *msh, const char *path)
 {
-	path = "src";
+
 	char *dir;
 	dir = getcwd(NULL, 0);
+	if (path == NULL)
+		path = getExportVar(&msh->export_list, "HOME")->value;
 	if (chdir(path) == 0)
 	{
 		setPwd(msh, dir);

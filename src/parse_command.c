@@ -61,7 +61,7 @@ int parse_double_larg(char **tokens, int *j)
 
 	printf("FILENAME = %s\n", fileName);
 
-	fileFd = open(fileName, O_CREAT | O_RDWR, 0644);
+	fileFd = open(fileName, O_CREAT | O_RDWR | O_APPEND, 0644);
 	//printf("file fd = %d\n", fileFd);
 	free(fileName);
 	return (fileFd);
@@ -159,87 +159,3 @@ char **lexer_again(char *s)
 	}
 	return (arr);
 }
-
-
-//int parseSymbol(char *cmd_str, int *i, t_cmd *command)
-//{
-//	if (cmd_str[(*i)] == '<')
-//	{
-//		if (cmd_str[(*i) + 1] == '<')
-//		{
-//			(*i)++;
-//			command->here_doc = 1;
-//			return (HERE_DOC);
-//		}
-//		else
-//		{
-//			command->redir_small = 1;
-//			(*i)++;					//сдвинули i на пробел
-//			command->fdIn = get_fdIn(cmd_str, i, O_RDONLY);
-//			return (RED_SMALL);
-//		}
-//
-//	}
-//	if (cmd_str[(*i)] == '>')
-//	{
-//		if (cmd_str[(*i) + 1] == '>')
-//		{
-//			return (DOUBLE_LARG);
-//		}
-//		else
-//		{
-//			(*i)++;
-//			command->fdIn = get_fdIn(cmd_str, i, 1); //1 = создать новый файл и задать ему правильные права
-//			//здесь в get_fdIn также смещаем i
-//			return (RED_LARG);
-//		}
-//
-//	}
-//	return (0);
-//}
-//
-//int parse_command(char *cmd_str, int num, char **fd, t_msh *msh)
-//{
-//	int i;
-//	//num - это номер команды
-//
-//	int pid;
-//	pid = fork();
-//
-//	if (pid == 0)
-//	{
-//		t_cmd cmd;
-//		if (num == msh->commands_num-1)
-//		{
-//			dup2(fd[num+1][1], STDOUT_FILENO);//перенаправляем выход в пайп
-//			close(fd[num + 1][1]);
-//		}
-//
-//		if (num != 0) //если команда не первая
-//		{
-//			dup2(fd[num][0], STDIN_FILENO);
-//			close(fd[num][0]);
-//		}
-//
-//		i = 0;
-//		parseSymbol(cmd_str, &i, &cmd); //здесь заполнила если есть - фд-шник файла на ввод с <
-//		i++; //сдвинули указатель
-//		move_index(cmd_str, &i, ' '); //теперь i на месте команды
-//
-//		//тут нужно взять саму команду (бинарник или fdIn)
-//		setCommandFromStr(cmd_str, &i, &cmd); //взяли саму команду и заодно проверили, есть ли here_doc
-//		//получили параллельно лимитер если есть here_doc
-//		//TODO: обработать строку до конца со всеми ее редиректами каким-то циклом
-//
-//		//выполнить команду
-//
-//
-//		cmd.execArr = getExecArr(cmd.command, pipexSplit(findPath(msh->export_list), ':')); //получаем массив для выполнения
-//		//тут уже все фд-шники поменяны
-//		closeAllFds(&msh->fd, msh->commands_num);
-//		execve(cmd.execArr[0], cmd.execArr, NULL);
-//		perror(NAME);
-//		exit(1);
-//	}
-
-//}

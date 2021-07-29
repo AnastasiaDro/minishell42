@@ -65,16 +65,27 @@ void dollarSign(t_msh *msh)
 void exec(t_msh *msh)
 {
     int i;
+    int j; //индекс для прохода по строке
+	char **cmdArr;
 
     i = -1;
+
 	//parse_command(msh, 0);
 
     while (msh->cmd[++i])
     {
-    	lexer_again(msh->cmd[i]);
-       while(msh->cmd[i])
+		t_cmd *cmd_s = malloc(sizeof (t_cmd));
+    	cmd_s->com_num = i;
+		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
+    	//и получаем массив токенов команды
+    	j = -1;
+       while(cmd_s->cmdTokens[++j]) //пока у нас есть токены
 	   {
-
+       		//чекаем управляющие символы
+		   check_ctrl_symbol(cmd_s, &j);
+		   //чекаем билдины
+		   
+			//чекаем и/или выполняем бинарники
 	   }
     }
 }

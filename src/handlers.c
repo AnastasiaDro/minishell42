@@ -20,3 +20,39 @@ void exportHandler(t_msh *msh, int i)
 		i++;
 	}
 }
+
+void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j)
+{
+	//пока у нас не закончились токены после слова экспорт
+	char *eq_ptr;
+	char *name;
+	char *value;
+
+	while (cmd_s->cmdTokens[*j])
+	{
+		printf("token = %s\n", cmd_s->cmdTokens[(*j)]);
+		//если внутри токена "="
+		//то мы делаем берем имя и значение после знака равно
+		printf("1 cmd_s->cmdTokens[*j + 1] = %s\n", cmd_s->cmdTokens[*j + 1]);
+		eq_ptr = ft_strchr(cmd_s->cmdTokens[(*j) + 1], '=');
+
+		if (eq_ptr)
+		{
+			*eq_ptr = '\0';
+			printf("2 cmd_s->cmdTokens[*j] = %s\n", cmd_s->cmdTokens[*j]);
+			name = ft_strdup(cmd_s->cmdTokens[(*j) + 1]);
+			value = eq_ptr + 1;
+			*eq_ptr = '=';
+			(*j)++;
+		}
+		else
+		{
+			(*j)++;
+			name = cmd_s->cmdTokens[*j];
+			value = NULL;
+			printf("token = %s\n", cmd_s->cmdTokens[(*j)]);
+		}
+		ft_add_variable(msh, name, value);
+		(*j)++;
+	}
+}

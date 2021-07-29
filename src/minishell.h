@@ -76,7 +76,7 @@ typedef struct s_msh // main struct
 	int 		commands_num;
 }               t_msh;
 
-typedef struct  s_command
+typedef struct  s_cmd
 {
 	//индекс команды в списке
 	int com_num;
@@ -89,8 +89,8 @@ typedef struct  s_command
 	int fileOutFd;
 	int red_larg_fileFd;
 	int red_small_fd;
-	char *command;
-}				t_command;
+	char **cmdTokens;
+}				t_cmd;
 
 // parsing
 void parser(t_msh *msh, char *line);
@@ -123,8 +123,12 @@ int parseHereDoc(int i,  int out, t_msh *msh);
 void	exportHandler(t_msh *msh, int i);
 void ft_add_variable(t_msh *msh, char *name, char *value);
 
-int parse_command(t_msh *msh, int com_num);
-int execCerBuiltin(t_msh *msh, char *com);
-//t_list *lexer_again(char *s);
+//ищем и выполянем контрольный символ
+int check_ctrl_symbol(t_cmd *cmd_s, int *j);
+int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
+void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
+void cerExec(t_msh *msh);
+void	waitChildren(void);
+//int parse_command(t_msh *msh, int com_num);
 char **lexer_again(char *s);
 #endif

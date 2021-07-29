@@ -5,81 +5,81 @@
 #include "minishell.h"
 #include "env_export_unset.h"
 
-int execCerBuiltin(t_msh *msh, char *com)
+int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j)
 {
-	int i;
-
-	i = 0;
-
-	if (!ft_strncmp(com, "echo", 4))
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "echo"))
 	{
-		ft_echo(msh->cmd);
+		ft_echo(&cmd_s->cmdTokens[*j]);
 		return (1);
 	}
-	if (!ft_strncmp(com, "pwd", ft_strlen(msh->cmd[i])))
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "pwd"))
 	{
 		ft_pwd();
 		return (1);
 	}
-	if (!ft_strncmp(com, "env", 3))
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "env"))
 	{
 		ft_print_env(msh);
 		printf("печатает лист\n");
 		return (1);
 	}
-	if (!ft_strncmp(com, "cd", 2))
+	if (!ft_strcmp(cmd_s->cmdTokens[*j],  "cd"))
 	{
 		ft_cd(msh, "cd ..");
 		return (1);
 	}
-	if (!ft_strncmp(com, "export", 5))
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "export"))
 	{
-		if (msh->cmd[i + 1] != NULL)
+		if (cmd_s->cmdTokens[*j + 1] != NULL)
 		{
-			exportHandler(msh, i);
+			//exportHandler(msh, i);
+			cerExportHandler(msh, cmd_s, j);
+			return (1);
 		}
 		ft_print_export(msh);
 		return (1);
 	}
-	if (!strncmp(com, "unset", 5))
+	if (!strcmp(cmd_s->cmdTokens[*j], "unset"))
 	{
-		if (com+5 != NULL)
+		if (cmd_s->cmdTokens[*j + 1] != NULL)
 		{
 			//сюда надо getFileNames
-
-			ft_unset(msh, &(msh->cmd[i + 1]));
+			(*j)++;
+			ft_unset(msh, &cmd_s->cmdTokens[*j]);
 		}
-
 		return (1);
 	}
 	return (0);
 }
 
-//void dollarSign(t_msh *msh)
-//{
-//	int i;
-//	int errNo = 0; //TODO: временно добавил
-//
-//	i = 0;
-//	if (!ft_strncmp(msh->cmd[i], "$", 1))
-//	{
-//		if (!ft_strncmp(msh->cmd[++i], "?", 1))
-//		{
-//			ft_putnbr_fd(errNo, 1);
-//			ft_putendl_fd(": command not found", 1);
-//		}
-//	}
-//}
-//
-//void exec(t_msh *msh)
-//{
-//	int i;
-//
-//	i = -1;
-//	parse_command(msh, 0);
-////    while (msh->cmd[++i])
-////    {
-////        dollarSign(msh);
-////        execBuiltin(msh);
-////    }
-//}
+void cerExec(t_msh *msh)
+{
+	int i;
+	int j; //индекс для прохода по строке
+	char **cmdArr;
+
+	i = -1;
+
+	//parse_command(msh, 0);
+
+	while (msh->cmd[++i])
+	{
+		t_cmd *cmd_s = malloc(sizeof (t_cmd));
+		cmd_s->com_num = i;
+		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
+		//и получаем массив токенов команды
+		j = 0;
+		while(cmd_s->cmdTokens[j]) //пока у нас есть токены
+		{
+			//чекаем управляющие символы
+			check_ctrl_symbol(cmd_s, &j);
+			//чекаем билдины
+			execCerBuiltin(msh, cmd_s, &j);
+			j++;
+			//чекаем и/или выполняем бинарники
+		}
+		free(cmd_s);
+
+	}
+	waitChildren();
+}

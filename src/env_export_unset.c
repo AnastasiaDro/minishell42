@@ -138,10 +138,14 @@ t_en_list *ft_search_var(t_en_list *list, char *name)
     tmp = list;
     while (tmp)
     {
-        if (!ft_strncmp(tmp->name, name, ft_strlen(name)))
+//		if (tmp->name)
+//			printf("tmp->name = %s    ", tmp->name);
+//		printf("char name = %s\n", name);
+        if (!ft_strcmp(tmp->name, name))
             return (tmp);
         tmp = tmp->next;
     }
+
     return (NULL);
 }
 
@@ -185,9 +189,16 @@ t_en_list *ft_add_export_list(t_msh *msh, char *name, char *value)
 
     p = ft_search_var(msh->export_list, name);
     if (p)
-        p->value = value;
+	{
+		p->value = value;
+
+	}
     else
-        ft_export_add_new(msh->export_list, name, value);
+	{
+		ft_export_add_new(msh->export_list, name, value);
+		printf("не нашли\n");
+	}
+
     return (p); // возвращаем указатель на элемент списка, в котором хранится наша переменная
 }
 
@@ -238,7 +249,6 @@ void deleteInList(t_en_list **list, char **names)
         tmp = *list;
         while(tmp)
         {
-           // if (!ft_strncmp(names[i], tmp->name, ft_strlen(names[i])))
             if (!ft_strcmp(names[i], tmp->name))
            {
                 printf("СОВПАЛО! %s\n", tmp->name);

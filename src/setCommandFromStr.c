@@ -4,7 +4,7 @@
 
 #include "minishell.h"
 
-//void *setCommandFromStr(char *cmd_str, int *i, t_command *command)
+//void *setCommandFromStr(char *cmd_str, int *i, t_cmd *command)
 //{
 ////	int end;
 ////	int tmp_fd;

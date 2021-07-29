@@ -13,3 +13,4 @@ src/DRAFT.txt
 # Project exclude paths
 /cmake-build-debug/
 pipex-intra
+.DS_Store

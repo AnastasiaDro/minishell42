@@ -16,10 +16,12 @@ void	printError(char *command, int flag)
 	if (flag == 1)
 	{
 		errno = 127;
-		write(2, NAME, ft_strlen(NAME));
+		printf("HERE\n");
+		//write(2, NAME, ft_strlen(NAME));
 		write(2, command, ft_strlen(command));
 		write(2, ": ", 2);
 		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));
 		write(2, "\n", 1);
+		//write(2, NAME, ft_strlen(NAME));
 	}
 }

@@ -90,7 +90,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			//чекаем управляющие символы
 			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
 				j += 1;
-
+			printf("строка от j = %s\n", cmd_s->cmdTokens[j]);
 //			if (check_ctrl_symbol(cmd_s, &j))
 //			{
 //				j +=1;

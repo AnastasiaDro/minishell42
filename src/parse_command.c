@@ -161,8 +161,8 @@ char **lexer_again(char *s)
 			end = start;
 			while(s[end] && s[end] != ' ')
 				end++;
-			start = end;
 			s1 = ft_substr(s, start, end - start);
+			start = end;
 		}
 		ft_lstadd_back(&lexer_list, ft_lstnew(s1));
 	}

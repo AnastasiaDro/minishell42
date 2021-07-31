@@ -139,4 +139,5 @@ char	**pipexSplit(char const *s, char c);
 char	*findCommand(char **pathList, char *command);
 void	printError(char *command, int flag);
 int 	initFds(t_msh *msh);
+void	closeAllFds(int **fd, int commands_num);
 #endif

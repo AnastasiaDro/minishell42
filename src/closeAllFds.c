@@ -1,13 +1,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	closeAllFds(int ***fd, int commands_num)
+void	closeAllFds(int **fd, int commands_num)
 {
 	int	i;
 	int	**tmp;
 
 	i = 0;
-	tmp = *fd;
+	tmp = fd;
 	while (i < commands_num)
 	{
 		close(tmp[i][0]);
@@ -16,6 +16,6 @@ void	closeAllFds(int ***fd, int commands_num)
 		tmp[i] = NULL;
 		i++;
 	}
-	free(*fd);
-	*fd = NULL;
+	free(fd);
+	fd = NULL;
 }

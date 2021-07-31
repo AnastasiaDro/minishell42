@@ -54,11 +54,11 @@ void parser(t_msh *msh, char *line)
             line++;
         while ((tmp = ft_strsep(&line, "|")) != NULL)
         {
-            ft_lstadd_back(&token, ft_lstnew(tmp));
+        	ft_lstadd_back(&token, ft_lstnew(ft_strtrim(tmp, " ")));
         }
     }
 
-    msh->commands_num = ft_lstsize(token);
+    msh->commands_num = ft_lstsize(token); //добавили в структуру msh число команд
     msh->cmd = malloc(( msh->commands_num + 1) * sizeof(char *));
     msh->cmd[ msh->commands_num] = NULL;
     t_list *tmp1 = token;
@@ -68,12 +68,6 @@ void parser(t_msh *msh, char *line)
         msh->cmd[i] = ft_strdup(tmp1->content);
         i++;
         tmp1 = tmp1->next;
-    }
-    i = 0;
-    while (msh->cmd[i])
-    {
-        printf("msh->cmd[i] %s\n", msh->cmd[i]);
-        i++;
     }
     // мы поделили строку на куски по пайпам, они лежат в минишелл cmd
     // TODO: тут оставили утечку

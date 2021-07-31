@@ -18,12 +18,11 @@ int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s)
 		printError(execArr[0], 1);
 		return (-1);
 	}
-
 	execArr[0] = path_command;
-
 	pid = fork();
 	if (pid == 0)
 	{
+		closeAllFds(msh->fd, msh->commands_num);
 		execve(execArr[0], execArr, NULL);
 	}
 	return (-1);

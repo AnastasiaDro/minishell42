@@ -70,14 +70,24 @@ void cerExec(t_msh *msh) // не весьchar **fd
 
 	while (msh->cmd[++i])
 	{
-
-
 		t_cmd *cmd_s = malloc(sizeof (t_cmd));
 		cmd_s->fileInFd = 0;
 		cmd_s->fileOutFd = 1;
 		cmd_s->com_num = i;
 		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
+
+		if (i != 0)
+		{
+			dup2(msh->fd[i][0], STDIN_FILENO);
+			close(msh->fd[i][0]);
+		}
+		if (i != msh->commands_num-1)
+		{
+			dup2(msh->fd[i + 1][1], STDOUT_FILENO);
+			close(msh->fd[i + 1][1]);
+		}
+
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
 		while(j < arrLen) //пока у нас есть токены
@@ -109,8 +119,8 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
-//		dup2(cmd_s->fileInFd, STDIN_FILENO);
-//		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+		dup2(cmd_s->fileInFd, STDIN_FILENO);
+		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
 		if (cmd_s->fileInFd != 0)
 		{
 			dup2(cmd_s->fileInFd, STDIN_FILENO);
@@ -132,5 +142,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			unlink("tmpFile");
 		free(cmd_s);
 	}
+	closeAllFds(msh->fd, msh->commands_num);
 	waitChildren();
 }

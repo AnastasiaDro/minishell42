@@ -22,6 +22,7 @@ int getTmpFile(char **tokens, int *j)	//here_doc
 
 	line = NULL;
 	tFileFd = open("tmpFile", O_CREAT | O_RDWR, 0644);
+	printf("fd = %d\n", tFileFd);
 	write(1, "> ", 2);
 	get_next_line(STDIN_FILENO, &line);
 	while (ft_strcmp(line, limiter))

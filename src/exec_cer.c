@@ -112,8 +112,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
-//		dup2((*cmd_s->fileInFd), STDIN_FILENO);
-//		dup2(*cmd_s->fileOutFd, STDOUT_FILENO);
 		if (*cmd_s->fileInFd != 0)
 		{
 			dup2(*cmd_s->fileInFd, STDIN_FILENO);
@@ -124,9 +122,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			dup2(*cmd_s->fileOutFd, STDOUT_FILENO);
 			close(*cmd_s->fileOutFd);
 		}
-
-
-
 		if (execArr != NULL && execArr[0] != NULL)
 		{
 			if(!execCerBuiltin(msh, execArr))
@@ -134,7 +129,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
-
 		free(cmd_s);
 	}
 	closeAllFds(msh->fd, msh->commands_num);

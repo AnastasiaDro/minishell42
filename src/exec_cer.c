@@ -78,7 +78,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
 
-
 		if (i != 0)
 			cmd_s->fileInFd = &(msh->fd[i][0]);
 		if (i != msh->commands_num - 1)
@@ -98,7 +97,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 				end++;
 			}
 			execArr = ft_calloc(sizeof (char *) , (end - j + 1));
-			//execArr[end - j] = NULL;
 			int u = 0;
 			while(u < (end - j))
 			{
@@ -106,7 +104,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 				u++;
 			}
 			j = end;
-			//printf("строка от j = %s\n", cmd_s->cmdTokens[j]);
 			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
 			{
 				j += 1;
@@ -127,6 +124,9 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			dup2(*cmd_s->fileOutFd, STDOUT_FILENO);
 			close(*cmd_s->fileOutFd);
 		}
+
+
+
 		if (execArr != NULL && execArr[0] != NULL)
 		{
 			if(!execCerBuiltin(msh, execArr))
@@ -134,6 +134,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
+
 		free(cmd_s);
 	}
 	closeAllFds(msh->fd, msh->commands_num);

@@ -96,12 +96,17 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 			//printf("RED_SMALL j = %d\n", *j);
 			cmd_s->red_smal = 1;
 			*cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
+			if (*cmd_s->fileInFd == -1)
+			{
+				printError(cmd_s->cmdTokens[*j + 1], 0); //доделать
+				(*j) += 1;
+				return (-1);
+			}
 			(*j) += 1;
 			return (RED_SMALL);
 		}
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
 		{
-			//printf("DOUBLE_LARG j = %d\n", *j);
 			*cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
 			cmd_s->double_larg = 1;
 			(*j) += 1;

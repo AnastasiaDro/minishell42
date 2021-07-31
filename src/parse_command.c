@@ -35,6 +35,7 @@ int getTmpFile(char **tokens, int *j)	//here_doc
 		free(tmp);
 	}
 	free(line);
+	close(tFileFd);
 	return (tFileFd);
 }
 
@@ -56,7 +57,6 @@ int parse_double_larg(char **tokens, int *j)
 	int fileFd;
 	char *fileName;
 
-	write(1, "hh", 2);
 	fileName = ft_strdup(tokens[(*j)+1]);
 
 
@@ -84,7 +84,8 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		{
 		//	printf("HERE_DOC j = %d\n", *j);
 			cmd_s ->here_doc = 1;
-			*cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
+			getTmpFile(cmd_s->cmdTokens, j);
+			*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
 		//	printf("tmpFile id = %d\n", cmd_s->fileInFd);
 			(*j) += 2; //сдвигаем указатель за лимитер
 			return (HERE_DOC);

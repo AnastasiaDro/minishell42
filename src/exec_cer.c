@@ -138,7 +138,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
-		//if (cmd_s->here_doc)
 		free(cmd_s);
 	}
 	closeAllFds(msh->fd, msh->commands_num);

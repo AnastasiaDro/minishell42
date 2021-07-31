@@ -66,7 +66,6 @@ typedef struct s_msh // main struct
 	int		cntPipes;
 	int		countTokens;
 	char     *line;
-
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
 	t_en_list   *env_list; //несортированный список переменных среды
@@ -139,4 +138,5 @@ char	*getBinaryName(char *command);
 char	**pipexSplit(char const *s, char c);
 char	*findCommand(char **pathList, char *command);
 void	printError(char *command, int flag);
+int 	initFds(t_msh *msh);
 #endif

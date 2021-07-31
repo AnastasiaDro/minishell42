@@ -148,11 +148,5 @@ char **lexer_again(char *s)
 		tmp = tmp->next;
 		i++;
 	}
-	i = 0;
-//	while(arr[i])
-//	{
-//		printf("arr[%d] = %s\n", i, arr[i]);
-//		i++;
-//	}
 	return (arr);
 }

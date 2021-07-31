@@ -58,9 +58,9 @@ void parser(t_msh *msh, char *line)
         }
     }
 
-    int lstsize = ft_lstsize(token);
-    msh->cmd = malloc((lstsize + 1) * sizeof(char *));
-    msh->cmd[lstsize] = NULL;
+    msh->commands_num = ft_lstsize(token);
+    msh->cmd = malloc(( msh->commands_num + 1) * sizeof(char *));
+    msh->cmd[ msh->commands_num] = NULL;
     t_list *tmp1 = token;
     int i = 0;
     while (tmp1)

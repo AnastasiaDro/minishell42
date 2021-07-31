@@ -58,14 +58,20 @@ void cerExec(t_msh *msh) // не весьchar **fd
 {
 	int i;
 	int j; //индекс для прохода по строке
-
-	i = -1;
 	int end;
 	char **execArr;
+	i = -1;
+
 
 	execArr = NULL;
+	//получили массив файловых дескрипторвж
+	initFds(msh);	//теперь подумать надо, как подключить к этому все остальное
+
+
 	while (msh->cmd[++i])
 	{
+
+
 		t_cmd *cmd_s = malloc(sizeof (t_cmd));
 		cmd_s->fileInFd = 0;
 		cmd_s->fileOutFd = 1;

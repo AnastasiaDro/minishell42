@@ -7,7 +7,7 @@ HOME = home
 SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c src/ft_exit.c src/ft_echo.c src/ft_pwd.c \
 		src/env_export_unset.c src/env_list.c  src/ft_cd.c  src/handlers.c src/parse_command.c \
 		src/utils/move_index.c src/exec_cer.c src/waitChildren.c src/getExportVar.c src/execBinary.c \
-		src/findCommand.c src/pipexSplit.c src/printError.c src/getBinaryName.c
+		src/findCommand.c src/pipexSplit.c src/printError.c src/getBinaryName.c src/closeAllFds.c
 
 OBJS = $(SRCS:.c=.o)
 

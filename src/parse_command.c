@@ -113,15 +113,16 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 				cmd_s->red_larg = 1;
 
 				*cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
-				printf("IF *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
+			//	printf("IF *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
 				(*j) += 1;
 			}
 			else
 			{
 				int tmp = *cmd_s->fileOutFd;
 				*cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
-				printf("ELSE *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
+				//printf("ELSE *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
 				close(tmp);
+				(*j) += 1;
 			}
 			return (RED_LARG);
 		}

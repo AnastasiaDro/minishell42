@@ -84,8 +84,8 @@ typedef struct  s_cmd
 	int red_larg;
 	int double_larg;
 	int tmpFileFd;
-	int fileInFd;
-	int fileOutFd;
+	int *fileInFd;
+	int *fileOutFd;
 	int red_larg_fileFd;
 	int red_small_fd;
 	char **cmdTokens;

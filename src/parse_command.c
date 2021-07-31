@@ -83,7 +83,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		{
 		//	printf("HERE_DOC j = %d\n", *j);
 			cmd_s ->here_doc = 1;
-			cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
+			*cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
 		//	printf("tmpFile id = %d\n", cmd_s->fileInFd);
 			(*j) += 2; //сдвигаем указатель за лимитер
 			return (HERE_DOC);
@@ -93,14 +93,14 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		{
 			//printf("RED_SMALL j = %d\n", *j);
 			cmd_s->red_smal = 1;
-			cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
+			*cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
 			(*j) += 1;
 			return (RED_SMALL);
 		}
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
 		{
 			//printf("DOUBLE_LARG j = %d\n", *j);
-			cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
+			*cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
 			cmd_s->double_larg = 1;
 			(*j) += 1;
 			return (DOUBLE_LARG);
@@ -108,9 +108,21 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		}
 		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
 		{
-			cmd_s->red_larg = 1;
-			cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
-			(*j) += 1;
+			if (cmd_s ->red_larg != 1)
+			{
+				cmd_s->red_larg = 1;
+
+				*cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
+				printf("IF *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
+				(*j) += 1;
+			}
+			else
+			{
+				int tmp = *cmd_s->fileOutFd;
+				*cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
+				printf("ELSE *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
+				close(tmp);
+			}
 			return (RED_LARG);
 		}
 		return (0);

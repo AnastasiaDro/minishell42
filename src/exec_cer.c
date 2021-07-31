@@ -61,7 +61,8 @@ void cerExec(t_msh *msh) // не весьchar **fd
 	int end;
 	char **execArr;
 	i = -1;
-
+	int zero = 0;
+	int one = 1;
 
 	execArr = NULL;
 	//получили массив файловых дескрипторвж
@@ -71,44 +72,40 @@ void cerExec(t_msh *msh) // не весьchar **fd
 	while (msh->cmd[++i])
 	{
 		t_cmd *cmd_s = malloc(sizeof (t_cmd));
-		cmd_s->fileInFd = 0;
-		cmd_s->fileOutFd = 1;
+		cmd_s->fileInFd = &zero;
+		cmd_s->fileOutFd = &one;
 		cmd_s->com_num = i;
 		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
 
-		if (i != 0)
-		{
-			dup2(msh->fd[i][0], STDIN_FILENO);
-			close(msh->fd[i][0]);
-		}
-		if (i != msh->commands_num-1)
-		{
-			dup2(msh->fd[i + 1][1], STDOUT_FILENO);
-			close(msh->fd[i + 1][1]);
-		}
 
+		if (i != 0)
+			cmd_s->fileInFd = &(msh->fd[i][0]);
+		if (i != msh->commands_num - 1)
+			cmd_s->fileOutFd = &(msh->fd[i + 1][1]);
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
 		while(j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
-			if (check_ctrl_symbol(cmd_s, &j))
-			{
-				j +=1;
-				//printf("fileOutFd = %d\n", cmd_s->fileOutFd);
-			}
-			if (j >= arrLen)
-				break;
+			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+				j += 1;
+
+//			if (check_ctrl_symbol(cmd_s, &j))
+//			{
+//				j +=1;
+//			}
+//			if (j >= arrLen)
+//				break;
 			end = j;
-			//беру массив команды с аргументами
+//			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
 			ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
 				end++;
 			}
-			execArr = malloc(sizeof (char *) * (end - j + 1));
-			execArr[end - j] = NULL;
+			execArr = ft_calloc(sizeof (char *) , (end - j + 1));
+			//execArr[end - j] = NULL;
 			int u = 0;
 			while(u < (end - j))
 			{
@@ -116,22 +113,25 @@ void cerExec(t_msh *msh) // не весьchar **fd
 				u++;
 			}
 			j = end;
+			printf("строка от j = %s\n", cmd_s->cmdTokens[j]);
+			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+				j += 1;
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
-		dup2(cmd_s->fileInFd, STDIN_FILENO);
-		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
-		if (cmd_s->fileInFd != 0)
+		dup2((*cmd_s->fileInFd), STDIN_FILENO);
+		dup2(*cmd_s->fileOutFd, STDOUT_FILENO);
+		if (*cmd_s->fileInFd != 0)
 		{
-			dup2(cmd_s->fileInFd, STDIN_FILENO);
-			close(cmd_s->fileInFd);
+			dup2(*cmd_s->fileInFd, STDIN_FILENO);
+			close(*cmd_s->fileInFd);
 		}
-		if (cmd_s->fileOutFd != 1)
+		if (*cmd_s->fileOutFd != 1)
 		{
-			dup2(cmd_s->fileOutFd, STDOUT_FILENO);
-			close(cmd_s->fileOutFd);
+			dup2(*cmd_s->fileOutFd, STDOUT_FILENO);
+			close(*cmd_s->fileOutFd);
 		}
-		if (execArr != NULL)
+		if (execArr != NULL && execArr[0] != NULL)
 		{
 			if(!execCerBuiltin(msh, execArr))
 				execBinary(msh, execArr, cmd_s);

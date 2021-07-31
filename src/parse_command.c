@@ -87,7 +87,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 			getTmpFile(cmd_s->cmdTokens, j);
 			*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
 		//	printf("tmpFile id = %d\n", cmd_s->fileInFd);
-			(*j) += 2; //сдвигаем указатель за лимитер
+			(*j) += 1; //сдвигаем указатель за лимитер
 			return (HERE_DOC);
 		}
 
@@ -113,7 +113,6 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 			if (cmd_s ->red_larg != 1)
 			{
 				cmd_s->red_larg = 1;
-
 				*cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
 			//	printf("IF *cmd_s->fileOutFd = %d\n", *cmd_s->fileOutFd);
 				(*j) += 1;

@@ -220,9 +220,9 @@ void ft_add_variable(t_msh *msh, char *name, char *value)
 void delete_var(t_en_list *del, t_en_list *prev)
 {
     prev->next = del->next;
-    //free(del->name);
-  //  free(del->value);
-//    free(del);
+    free(del->name);
+    free(del->value);
+    free(del);
     del = NULL;
 }
 

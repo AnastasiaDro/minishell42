@@ -129,9 +129,13 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
+		ft_freeStringsArr(execArr);
+		ft_freeStringsArr(cmd_s->cmdTokens);
 		free(cmd_s);
+
 	}
 	closeAllFds(msh->fd, msh->commands_num);
 	waitChildren();
+	ft_freeStringsArr(msh->cmd);
 	unlink("tmpFile");
 }

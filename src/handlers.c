@@ -43,14 +43,14 @@ void cerExportHandler(t_msh *msh, char **execArr)
 			*eq_ptr = '\0';
 			printf("2 cmd_s->cmdTokens[*j] = %s\n", execArr[i]);
 			name = ft_strdup(execArr[i]);
-			value = eq_ptr + 1;
+			value = ft_strdup(eq_ptr + 1);
 			*eq_ptr = '=';
 			//i++;
 		}
 		else
 		{
 		//	i++;
-			name = execArr[i];
+			name = ft_strdup(execArr[i]);
 			value = NULL;
 			printf("token = %s\n", execArr[i]);
 		}

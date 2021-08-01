@@ -187,7 +187,6 @@ t_en_list *ft_add_export_list(t_msh *msh, char *name, char *value)
     if (p)
 	{
 		p->value = value;
-
 	}
     else
 		ft_export_add_new(msh->export_list, name, value);

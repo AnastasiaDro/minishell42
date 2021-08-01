@@ -10,9 +10,22 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	int i;
 
 	i = 0;
+	
 	if (!ft_strcmp(comArr[i], "echo"))
 	{
-		ft_echo(comArr);
+		if (!ft_strncmp(comArr[i + 1], "$", 1) && (ft_strlen(comArr[i + 1]) > 1))
+		{
+			dollarSign(msh, comArr[++i]);
+		}
+		else
+		{
+			ft_echo(comArr);
+		}
+		return (1);
+	}
+	if (!ft_strncmp(comArr[i], "$", 1) && (ft_strlen(comArr[i]) > 1))
+	{
+		dollarSign(msh, comArr[i]);
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i], "pwd"))
@@ -26,7 +39,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 		printf("печатает лист\n");
 		return (1);
 	}
-	if (!ft_strcmp(comArr[i],  "cd"))
+	if (!ft_strcmp(comArr[i], "cd"))
 	{
 		ft_cd(msh, comArr[i + 1]);
 		return (1);
@@ -63,16 +76,10 @@ void cerExec(t_msh *msh) // не весьchar **fd
 	int end;
 	char **execArr;
 
-	//parse_command(msh, 0);
-
+	execArr = NULL;
 	while (msh->cmd[++i])
 	{
-
-
-		//< file1 cat -e | ls -la > fileR | ls -la
-		//int **fd и индекс команды i
-		//вход: fd[i][0] выход: fd[i + 1][1]
-		t_cmd *cmd_s = malloc(sizeof (t_cmd));
+		t_cmd *cmd_s = malloc(sizeof(t_cmd));
 		cmd_s->fileInFd = 0;
 		cmd_s->fileOutFd = 1;
 		cmd_s->com_num = i;
@@ -80,13 +87,13 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		//и получаем массив токенов команды
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
-		while(j < arrLen) //пока у нас есть токены
+		while (j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
 			if (check_ctrl_symbol(cmd_s, &j))
 			{
-				j +=2;
-				printf("fileOutFd = %d\n", cmd_s->fileOutFd);
+				j += 1;
+				//printf("fileOutFd = %d\n", cmd_s->fileOutFd);
 			}
 			if (j >= arrLen)
 			{
@@ -94,36 +101,55 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			}
 
 			end = j;
-	//		printf("cmd_s->cmdTokens[j] = %s\n", cmd_s->cmdTokens[j]);
+			//		printf("cmd_s->cmdTokens[j] = %s\n", cmd_s->cmdTokens[j]);
 			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
-			ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
+				   ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
 				end++;
 			}
-
-			execArr = malloc(sizeof (char *) * (end - j + 1));
+			//end--;
+			execArr = malloc(sizeof(char *) * (end - j + 1));
 			execArr[end - j] = NULL;
 			int u = 0;
-			while(u < (end - j))
+			while (u < (end - j))
 			{
 				execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
+				//printf("HERE execArr[%d] = %s\n", u, execArr[u]);
 				u++;
 			}
 			j = end;
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
-		dup2(cmd_s->fileInFd, STDIN_FILENO);
-		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+		//		dup2(cmd_s->fileInFd, STDIN_FILENO);
+		//		dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+		if (cmd_s->fileInFd != 0)
+		{
+			dup2(cmd_s->fileInFd, STDIN_FILENO);
+			close(cmd_s->fileInFd);
+		}
+		if (cmd_s->fileOutFd != 1)
+		{
+			dup2(cmd_s->fileOutFd, STDOUT_FILENO);
+			close(cmd_s->fileOutFd);
+		}
+		//close(cmd_s->fileInFd);
+		//		close(cmd_s->fileOutFd);
+		//		execCerBuiltin(msh, execArr);
 
-		execCerBuiltin(msh, execArr);
+		if (execArr != NULL)
+		{
+			if (!execCerBuiltin(msh, execArr))
+				execBinary(msh, execArr, cmd_s);
+		}
+		//	printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
-		if (cmd_s->fileInFd != 0)
-			close(cmd_s->fileInFd);
-		if (cmd_s->fileOutFd != 1)
-			close(cmd_s->fileOutFd);
+		if (cmd_s->here_doc)
+			unlink("tmpFile");
+		//		close(savesrdin);
+		//		close(savestdout);
 		free(cmd_s);
 	}
 	waitChildren();

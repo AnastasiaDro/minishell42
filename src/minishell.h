@@ -74,6 +74,7 @@ typedef struct s_msh // main struct
     int     	envp_len;  //длина списка переменных среды
 	int			**fd;
 	int 		commands_num;
+	int			dollar;
 }               t_msh;
 
 typedef struct  s_cmd
@@ -96,7 +97,10 @@ typedef struct  s_cmd
 void parser(t_msh *msh, char *line);
 
 // lexer
-char *lexer(t_msh *msh, char **line);
+// char *lexer(t_msh *msh, char **line);
+
+//dollar
+void dollarSign(t_msh *msh, char *dollar);
 
 // exec
 void	exec(t_msh *msh);
@@ -107,7 +111,7 @@ void ft_error(ssize_t err_no, const char *msg);
 // init
 //void	ft_init(t_msh *msh);
 void ft_init(t_msh *msh, char **envp);
-
+const char	*getValue(t_en_list *export_list, const char *key);
 // builtin
 void	ft_exit();
 void	ft_echo(char **av);
@@ -134,4 +138,9 @@ void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
 char **lexer_again(char *s);
 t_en_list *getExportVar(t_en_list **export, char *key_name);
+int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s);
+char	*getBinaryName(char *command);
+char	**pipexSplit(char const *s, char c);
+char	*findCommand(char **pathList, char *command);
+void	printError(char *command, int flag);
 #endif

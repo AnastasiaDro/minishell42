@@ -1,41 +1,31 @@
 //
-// Created by Cesar Erebus on 7/25/21.
+// Created by Cesar Erebus on 7/29/21.
 //
 
 #include "minishell.h"
 
-int execBinary(int i, t_msh *msh, int fdIn, int fdOut)
+int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s)
 {
-	int tmpFd;
 	int pid;
-	char	**execArr;
+	char *binaryName;
 	char **pathList;
+	char *path_command;
 
-	tmpFd = checkHereDoc(i, msh);
-	if (tmpFd == -1)
-		return (-1);
-	if (tmpFd)	//если у нас был << мы меняем источник ввода на временный файл
+	//найти бинарник
+	pathList = pipexSplit((getExportVar(&(msh->export_list), "PATH"))->value, ':');
+	path_command = findCommand(pathList, execArr[0] );
+	if (path_command == NULL)
 	{
-		dup2(tmpFd, fdIn);
-		close(tmpFd);
+		printError(execArr[0], 1);
+		return (-1);
 	}
-	pathList = pipexSplit(findPath(msh->export_list), ':');
 
+	execArr[0] = path_command;
+
+	pid = fork();
 	if (pid == 0)
 	{
-		execArr = getExecArr(msh->cmd[i], pathList);
-		if(!execArr)
-		{
-			printError(msh->cmd[i], 1);
-			//тут бы очистить всё
-			exit(1);
-		}
-
-		dup2(fdOut, STDOUT_FILENO);
-		close(fdOut);
 		execve(execArr[0], execArr, NULL);
-		perror(NAME);
-		exit(1);
 	}
-	return (pid);
+	return (-1);
 }

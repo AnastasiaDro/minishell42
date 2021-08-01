@@ -8,17 +8,17 @@
 #define RED_SMALL 1
 #define RED_LARG 2
 #define DOUBLE_LARG 3
-#define HERE_DOC	4
-#define CREATE_FILE  O_CREAT | O_RDWR, 0644
+#define HERE_DOC 4
+#define CREATE_FILE O_CREAT | O_RDWR, 0644
 
-int getTmpFile(char **tokens, int *j)	//here_doc
+int getTmpFile(char **tokens, int *j) //here_doc
 {
-	char	*line;
-	int		tFileFd;
-	char	*tmp;
-	char 	*limiter;
+	char *line;
+	int tFileFd;
+	char *tmp;
+	char *limiter;
 
-	limiter = ft_strdup(tokens[(*j)+1]);
+	limiter = ft_strdup(tokens[(*j) + 1]);
 
 	line = NULL;
 	tFileFd = open("tmpFile", O_CREAT | O_RDWR, 0644);
@@ -37,18 +37,15 @@ int getTmpFile(char **tokens, int *j)	//here_doc
 	return (tFileFd);
 }
 
-
 int parse_red_larg(char **tokens, int *j)
 {
 	int fileFd;
 	char *fileName;
 
-	fileName = ft_strdup(tokens[(*j)+1]);
+	fileName = ft_strdup(tokens[(*j) + 1]);
 	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
-	printf("file fd = %d\n", fileFd);
 	free(fileName);
 	return (fileFd);
-
 }
 
 int parse_double_larg(char **tokens, int *j)
@@ -57,9 +54,7 @@ int parse_double_larg(char **tokens, int *j)
 	char *fileName;
 
 	write(1, "hh", 2);
-	fileName = ft_strdup(tokens[(*j)+1]);
-
-	printf("FILENAME = %s\n", fileName);
+	fileName = ft_strdup(tokens[(*j) + 1]);
 
 	fileFd = open(fileName, O_CREAT | O_RDWR | O_APPEND, 0644);
 	//printf("file fd = %d\n", fileFd);
@@ -72,53 +67,49 @@ int parse_red_small(char **tokens, int *j)
 	int fileFd;
 	char *fileName;
 
-	fileName = ft_strdup(tokens[(*j)+1]);
+	fileName = ft_strdup(tokens[(*j) + 1]);
 	fileFd = open(fileName, O_RDONLY);
-	printf("fileFd = %d\n", fileFd);
-	printf("filename = %s\n", fileName);
 	free(fileName);
 	return (fileFd);
 }
 
-
 int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 {
-		if (!ft_strcmp(cmd_s->cmdTokens[*j], "<<"))
-		{
-			printf("HERE_DOC j = %d\n", *j);
-			cmd_s ->here_doc = 1;
-			cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
-			printf("tmpFile id = %d\n", cmd_s->fileInFd);
-			(*j) += 2; //сдвигаем указатель за лимитер
-			return (HERE_DOC);
-		}
-
-		if(!ft_strcmp(cmd_s->cmdTokens[*j], "<"))
-		{
-			printf("RED_SMALL j = %d\n", *j);
-			cmd_s->red_smal = 1;
-			cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
-			(*j) += 1;
-			return (RED_SMALL);
-		}
-		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
-		{
-			printf("DOUBLE_LARG j = %d\n", *j);
-			cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
-			cmd_s->double_larg = 1;
-			(*j) += 1;
-			return (DOUBLE_LARG);
-
-		}
-		if(!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
-		{
-			cmd_s->red_larg = 1;
-			cmd_s->fileOutFd  = parse_red_larg(cmd_s->cmdTokens, j);
-			return (RED_LARG);
-		}
-		return (0);
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<<"))
+	{
+		//	printf("HERE_DOC j = %d\n", *j);
+		cmd_s->here_doc = 1;
+		cmd_s->fileInFd = getTmpFile(cmd_s->cmdTokens, j);
+		//	printf("tmpFile id = %d\n", cmd_s->fileInFd);
+		(*j) += 2; //сдвигаем указатель за лимитер
+		return (HERE_DOC);
 	}
 
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<"))
+	{
+		//printf("RED_SMALL j = %d\n", *j);
+		cmd_s->red_smal = 1;
+		cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
+		(*j) += 1;
+		return (RED_SMALL);
+	}
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
+	{
+		//printf("DOUBLE_LARG j = %d\n", *j);
+		cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
+		cmd_s->double_larg = 1;
+		(*j) += 1;
+		return (DOUBLE_LARG);
+	}
+	if (!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
+	{
+		cmd_s->red_larg = 1;
+		cmd_s->fileOutFd = parse_red_larg(cmd_s->cmdTokens, j);
+		(*j) += 1;
+		return (RED_LARG);
+	}
+	return (0);
+}
 
 char **lexer_again(char *s)
 {
@@ -128,15 +119,31 @@ char **lexer_again(char *s)
 	int end;
 	lexer_list = NULL;
 	int lst_size = 0;
+	char *s1;
 
-	while(s[start])
+	while (s[start])
 	{
 		move_index(s, &start, ' ');
-		end = start;
-		while(s[end] && s[end] != ' ')
-			end++;
-		ft_lstadd_back(&lexer_list, ft_lstnew(ft_substr(s, start, end - start)));
-		start = end;
+		char c = s[start];
+		if (c == '\"' || c == '\'')
+		{
+			start++;
+			// запустить dollar();
+			end = start;
+			while (s[end] && s[end] != c)
+				end++;
+			s1 = ft_substr(s, start, end - start);
+			start = end + 1;
+		}
+		else
+		{
+			end = start;
+			while (s[end] && s[end] != ' ')
+				end++;
+			s1 = ft_substr(s, start, end - start);
+			start = end;
+		}
+		ft_lstadd_back(&lexer_list, ft_lstnew(s1));
 	}
 	t_list *tmp = lexer_list;
 	lst_size = ft_lstsize(tmp);
@@ -145,16 +152,10 @@ char **lexer_again(char *s)
 
 	int i = 0;
 	tmp = lexer_list;
-	while(tmp)
+	while (tmp)
 	{
 		arr[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
-		i++;
-	}
-	i = 0;
-	while(arr[i])
-	{
-		printf("arr[%d] = %s\n", i, arr[i]);
 		i++;
 	}
 	return (arr);

@@ -15,6 +15,20 @@ void inQuotes(char **line)
         ++*line;
 }
 
+void inQuotes1(char **line)
+{
+    char sym;
+
+    sym = **line;
+    ++*line;
+    while (*line && **line && **line != sym)
+        ++*line;
+    if (**line == '\0')
+        ft_error(1, "MULTILINE_NOT_SUPPORTED");
+    else
+        ++*line;
+}
+
 char *lexer(t_msh *msh, char **line)
 {
     char *start;
@@ -54,7 +68,7 @@ void parser(t_msh *msh, char *line)
             line++;
         while ((tmp = ft_strsep(&line, "|")) != NULL)
         {
-            ft_lstadd_back(&token, ft_lstnew(tmp));
+            ft_lstadd_back(&token, ft_lstnew(ft_strtrim(tmp, " ")));
         }
     }
 
@@ -69,12 +83,12 @@ void parser(t_msh *msh, char *line)
         i++;
         tmp1 = tmp1->next;
     }
-    i = 0;
-    while (msh->cmd[i])
-    {
-        printf("msh->cmd[i] %s\n", msh->cmd[i]);
-        i++;
-    }
+    // i = 0;
+    // while (msh->cmd[i])
+    // {
+    //     printf("msh->cmd[i] |%s|\n", msh->cmd[i]);
+    //     i++;
+    // }
     // мы поделили строку на куски по пайпам, они лежат в минишелл cmd
     // TODO: тут оставили утечку
 }

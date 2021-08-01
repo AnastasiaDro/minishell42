@@ -125,7 +125,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		if (execArr != NULL && execArr[0] != NULL)
 		{
 			if(!execCerBuiltin(msh, execArr))
-				execBinary(msh, execArr, cmd_s);
+				execBinary(msh, execArr);
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);

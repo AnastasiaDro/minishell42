@@ -3,7 +3,7 @@
 
 int ctrl_d(t_msh *msh)
 {
-	if (msh->line == NULL || !ft_strncmp("exit", msh->line, ft_strlen(msh->line)))
+	if (msh->line == NULL || !ft_strcmp("exit", msh->line))
 	{
 		printf("exit\n");
 		return (1);
@@ -17,13 +17,7 @@ void ctrl_c(int num)
 {
 	if (num == SIGINT)
 	{
-		//структура, куда сохраним настройки терминала, самому делать не надо, 
-		//она из библиотеки #include <sys/termios.h>
 		struct termios term;
-		// char *term_name;
-
-		//    term_name = "xterm-256color";
-
 		///Нужно проверить все эти функции на возвращаемое значение!!!
 		//        //получаем атрибуты терминала
 		tcgetattr(0, &term);
@@ -60,9 +54,8 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		msh.line = readline("msh: ");
-
         if (ctrl_d(&msh))
-            break;
+        	break;
 		msh.len = ft_strlen(msh.line);
 		if (msh.len > 0)
 		{

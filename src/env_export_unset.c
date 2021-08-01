@@ -1,7 +1,4 @@
-//
-// Created by Cesar Erebus on 6/17/21.
-//
-//#include "stdio.h"
+
 #include <stddef.h>
 #include "../libft/libft.h"
 #include "minishell.h"
@@ -193,11 +190,7 @@ t_en_list *ft_add_export_list(t_msh *msh, char *name, char *value)
 
 	}
     else
-	{
 		ft_export_add_new(msh->export_list, name, value);
-		printf("не нашли\n");
-	}
-
     return (p); // возвращаем указатель на элемент списка, в котором хранится наша переменная
 }
 

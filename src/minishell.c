@@ -64,6 +64,7 @@ int main(int ac, char **av, char **envp)
 			cerExec(&msh);
 		}
 		free(msh.line);
+
 		msh.line = NULL;
 	}
 	return (0);

@@ -23,7 +23,6 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	if (!ft_strcmp(comArr[i], "env"))
 	{
 		ft_print_env(msh);
-		printf("печатает лист\n");
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i],  "cd"))
@@ -129,9 +128,13 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
+		ft_freeStringsArr(cmd_s->cmdTokens);
+		ft_freeStringsArr(execArr);
 		free(cmd_s);
 	}
 	closeAllFds(msh->fd, msh->commands_num);
 	waitChildren();
 	unlink("tmpFile");
+	ft_freeStringsArr(msh->cmd);
+
 }

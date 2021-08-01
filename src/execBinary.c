@@ -15,6 +15,8 @@ int execBinary(t_msh *msh, char **execArr)
 		printError(execArr[0], 1);
 		return (-1);
 	}
+	free(execArr[0]);
+	execArr[0] = NULL;
 	execArr[0] = path_command;
 	pid = fork();
 	if (pid == 0)
@@ -23,7 +25,5 @@ int execBinary(t_msh *msh, char **execArr)
 		execve(execArr[0], execArr, NULL);
 		return (-1);
 	}
-	free(path_command);
-	path_command = NULL;
 	return (0);
 }

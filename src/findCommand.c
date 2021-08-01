@@ -20,5 +20,6 @@ char	*findCommand(char **pathList, char *command)
 			return (command_path);
 		i++;
 	}
+	free(command_path);
 	return (NULL);
 }

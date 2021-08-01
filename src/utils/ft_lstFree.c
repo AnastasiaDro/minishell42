@@ -1,15 +1,12 @@
-//
-// Created by Cesar Erebus on 8/1/21.
-//
 #include "../../libft/libft.h"
 
-void ft_lstFree(t_list *list)
+void	ft_lstFree(t_list *list)
 {
-	t_list *tmp;
-	t_list *tmpP;
+	t_list	*tmp;
+	t_list	*tmpP;
 
 	tmp = list;
-	while(tmp)
+	while (tmp)
 	{
 		tmpP = tmp;
 		free(tmp->content);

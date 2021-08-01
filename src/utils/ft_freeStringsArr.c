@@ -1,5 +1,3 @@
-
-
 #include <stdlib.h>
 
 int	ft_freeStringsArr(char **stringsArr)

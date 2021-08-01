@@ -4,7 +4,6 @@ void	ft_echo(char **av)
 {
 	int	i;
 	int nflag = 0;
-
 	while (*++av && !strncmp(*av, "-n", 2))
 	{
 		i = 1;
@@ -28,10 +27,3 @@ void	ft_echo(char **av)
 	if (!nflag)
 		write(STDOUT_FILENO, "\n", 1);
 }
-
-// int main(int ac, char **av)
-// {
-// 	(void)ac;
-// 	ft_echo(av);
-// 	return (0);
-// }

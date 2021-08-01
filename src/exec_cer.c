@@ -10,9 +10,22 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	int i;
 
 	i = 0;
+	
 	if (!ft_strcmp(comArr[i], "echo"))
 	{
-		ft_echo(comArr);
+		if (comArr[i + 1] && !ft_strncmp(comArr[i + 1], "$", 1) && (ft_strlen(comArr[i + 1]) > 1))
+		{
+			dollarSign(msh, comArr[++i]);
+		}
+		else
+		{
+			ft_echo(comArr);
+		}
+		return (1);
+	}
+	if (!ft_strncmp(comArr[i], "$", 1) && (ft_strlen(comArr[i]) > 1))
+	{
+		dollarSign(msh, comArr[i]);
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i], "pwd"))
@@ -26,7 +39,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 		printf("печатает лист\n");
 		return (1);
 	}
-	if (!ft_strcmp(comArr[i],  "cd"))
+	if (!ft_strcmp(comArr[i], "cd"))
 	{
 		ft_cd(msh, comArr[i + 1]);
 		return (1);
@@ -45,7 +58,6 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	{
 		if (comArr[i + 1] != NULL)
 		{
-			//сюда надо getFileNames
 			i++;
 			ft_unset(msh, &comArr[i]);
 		}
@@ -78,13 +90,37 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
 
+		int y = 0;
+		while (cmd_s->cmdTokens[y])
+		{	
+			if (cmd_s->cmdTokens[y][0] == '$')
+			{
+				char *tmp;
+				char *p;
+				tmp = cmd_s->cmdTokens[y];
+				p = (char *)getValue(msh->export_list, &cmd_s->cmdTokens[y][1]);
+				if (p!=NULL)
+				{
+					cmd_s->cmdTokens[y] = ft_strdup(p);
+					free(tmp);
+				}
+				
+				//cmd_s->cmdTokens[y] = 
+			//	printf("%s\n", cmd_s->cmdTokens[y]);
+			}
+			
+			y++;
+		}
+		
+
+
 		if (i != 0)
 			cmd_s->fileInFd = &(msh->fd[i][0]);
 		if (i != msh->commands_num - 1)
 			cmd_s->fileOutFd = &(msh->fd[i + 1][1]);
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
-		while(j < arrLen) //пока у нас есть токены
+		while (j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
 			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
@@ -92,13 +128,13 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			end = j;
 //			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
-			ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
+				   ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
 				end++;
 			}
 			execArr = ft_calloc(sizeof (char *) , (end - j + 1));
 			int u = 0;
-			while(u < (end - j))
+			while (u < (end - j))
 			{
 				execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
 				u++;

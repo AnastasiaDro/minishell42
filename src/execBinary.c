@@ -21,6 +21,9 @@ int execBinary(t_msh *msh, char **execArr)
 	{
 		closeAllFds(msh->fd, msh->commands_num);
 		execve(execArr[0], execArr, NULL);
+		return (-1);
 	}
-	return (-1);
+	free(path_command);
+	path_command = NULL;
+	return (0);
 }

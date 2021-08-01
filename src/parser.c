@@ -69,6 +69,7 @@ void parser(t_msh *msh, char *line)
         i++;
         tmp1 = tmp1->next;
     }
+	ft_lstFree(token);
     // мы поделили строку на куски по пайпам, они лежат в минишелл cmd
     // TODO: тут оставили утечку
 }

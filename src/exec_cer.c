@@ -96,26 +96,20 @@ void cerExec(t_msh *msh) // не весьchar **fd
 				//printf("fileOutFd = %d\n", cmd_s->fileOutFd);
 			}
 			if (j >= arrLen)
-			{
 				break;
-			}
-
 			end = j;
-			//		printf("cmd_s->cmdTokens[j] = %s\n", cmd_s->cmdTokens[j]);
 			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
 				   ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
 				end++;
 			}
-			//end--;
-			execArr = malloc(sizeof(char *) * (end - j + 1));
+			execArr = malloc(sizeof (char *) * (end - j + 1));
 			execArr[end - j] = NULL;
 			int u = 0;
 			while (u < (end - j))
 			{
 				execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
-				//printf("HERE execArr[%d] = %s\n", u, execArr[u]);
 				u++;
 			}
 			j = end;
@@ -134,22 +128,15 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			dup2(cmd_s->fileOutFd, STDOUT_FILENO);
 			close(cmd_s->fileOutFd);
 		}
-		//close(cmd_s->fileInFd);
-		//		close(cmd_s->fileOutFd);
-		//		execCerBuiltin(msh, execArr);
-
 		if (execArr != NULL)
 		{
 			if (!execCerBuiltin(msh, execArr))
 				execBinary(msh, execArr, cmd_s);
 		}
-		//	printf("cmd_s->fileOutFd = %d\n", cmd_s->fileOutFd);
 		dup2(savestdout, STDOUT_FILENO);
 		dup2(savesrdin, STDIN_FILENO);
 		if (cmd_s->here_doc)
 			unlink("tmpFile");
-		//		close(savesrdin);
-		//		close(savestdout);
 		free(cmd_s);
 	}
 	waitChildren();

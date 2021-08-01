@@ -7,7 +7,6 @@
 int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s)
 {
 	int pid;
-	char *binaryName;
 	char **pathList;
 	char *path_command;
 

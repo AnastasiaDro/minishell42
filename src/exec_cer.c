@@ -19,7 +19,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 		}
 		else
 		{
-			ft_echo(comArr);
+			ft_echo(comArr, 0);
 		}
 		return (1);
 	}

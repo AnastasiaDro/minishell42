@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
+#include "enviroment/envAddNew.h"
 
 int execBuiltin(t_msh *msh)
 {
@@ -40,7 +40,7 @@ int execBuiltin(t_msh *msh)
     if (!strncmp(msh->cmd[i], "unset", ft_strlen(msh->cmd[i])))
     {
         if (msh->cmd[i + 1] != NULL)
-            ft_unset(msh, &(msh->cmd[i + 1]));
+			envUnset(msh, &(msh->cmd[i + 1]));
         return (1);
     }
     return (0);

@@ -16,7 +16,7 @@
 #include <errno.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
-#include "enviroment/envList.h"
+#include "enviroment/enviroment.h"
 #include "utils/msh_utils.h"
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"
@@ -125,7 +125,7 @@ int parseHereDoc(int i,  int out, t_msh *msh);
 
 // handlers
 void	exportHandler(t_msh *msh, int i);
-void ft_add_variable(t_msh *msh, char *name, char *value);
+void envAddVariable(t_msh *msh, char *name, char *value);
 
 //ищем и выполянем контрольный символ
 int check_ctrl_symbol(t_cmd *cmd_s, int *j);
@@ -146,4 +146,9 @@ char	*findCommand(char **pathList, char *command);
 void	printError(char *command, int flag);
 int 	initFds(t_msh *msh);
 void	closeAllFds(int **fd, int commands_num);
+
+void envInitEnvpList(t_msh *msh);
+void ft_print_export( t_msh *msh);
+void ft_print_env(t_msh *msh);
+void envUnset(t_msh *msh, char **names);
 #endif

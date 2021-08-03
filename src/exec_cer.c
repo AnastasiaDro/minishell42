@@ -3,7 +3,7 @@
 //
 
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
+#include "enviroment/envAddNew.h"
 
 int execCerBuiltin(t_msh *msh, char **comArr)
 {
@@ -59,7 +59,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 		if (comArr[i + 1] != NULL)
 		{
 			i++;
-			ft_unset(msh, &comArr[i]);
+			envUnset(msh, &comArr[i]);
 		}
 		return (1);
 	}

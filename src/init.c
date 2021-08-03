@@ -1,5 +1,5 @@
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
+#include "enviroment/envAddNew.h"
 
 const char	*getValue(t_en_list *export_list, const char *key)
 {
@@ -32,6 +32,6 @@ void	ft_init(t_msh *msh, char **envp)
 	//msh->envp_len = envInitEnvpList(envp, &(msh->export_list), &(msh->env_list));
 	envInitEnvpList(msh);
 	s1 = "HOME";
-	ft_unset(msh, &s1);
-	ft_add_variable(msh, ft_strdup(s1), ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));
+	envUnset(msh, &s1);
+	envAddVariable(msh, ft_strdup(s1), ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));
 }

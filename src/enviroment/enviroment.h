@@ -12,6 +12,7 @@
 
 #ifndef ENVLIST_H
 # define ENVLIST_H
+#include "../minishell.h"
 
 typedef struct s_en_list
 {

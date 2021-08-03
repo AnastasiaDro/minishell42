@@ -6,17 +6,18 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:13:31 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/03 20:49:54 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/03 22:00:28 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	dollarSign(t_msh *msh, char *dollar)
+int	dollarSign(t_msh *msh, char *dollar)
 {
 	char	*token;
 	char	*found;
 
+	printf("dollar: %s\n", dollar);
 	token = ft_strsep(&dollar, " $");
 	while (token != NULL)
 	{
@@ -36,7 +37,8 @@ void	dollarSign(t_msh *msh, char *dollar)
 				else
 					write(STDOUT_FILENO, "\n", 1);
 			}
-			token = ft_strsep(&dollar, " $");
 		}
+		token = ft_strsep(&dollar, " $");
 	}
+	return (1);
 }

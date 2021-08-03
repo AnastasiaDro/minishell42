@@ -32,7 +32,7 @@ TODO:
 
 TODO: bugs
 	-cd
-	-$
+	-$: done
 
 TODO: norminette
 	-src/ft_cd.c: OK!

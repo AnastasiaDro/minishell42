@@ -99,7 +99,7 @@ void parser(t_msh *msh, char *line);
 // char *lexer(t_msh *msh, char **line);
 
 //dollar
-void dollarSign(t_msh *msh, char *dollar);
+int dollarSign(t_msh *msh, char *dollar);
 
 // exec
 void	exec(t_msh *msh);
@@ -114,8 +114,8 @@ const char	*getValue(t_en_list *export_list, const char *key);
 // builtin
 void	ft_exit();
 void	ft_echo(char **av, int nflag);
-void	ft_pwd();
-void ft_cd(t_msh *msh, const char *path);
+int		ft_pwd();
+int ft_cd(t_msh *msh, const char *path);
 // void	ft_echo(t_msh *msh, int arguments);
 
 // readline

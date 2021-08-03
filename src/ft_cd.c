@@ -6,7 +6,7 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:28:34 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/02 12:47:07 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/03 22:36:24 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	setPwd(t_msh *msh, char *dir)
 	}
 }
 
-void	ft_cd(t_msh *msh, const char *path)
+int	ft_cd(t_msh *msh, const char *path)
 {
 	char	*dir;
 
@@ -47,4 +47,5 @@ void	ft_cd(t_msh *msh, const char *path)
 		setPwd(msh, dir);
 	else
 		printf("msh: cd: %s: No such file or directory\n", path);
+	return (1);
 }

@@ -1,47 +1,44 @@
-//
-// Created by Cesar Erebus on 7/27/21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cer.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 21:28:18 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/03 22:37:25 by jkeitha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 #include "env_export_unset.h"
+
+int execEcho(t_msh *msh, char **comArr, int *i)
+{
+	if (comArr[*i + 1] && !ft_strncmp(comArr[*i + 1], "$", 1) && (ft_strlen(comArr[*i + 1]) > 1))
+		dollarSign(msh, comArr[++(*i)]);
+	else
+		ft_echo(comArr, 0);
+	return (1);
+}
 
 int execCerBuiltin(t_msh *msh, char **comArr)
 {
 	int i;
 
 	i = 0;
-	
 	if (!ft_strcmp(comArr[i], "echo"))
-	{
-		if (comArr[i + 1] && !ft_strncmp(comArr[i + 1], "$", 1) && (ft_strlen(comArr[i + 1]) > 1))
-		{
-			dollarSign(msh, comArr[++i]);
-		}
-		else
-		{
-			ft_echo(comArr, 0);
-		}
-		return (1);
-	}
+		return (execEcho(msh, comArr, &i));
 	if (!ft_strncmp(comArr[i], "$", 1) && (ft_strlen(comArr[i]) > 1))
-	{
-		dollarSign(msh, comArr[i]);
-		return (1);
-	}
+		return (dollarSign(msh, comArr[i]));
 	if (!ft_strcmp(comArr[i], "pwd"))
-	{
-		ft_pwd();
-		return (1);
-	}
+		return (ft_pwd());
+	if (!ft_strcmp(comArr[i], "cd"))
+		return (ft_cd(msh, comArr[i + 1]));
+
 	if (!ft_strcmp(comArr[i], "env"))
 	{
 		ft_print_env(msh);
-		printf("печатает лист\n");
-		return (1);
-	}
-	if (!ft_strcmp(comArr[i], "cd"))
-	{
-		ft_cd(msh, comArr[i + 1]);
 		return (1);
 	}
 	if (!ft_strcmp(comArr[i], "export"))
@@ -54,7 +51,7 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 		ft_print_export(msh);
 		return (1);
 	}
-	if (!strcmp(comArr[i], "unset"))
+	if (!ft_strcmp(comArr[i], "unset"))
 	{
 		if (comArr[i + 1] != NULL)
 		{
@@ -78,12 +75,11 @@ void cerExec(t_msh *msh) // не весьchar **fd
 
 	execArr = NULL;
 	//получили массив файловых дескрипторвж
-	initFds(msh);	//теперь подумать надо, как подключить к этому все остальное
-
+	initFds(msh); //теперь подумать надо, как подключить к этому все остальное
 
 	while (msh->cmd[++i])
 	{
-		t_cmd *cmd_s = malloc(sizeof (t_cmd));
+		t_cmd *cmd_s = malloc(sizeof(t_cmd));
 		cmd_s->fileInFd = &zero;
 		cmd_s->fileOutFd = &one;
 		cmd_s->com_num = i;
@@ -92,7 +88,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 
 		int y = 0;
 		while (cmd_s->cmdTokens[y])
-		{	
+		{
 			if (cmd_s->cmdTokens[y][0] == '$')
 			{
 				char *tmp;
@@ -101,15 +97,18 @@ void cerExec(t_msh *msh) // не весьchar **fd
 				tmp = cmd_s->cmdTokens[y];
 				p = (char *)getValue(msh->export_list, &cmd_s->cmdTokens[y][1]);
 				if (p != NULL)
+				{
 					cmd_s->cmdTokens[y] = ft_strdup(p);
-				else
+					free(tmp);
+				}
+				else if (cmd_s->cmdTokens[y][1] != '?')
+				{
 					cmd_s->cmdTokens[y] = NULL;
-				free(tmp);
+					free(tmp);
+				}
 			}
 			y++;
 		}
-		
-
 
 		if (i != 0)
 			cmd_s->fileInFd = &(msh->fd[i][0]);
@@ -118,20 +117,20 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
 		if (!cmd_s->cmdTokens[0])
-			return ;
+			return;
 		while (j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
 			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
 				j += 1;
 			end = j;
-//			//беру массив команды с аргументами
+			//			//беру массив команды с аргументами
 			while (cmd_s->cmdTokens[end] && ft_strcmp(cmd_s->cmdTokens[end], ">>") && ft_strcmp(cmd_s->cmdTokens[end], ">") &&
 				   ft_strcmp(cmd_s->cmdTokens[end], "<") && ft_strcmp(cmd_s->cmdTokens[end], "<<"))
 			{
 				end++;
 			}
-			execArr = ft_calloc(sizeof (char *) , (end - j + 1));
+			execArr = ft_calloc(sizeof(char *), (end - j + 1));
 			int u = 0;
 			while (u < (end - j))
 			{
@@ -143,7 +142,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			{
 				j += 1;
 			}
-
 		}
 		int savestdout = dup(1);
 		int savesrdin = dup(0);
@@ -159,7 +157,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		}
 		if (execArr != NULL && execArr[0] != NULL)
 		{
-			if(!execCerBuiltin(msh, execArr))
+			if (!execCerBuiltin(msh, execArr))
 				execBinary(msh, execArr);
 		}
 		dup2(savestdout, STDOUT_FILENO);
@@ -167,7 +165,6 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		ft_freeStringsArr(execArr);
 		ft_freeStringsArr(cmd_s->cmdTokens);
 		free(cmd_s);
-
 	}
 	closeAllFds(msh->fd, msh->commands_num);
 	waitChildren();

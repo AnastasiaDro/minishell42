@@ -29,8 +29,8 @@ void	ft_init(t_msh *msh, char **envp)
 	msh->env_list = NULL;
 	msh->c = (char)255;
 	msh->envp_len = (int)ft_arrlen(envp);
-	//msh->envp_len = init_envp_list(envp, &(msh->export_list), &(msh->env_list));
-	init_envp_list(msh);
+	//msh->envp_len = envInitEnvpList(envp, &(msh->export_list), &(msh->env_list));
+	envInitEnvpList(msh);
 	s1 = "HOME";
 	ft_unset(msh, &s1);
 	ft_add_variable(msh, ft_strdup(s1), ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));

@@ -7,7 +7,7 @@
 
 
 
-//int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
+//int envInitEnvpList(char **arr, t_en_list **list, t_en_list **env_list)
 //{
 //		int index;
 //		char *str;

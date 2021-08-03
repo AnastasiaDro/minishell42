@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_list.h                                         :+:      :+:    :+:   */
+/*   envList.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:16:56 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 13:16:59 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/03 13:36:11 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_LIST_H
-# define ENV_LIST_H
+#ifndef ENVLIST_H
+# define ENVLIST_H
 
 typedef struct s_en_list
 {

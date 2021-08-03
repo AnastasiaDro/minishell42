@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   envSetNameVal.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 13:37:56 by cerebus           #+#    #+#             */
+/*   Updated: 2021/08/03 13:38:04 by cerebus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void    envSetNameValue(t_en_list *list, char *str)
+void	envSetNameValue(t_en_list *list, char *str)
 {
 	int		end;
 	int		len;

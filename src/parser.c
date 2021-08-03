@@ -15,6 +15,20 @@ void inQuotes(char **line)
         ++*line;
 }
 
+void inQuotes1(char **line)
+{
+    char sym;
+
+    sym = **line;
+    ++*line;
+    while (*line && **line && **line != sym)
+        ++*line;
+    if (**line == '\0')
+        ft_error(1, "MULTILINE_NOT_SUPPORTED");
+    else
+        ++*line;
+}
+
 char *lexer(t_msh *msh, char **line)
 {
     char *start;

@@ -1,13 +1,16 @@
 #include "minishell.h"
 #include "enviroment/env_export_unset.h"
 
-const char	*getLOGNAME(t_en_list *export_list)
+const char	*getValue(t_en_list *export_list, const char *key)
 {
-	while (export_list)
+	t_en_list *tmp;
+
+	tmp = export_list;
+	while (tmp)
 	{
-		if (!ft_strncmp(export_list->name, "LOGNAME", 7))
-			return (export_list->value);
-		export_list = export_list->next;
+		if (!ft_strcmp(tmp->name, key))
+			return (tmp->value);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
@@ -27,5 +30,5 @@ void	ft_init(t_msh *msh, char **envp)
 	msh->envp_len = init_envp_list(envp, &(msh->export_list), &(msh->env_list));
 	s1 = "HOME";
 	ft_unset(msh, &s1);
-	ft_add_variable(msh, ft_strdup(s1), ft_strjoin("/Users/", getLOGNAME(msh->export_list)));
+	ft_add_variable(msh, ft_strdup(s1), ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));
 }

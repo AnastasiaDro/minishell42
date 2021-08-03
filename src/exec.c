@@ -46,21 +46,21 @@ int execBuiltin(t_msh *msh)
     return (0);
 }
 
-void dollarSign(t_msh *msh)
-{
-    int i;
-    int errNo = 0; //TODO: временно добавил
+// void dollarSign(t_msh *msh)
+// {
+//     int i;
+//     int errNo = 0; //TODO: временно добавил
 
-    i = 0;
-    if (!ft_strncmp(msh->cmd[i], "$", 1))
-    {
-        if (!ft_strncmp(msh->cmd[++i], "?", 1))
-        {
-            ft_putnbr_fd(errNo, 1);
-            ft_putendl_fd(": command not found", 1);
-        }
-    }
-}
+//     i = 0;
+//     if (!ft_strncmp(msh->cmd[i], "$", 1))
+//     {
+//         if (!ft_strncmp(msh->cmd[++i], "?", 1))
+//         {
+//             ft_putnbr_fd(errNo, 1);
+//             ft_putendl_fd(": command not found", 1);
+//         }
+//     }
+// }
 
 void exec(t_msh *msh)
 {

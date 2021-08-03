@@ -4,7 +4,9 @@ void delete_var(t_en_list *del, t_en_list *prev)
 {
 	prev->next = del->next;
 	free(del->name);
+	del->name = NULL;
 	free(del->value);
+	del->value = NULL;
 	free(del);
 	del = NULL;
 }

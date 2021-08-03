@@ -5,37 +5,7 @@
 #define EXP_PREFIX "declare -x "
 #include "envList.h"
 
-int ft_env(char **envp)
-{
-    int i;
 
-    i = 0;
-    while(envp[i])
-    {
-        write(1, envp[i], ft_strlen(envp[i]));
-        write(1, "\n", 1);
-        i++;
-    }
-    return (i);
-}
-
-
-char **copy_arr(char **arr, int arr_len)
-{
-	char **copy;
-	int i;
-
-	i = 0;
-	arr_len = ft_arrlen(arr);
-	copy = ft_calloc(arr_len + 1, sizeof(char *));
-	while (i < arr_len)
-	{
-		copy[i] = arr[i];
-		i++;
-	}
-	return (copy);
-	
-}
 
 int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 {
@@ -87,44 +57,6 @@ int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
 		}
 		return (arr_len);
     //вернем длину количества аргументов
-}
-
-
-void ft_print_export( t_msh *msh)
-{
-    t_en_list *vars;
-	char *value;
-
-    vars = msh->export_list;
-	while (vars)
-	{
-		value = vars->value;
-		if (value != NULL)
-			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);
-		else
-		{
-			if (vars->name)
-			{
-				printf("declare -x %s\n", vars->name);
-			}
-		}
-		vars = vars->next;
-	}
-}
-
-void ft_print_env(t_msh *msh)
-{
-    t_en_list   *vars;
-    char        *value;
-
-    vars = msh->env_list;
-    while (vars)
-    {
-        value = vars->value;
-        if (value != NULL)
-            printf("%s=\"%s\"\n", vars->name, vars->value);
-        vars = vars->next;
-    }
 }
 
 
@@ -213,49 +145,49 @@ void ft_add_variable(t_msh *msh, char *name, char *value)
     ft_add_env_list(msh, name, value, flag);
 }
 
-void delete_var(t_en_list *del, t_en_list *prev)
-{
-    prev->next = del->next;
-    free(del->name);
-    del->name = NULL;
-    free(del->value);
-    del->value = NULL;
-    free(del);
-    del = NULL;
-}
-
-void deleteInList(t_en_list **list, char **names)
-{
-    int i;
-    t_en_list *prev;
-    t_en_list *tmp;
-
-    tmp = *list;
-    prev = NULL;
-    i = 0;
-
-    while (names[i])
-    {
-        tmp = *list;
-        while(tmp)
-        {
-            if (!ft_strcmp(names[i], tmp->name))
-           {
-                printf("СОВПАЛО! %s\n", tmp->name);
-                if (prev)
-                {
-                    delete_var(tmp, prev);
-                    break;
-                }
-                else
-                {
-                    *list = (*list)->next;
-                    break;
-                }
-            }
-            prev = tmp;
-            tmp = tmp->next;
-        }
-        i++;
-    }
-}
+//void delete_var(t_en_list *del, t_en_list *prev)
+//{
+//    prev->next = del->next;
+//    free(del->name);
+//    del->name = NULL;
+//    free(del->value);
+//    del->value = NULL;
+//    free(del);
+//    del = NULL;
+//}
+//
+//void deleteInList(t_en_list **list, char **names)
+//{
+//    int i;
+//    t_en_list *prev;
+//    t_en_list *tmp;
+//
+//    tmp = *list;
+//    prev = NULL;
+//    i = 0;
+//
+//    while (names[i])
+//    {
+//        tmp = *list;
+//        while(tmp)
+//        {
+//            if (!ft_strcmp(names[i], tmp->name))
+//           {
+//                printf("СОВПАЛО! %s\n", tmp->name);
+//                if (prev)
+//                {
+//                    delete_var(tmp, prev);
+//                    break;
+//                }
+//                else
+//                {
+//                    *list = (*list)->next;
+//                    break;
+//                }
+//            }
+//            prev = tmp;
+//            tmp = tmp->next;
+//        }
+//        i++;
+//    }
+//}

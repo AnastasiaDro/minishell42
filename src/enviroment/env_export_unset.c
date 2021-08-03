@@ -1,9 +1,9 @@
 
 #include <stddef.h>
-#include "../libft/libft.h"
-#include "minishell.h"
+#include "../../libft/libft.h"
+#include "../minishell.h"
 #define EXP_PREFIX "declare -x "
-#include "env_list.h"
+#include "envList.h"
 
 int ft_env(char **envp)
 {
@@ -135,9 +135,6 @@ t_en_list *ft_search_var(t_en_list *list, char *name)
     tmp = list;
     while (tmp)
     {
-//		if (tmp->name)
-//			printf("tmp->name = %s    ", tmp->name);
-//		printf("char name = %s\n", name);
         if (!ft_strcmp(tmp->name, name))
             return (tmp);
         tmp = tmp->next;
@@ -162,20 +159,20 @@ void    ft_export_add_new(t_en_list *export_list, char *name, char *value)
 
     if (ft_strncmp(previous->name, name, ft_strlen(name)) >= 0) //если наше имя меньше первого элемента то добавляем в начало
     {
-        env_lstadd_front(&export_list, env_parsed_lstnew(name, value));
+        env_lstadd_front(&export_list, envParsedLstNew(name, value));
         return;
     }
     while(tmp)
     {
         if (ft_strncmp(tmp->name, name, ft_strlen(name)) > 0)
         {
-            ft_insert_to_list(previous, tmp, env_parsed_lstnew(name, value));
+            ft_insert_to_list(previous, tmp, envParsedLstNew(name, value));
             return;
         }
         previous = tmp;
         tmp = tmp->next;
     }
-    env_lstadd_back(&export_list, env_parsed_lstnew(name, value));
+    env_lstadd_back(&export_list, envParsedLstNew(name, value));
 }
 
 //проверить, есть ли у новой переменной значение
@@ -199,7 +196,7 @@ void ft_add_env_list(t_msh *msh, char *name, char *value, t_en_list *flag)
     t_en_list *p;
 
     if(!flag)
-        env_lstadd_back(&(msh->env_list), env_parsed_lstnew(name, value));
+        env_lstadd_back(&(msh->env_list), envParsedLstNew(name, value));
     else
     {
         p = ft_search_var(msh->env_list, name);

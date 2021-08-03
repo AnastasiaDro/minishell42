@@ -5,6 +5,13 @@ execve() -
 wait() - 
 chdir() - 
 
+while (1)
+{
+....
+...
+system("leak ./minishell");
+}
+
 -L/usr/local/opt/readline/lib
 
 -I/usr/local/opt/readline/include
@@ -23,37 +30,15 @@ TODO:
 на потом:
 1) обработать след кейс: export NAME = VALUE (в оригинале с пробелом между "NAME" и "=" не работает)
 
+TODO: bugs
+	-cd
+	-$: done
 
-
-
-
-
-
-// хлам из парсера 
-i = 0;
-    while (token) // TODO: проверить токенов на синтактическую ошибку
-    {
-        msh->cmd[i] = ft_strdup(token->content);
-        printf("msh->cmd[%d]: %s\n", i, msh->cmd[i]);
-        if (!ft_strcmp(msh->cmd[i], "|") || !token->next)
-        {
-            if (!ft_strcmp(msh->cmd[i], "|"))
-                msh->cntPipes++;
-            if (!token->next)
-            {   
-                if (msh->cntPipes)
-                    msh->cntPipes = -1;
-                msh->cmd[i + 1] = NULL;
-            }
-            else
-                msh->cmd[i] = NULL;
-            // execve("/bin/", msh->cmd, envp);
-            printf("msh->cmd[%d]: %s\n", i, msh->cmd[i]);
-            i = -1;
-            printf("cntPipes: %d\n", msh->cntPipes);
-            
-        }
-        token = token->next;
-        i++;
-    }
-    msh->cmd[i + 1] = NULL;
+TODO: norminette
+	-src/ft_cd.c: OK!
+	-src/ft_echo.c: OK!
+	-src/ft_exit.c: OK!
+	-src/ft_pwd.c: OK!
+	-src/parser.c: Error!
+	-src/parser.c: OK!
+	

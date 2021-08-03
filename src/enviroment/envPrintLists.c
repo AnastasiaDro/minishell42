@@ -6,16 +6,16 @@
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:13:44 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 20:13:46 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/03 20:31:33 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_print_export( t_msh *msh)
+void	ft_print_export( t_msh *msh)
 {
-	t_en_list *vars;
-	char *value;
+	t_en_list	*vars;
+	char		*value;
 
 	vars = msh->export_list;
 	while (vars)
@@ -34,10 +34,10 @@ void ft_print_export( t_msh *msh)
 	}
 }
 
-void ft_print_env(t_msh *msh)
+void	ft_print_env(t_msh *msh)
 {
-	t_en_list   *vars;
-	char        *value;
+	t_en_list	*vars;
+	char		*value;
 
 	vars = msh->env_list;
 	while (vars)

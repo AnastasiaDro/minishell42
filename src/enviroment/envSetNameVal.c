@@ -12,7 +12,8 @@
 
 #include "../minishell.h"
 
-void	envSetNameValue(t_en_list *list, char *str)
+void
+envSetNameValue(t_en_list *list, char *str)
 {
 	int		end;
 	int		len;

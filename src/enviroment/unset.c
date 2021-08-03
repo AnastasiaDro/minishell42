@@ -1,7 +1,6 @@
 //
 // Created by Cesar Erebus on 8/3/21.
 //
-#include "envList.h"
 #include "../minishell.h"
 
 void ft_unset(t_msh *msh, char **names)

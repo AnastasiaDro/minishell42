@@ -19,8 +19,8 @@ t_en_list	*envParsedLstNew(char *name, char *value)
 	list = (t_en_list *)malloc(sizeof(t_en_list));
 	if (!list)
 		return (NULL);
-	list->name = name;
-	list->value = value;
+	list->name = ft_strdup(name);
+	list->value = ft_strdup(value);
 	list->next = NULL;
 	return (list);
 }

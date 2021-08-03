@@ -257,15 +257,3 @@ void deleteInList(t_en_list **list, char **names)
         i++;
     }
 }
-
-
-void ft_unset(t_msh *msh, char **names)
-{
-    t_en_list *envTmp;
-    t_en_list *expTmp;
-
-    envTmp = msh->env_list;
-    expTmp = msh->export_list;
-    deleteInList(&envTmp, names);
-    deleteInList(&expTmp, names);
-}

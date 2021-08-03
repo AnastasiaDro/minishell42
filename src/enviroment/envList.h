@@ -36,4 +36,6 @@ void		envSetNameValue(t_en_list *list, char *str);
 
 t_en_list	*envParsedLstNew(char *name, char *value);
 
+void deleteInList(t_en_list **list, char **names);
+
 #endif

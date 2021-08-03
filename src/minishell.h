@@ -132,7 +132,7 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j);
 //int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
 int execCerBuiltin(t_msh *msh, char **comArr);
 //void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
-void cerExportHandler(t_msh *msh, char **execArr);
+int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
@@ -148,7 +148,7 @@ int 	initFds(t_msh *msh);
 void	closeAllFds(int **fd, int commands_num);
 
 void envInitEnvpList(t_msh *msh);
-void ft_print_export( t_msh *msh);
-void ft_print_env(t_msh *msh);
+int ft_print_export( t_msh *msh);
+int ft_print_env(t_msh *msh);
 void envUnset(t_msh *msh, char **names);
 #endif

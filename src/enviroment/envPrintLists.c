@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	ft_print_export( t_msh *msh)
+int	ft_print_export( t_msh *msh)
 {
 	t_en_list	*vars;
 	char		*value;
@@ -26,15 +26,14 @@ void	ft_print_export( t_msh *msh)
 		else
 		{
 			if (vars->name)
-			{
 				printf("declare -x %s\n", vars->name);
-			}
 		}
 		vars = vars->next;
 	}
+	return (1);
 }
 
-void	ft_print_env(t_msh *msh)
+int	ft_print_env(t_msh *msh)
 {
 	t_en_list	*vars;
 	char		*value;
@@ -47,4 +46,5 @@ void	ft_print_env(t_msh *msh)
 			printf("%s=\"%s\"\n", vars->name, vars->value);
 		vars = vars->next;
 	}
+	return (1);
 }

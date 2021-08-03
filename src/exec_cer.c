@@ -23,40 +23,26 @@ int execEcho(t_msh *msh, char **comArr, int *i)
 
 int execCerBuiltin(t_msh *msh, char **comArr)
 {
-	int i;
-
-	i = 0;
-	if (!ft_strcmp(comArr[i], "echo"))
+	if (!ft_strcmp(comArr[0], "echo"))
 		return (execEcho(msh, comArr, &i));
-	if (!ft_strncmp(comArr[i], "$", 1) && (ft_strlen(comArr[i]) > 1))
-		return (dollarSign(msh, comArr[i]));
-	if (!ft_strcmp(comArr[i], "pwd"))
+	if (!ft_strncmp(comArr[0], "$", 1) && (ft_strlen(comArr[0]) > 1))
+		return (dollarSign(msh, comArr[0]));
+	if (!ft_strcmp(comArr[0], "pwd"))
 		return (ft_pwd());
-	if (!ft_strcmp(comArr[i], "cd"))
-		return (ft_cd(msh, comArr[i + 1]));
-
-	if (!ft_strcmp(comArr[i], "env"))
+	if (!ft_strcmp(comArr[0], "cd"))
+		return (ft_cd(msh, comArr[1]));
+	if (!ft_strcmp(comArr[0], "env"))
+		return (ft_print_env(msh));
+	if (!ft_strcmp(comArr[0], "export"))
 	{
-		ft_print_env(msh);
-		return (1);
+		if (comArr[1] != NULL)
+			return (cerExportHandler(msh, comArr));
+		return (ft_print_export(msh));
 	}
-	if (!ft_strcmp(comArr[i], "export"))
+	if (!ft_strcmp(comArr[0], "unset"))
 	{
-		if (comArr[i + 1] != NULL)
-		{
-			cerExportHandler(msh, comArr);
-			return (1);
-		}
-		ft_print_export(msh);
-		return (1);
-	}
-	if (!ft_strcmp(comArr[i], "unset"))
-	{
-		if (comArr[i + 1] != NULL)
-		{
-			i++;
-			envUnset(msh, &comArr[i]);
-		}
+		if (comArr[1] != NULL)
+			envUnset(msh, &comArr[1]);
 		return (1);
 	}
 	return (0);

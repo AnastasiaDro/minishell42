@@ -21,9 +21,8 @@ void exportHandler(t_msh *msh, int i)
 	}
 }
 
-void cerExportHandler(t_msh *msh, char **execArr)
+int cerExportHandler(t_msh *msh, char **execArr)
 {
-	//пока у нас не закончились токены после слова экспорт
 	char *eq_ptr;
 	char *name;
 	char *value;
@@ -32,24 +31,16 @@ void cerExportHandler(t_msh *msh, char **execArr)
 	i = 1;
 	while (execArr[i])
 	{
-		printf("token = %s\n", execArr[i]);
-		//если внутри токена "="
-		//то мы делаем берем имя и значение после знака равно
-		//printf("1 cmd_s->cmdTokens[*j + 1] = %s\n", execArr[i + 1]);
 		eq_ptr = ft_strchr(execArr[i], '=');
-
 		if (eq_ptr)
 		{
 			*eq_ptr = '\0';
-			printf("2 cmd_s->cmdTokens[*j] = %s\n", execArr[i]);
 			name = ft_strdup(execArr[i]);
 			value = ft_strdup(eq_ptr + 1);
 			*eq_ptr = '=';
-			//i++;
 		}
 		else
 		{
-		//	i++;
 			name = ft_strdup(execArr[i]);
 			value = NULL;
 			printf("token = %s\n", execArr[i]);
@@ -57,4 +48,5 @@ void cerExportHandler(t_msh *msh, char **execArr)
 		envAddVariable(msh, name, value);
 		i++;
 	}
+	return (1);
 }

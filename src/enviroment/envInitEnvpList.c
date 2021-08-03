@@ -6,19 +6,18 @@
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:14:05 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 20:14:07 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/03 20:29:18 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void setOLDPWD(t_msh *msh)
+void	setOLDPWD(t_msh *msh)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < msh->envp_len)
+	while (i < msh->envp_len)
 	{
 		if (!ft_strncmp(msh->envp[i], "OLDPWD", 6))
 			msh->envp[i] = "OLDPWD";
@@ -27,7 +26,7 @@ void setOLDPWD(t_msh *msh)
 	}
 }
 
-void is_less(t_msh  *msh, int i, char **str, int *index)
+void	is_less(t_msh *msh, int i, char **str, int *index)
 {
 	if (ft_strncmp(msh->envp[i], *str, ft_strlen(msh->envp[i])) <= 0)
 	{
@@ -36,12 +35,12 @@ void is_less(t_msh  *msh, int i, char **str, int *index)
 	}
 }
 
-void envInitEnvpList(t_msh *msh)
+void	envInitEnvpList(t_msh *msh)
 {
-	int index;
-	char *str;
-	int i;
-	int j;
+	int		index;
+	char	*str;
+	int		i;
+	int		j;
 
 	j = 0;
 	setOLDPWD(msh);
@@ -52,7 +51,7 @@ void envInitEnvpList(t_msh *msh)
 		while (++i < msh->envp_len)
 		{
 			if (msh->envp[i] == NULL)
-				continue;
+				continue ;
 			else
 				is_less(msh, i, &str, &index);
 		}

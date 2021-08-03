@@ -89,43 +89,43 @@ int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
     //вернем длину количества аргументов
 }
 
-
-void ft_print_export( t_msh *msh)
-{
-    t_en_list *vars;
-	char *value;
-
-    vars = msh->export_list;
-	while (vars)
-	{
-		value = vars->value;
-		if (value != NULL)
-			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);
-		else
-		{
-			if (vars->name)
-			{
-				printf("declare -x %s\n", vars->name);
-			}
-		}
-		vars = vars->next;
-	}
-}
-
-void ft_print_env(t_msh *msh)
-{
-    t_en_list   *vars;
-    char        *value;
-
-    vars = msh->env_list;
-    while (vars)
-    {
-        value = vars->value;
-        if (value != NULL)
-            printf("%s=\"%s\"\n", vars->name, vars->value);
-        vars = vars->next;
-    }
-}
+//
+//void ft_print_export( t_msh *msh)
+//{
+//    t_en_list *vars;
+//	char *value;
+//
+//    vars = msh->export_list;
+//	while (vars)
+//	{
+//		value = vars->value;
+//		if (value != NULL)
+//			printf("declare -x %s=\"%s\"\n", vars->name, vars->value);
+//		else
+//		{
+//			if (vars->name)
+//			{
+//				printf("declare -x %s\n", vars->name);
+//			}
+//		}
+//		vars = vars->next;
+//	}
+//}
+//
+//void ft_print_env(t_msh *msh)
+//{
+//    t_en_list   *vars;
+//    char        *value;
+//
+//    vars = msh->env_list;
+//    while (vars)
+//    {
+//        value = vars->value;
+//        if (value != NULL)
+//            printf("%s=\"%s\"\n", vars->name, vars->value);
+//        vars = vars->next;
+//    }
+//}
 
 
 t_en_list *ft_search_var(t_en_list *list, char *name)
@@ -213,47 +213,3 @@ void ft_add_variable(t_msh *msh, char *name, char *value)
     ft_add_env_list(msh, name, value, flag);
 }
 
-void delete_var(t_en_list *del, t_en_list *prev)
-{
-    prev->next = del->next;
-    free(del->name);
-    free(del->value);
-    free(del);
-    del = NULL;
-}
-
-void deleteInList(t_en_list **list, char **names)
-{
-    int i;
-    t_en_list *prev;
-    t_en_list *tmp;
-
-    tmp = *list;
-    prev = NULL;
-    i = 0;
-
-    while (names[i])
-    {
-        tmp = *list;
-        while(tmp)
-        {
-            if (!ft_strcmp(names[i], tmp->name))
-           {
-                printf("СОВПАЛО! %s\n", tmp->name);
-                if (prev)
-                {
-                    delete_var(tmp, prev);
-                    break;
-                }
-                else
-                {
-                    *list = (*list)->next;
-                    break;
-                }
-            }
-            prev = tmp;
-            tmp = tmp->next;
-        }
-        i++;
-    }
-}

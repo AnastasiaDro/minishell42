@@ -6,7 +6,7 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 18:55:44 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/02 18:57:38 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/03 16:10:23 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ void	parser(t_msh *msh, char *line)
 	{
 		while (*line == ' ')
 			line++;
-		while ((tmp = ft_strsep(&line, "|")) != NULL)
+		tmp = ft_strsep(&line, "|");
+		while (tmp != NULL)
+		{
 			ft_lstadd_back(&token, ft_lstnew(ft_strtrim(tmp, " ")));
+			tmp = ft_strsep(&line, "|");
+		}
 	}
 	getCMD(msh, token);
 }

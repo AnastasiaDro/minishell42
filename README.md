@@ -5,6 +5,13 @@ execve() -
 wait() - 
 chdir() - 
 
+while (1)
+{
+....
+...
+system("leak ./minishell");
+}
+
 -L/usr/local/opt/readline/lib
 
 -I/usr/local/opt/readline/include
@@ -28,3 +35,6 @@ TODO: norminette
 	-src/ft_echo.c: OK!
 	-src/ft_exit.c: OK!
 	-src/ft_pwd.c: OK!
+	-src/parser.c: Error!
+	-src/parser.c: OK!
+	

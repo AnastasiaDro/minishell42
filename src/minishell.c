@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include "enviroment/envAddNew.h"
 
 int ctrl_d(t_msh *msh)
 {

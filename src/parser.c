@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include "enviroment/envAddNew.h"
 
 void inQuotes(char **line)
 {

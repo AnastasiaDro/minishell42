@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include "enviroment/envAddNew.h"
 
 const char	*getValue(t_en_list *export_list, const char *key)
 {

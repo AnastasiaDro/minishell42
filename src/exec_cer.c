@@ -3,7 +3,6 @@
 //
 
 #include "minishell.h"
-#include "enviroment/envAddNew.h"
 
 int execCerBuiltin(t_msh *msh, char **comArr)
 {

@@ -20,7 +20,10 @@ t_en_list	*envParsedLstNew(char *name, char *value)
 	if (!list)
 		return (NULL);
 	list->name = ft_strdup(name);
-	list->value = ft_strdup(value);
+	if (value)
+		list->value = ft_strdup(value);
+	else
+		list->value = NULL;
 	list->next = NULL;
 	return (list);
 }

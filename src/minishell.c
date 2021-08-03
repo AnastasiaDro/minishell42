@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 17:09:15 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/03 17:09:17 by jkeitha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "env_export_unset.h"
 
-int ctrl_d(t_msh *msh)
+int	ctrl_d(t_msh *msh)
 {
 	if (msh->line == NULL || !ft_strcmp("exit", msh->line))
 	{
@@ -11,30 +23,19 @@ int ctrl_d(t_msh *msh)
 	return (0);
 }
 
-//ф-я стат должна выдать ноль, когда происходит совпадение
-
-void ctrl_c(int num)
+void	ctrl_c(int num)
 {
+	struct termios	term;
+
 	if (num == SIGINT)
 	{
-		struct termios term;
-		///Нужно проверить все эти функции на возвращаемое значение!!!
-		//        //получаем атрибуты терминала
 		tcgetattr(0, &term);
-		//        //выключаем чета-там, что символ не отображается
 		term.c_lflag &= ~(ECHO);
 		term.c_lflag &= ~(ICANON);
-		//
-		//        //сетим атрибуты
 		tcsetattr(0, TCSANOW, &term);
-
-		//снвоа берем атрибуты
 		tcgetattr(0, &term);
-		//хардкодом включаем обратно как было (узнала число, сделав принтф перед изменением настроек printf(" %lx\n", term.cl_flag);
 		term.c_lflag = 0x2020010d;
-		//снова засетила атрибуты
 		tcsetattr(0, TCSANOW, &term);
-		//дальше уже знакомый код
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -43,9 +44,10 @@ void ctrl_c(int num)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	t_msh msh;
+	t_msh	msh;
+
 	(void)ac;
 	(void)av;
 	(void)envp;
@@ -54,8 +56,8 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		msh.line = readline("msh: ");
-        if (ctrl_d(&msh))
-        	break;
+		if (ctrl_d(&msh))
+			break ;
 		msh.len = ft_strlen(msh.line);
 		if (msh.len > 0)
 		{

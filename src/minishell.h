@@ -69,11 +69,12 @@ typedef struct s_msh // main struct
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
 	t_en_list   *env_list; //несортированный список переменных среды
-	char 		**envp_arr;
+	char 		**envp;
     int     	envp_len;  //длина списка переменных среды
 	int			**fd;
 	int 		commands_num;
 	int			dollar;
+	char		c;
 }               t_msh;
 
 typedef struct  s_cmd

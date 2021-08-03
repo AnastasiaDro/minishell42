@@ -7,57 +7,57 @@
 
 
 
-int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
-{
-		int index;
-		char *str;
-		int i;
-		int j;
-		int arr_len;
-		char c = (char)255;
-
-
-		arr_len = (int)ft_arrlen(arr);
-		j = 1;
-		i = 0;
-		while(i < arr_len)
-        {
-            if (!strncmp(arr[i], "OLDPWD", 6))
-                arr[i] = "OLDPWD";
-            env_lstadd_back(env_list, env_lstnew(arr[i]));
-		    i++;
-        }
-	    str = arr[0];
-		while (j < arr_len)
-		{
-			i = 0;
-			while (i < arr_len)
-			{
-				if (arr[i] == NULL)
-				{
-					i++;
-					continue;
-				}
-				else {
-					if (ft_strncmp(arr[i], str, ft_strlen(arr[i])) <= 0)
-					{
-						str = arr[i];
-						index = i;
-					}
-				}
-				i++;
-			}
-			if (str != NULL)
-            {
-                env_lstadd_back(list, env_lstnew(str));
-            }
-            arr[index] = NULL;
-			str = &c;
-			j++;
-		}
-		return (arr_len);
-    //вернем длину количества аргументов
-}
+//int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list)
+//{
+//		int index;
+//		char *str;
+//		int i;
+//		int j;
+//		int arr_len;
+//		char c = (char)255;
+//
+//
+//		arr_len = (int)ft_arrlen(arr);
+//		j = 1;
+//		i = 0;
+//		while(i < arr_len)
+//        {
+//            if (!strncmp(arr[i], "OLDPWD", 6))
+//                arr[i] = "OLDPWD";
+//            env_lstadd_back(env_list, env_lstnew(arr[i]));
+//		    i++;
+//        }
+//	    str = arr[0];
+//		while (j < arr_len)
+//		{
+//			i = 0;
+//			while (i < arr_len)
+//			{
+//				if (arr[i] == NULL)
+//				{
+//					i++;
+//					continue;
+//				}
+//				else {
+//					if (ft_strncmp(arr[i], str, ft_strlen(arr[i])) <= 0)
+//					{
+//						str = arr[i];
+//						index = i;
+//					}
+//				}
+//				i++;
+//			}
+//			if (str != NULL)
+//            {
+//                env_lstadd_back(list, env_lstnew(str));
+//            }
+//            arr[index] = NULL;
+//			str = &c;
+//			j++;
+//		}
+//		return (arr_len);
+//    //вернем длину количества аргументов
+//}
 
 
 t_en_list *ft_search_var(t_en_list *list, char *name)

@@ -8,7 +8,9 @@
 int ft_env(char **envp);
 void insert_var(t_list **envp_list, char *var);
 //int init_envp_list(char **envp, t_en_list **envp_list);
-int init_envp_list(char **arr, t_en_list **list, t_en_list **env_list);
+//int init_envp_list(char **envp, t_en_list **export_list, t_en_list **env_list);
+//int init_envp_list(char **envp, t_en_list **export_list, t_en_list **env_list);
+void init_envp_list(t_msh *msh);
 void ft_print_export( t_msh *msh);
 void ft_print_env(t_msh *msh);
 

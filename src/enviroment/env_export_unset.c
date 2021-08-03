@@ -5,21 +5,6 @@
 #define EXP_PREFIX "declare -x "
 #include "envList.h"
 
-t_en_list *ft_search_var(t_en_list *list, char *name)
-{
-    t_en_list *tmp;
-
-    tmp = list;
-    while (tmp)
-    {
-        if (!ft_strcmp(tmp->name, name))
-            return (tmp);
-        tmp = tmp->next;
-    }
-
-    return (NULL);
-}
-
 void ft_insert_to_list(t_en_list *prev, t_en_list *fol, t_en_list *new)
 {
     prev->next = new;
@@ -33,7 +18,6 @@ void    ft_export_add_new(t_en_list *export_list, char *name, char *value)
 
     previous = export_list;
     tmp = export_list->next;
-
     if (ft_strncmp(previous->name, name, ft_strlen(name)) >= 0) //если наше имя меньше первого элемента то добавляем в начало
     {
         env_lstadd_front(&export_list, envParsedLstNew(name, value));
@@ -57,7 +41,7 @@ t_en_list *ft_add_export_list(t_msh *msh, char *name, char *value)
 {
     t_en_list *p;
 
-    p = ft_search_var(msh->export_list, name);
+    p = getExportVar(&msh->export_list, name);
     if (p)
 	{
 		p->value = value;
@@ -76,7 +60,7 @@ void ft_add_env_list(t_msh *msh, char *name, char *value, t_en_list *flag)
         env_lstadd_back(&(msh->env_list), envParsedLstNew(name, value));
     else
     {
-        p = ft_search_var(msh->env_list, name);
+    	p = getExportVar(&msh->env_list, name);
         p->value = value;
     }
 }

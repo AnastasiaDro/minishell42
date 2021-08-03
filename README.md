@@ -30,6 +30,10 @@ TODO:
 на потом:
 1) обработать след кейс: export NAME = VALUE (в оригинале с пробелом между "NAME" и "=" не работает)
 
+TODO: bugs
+	-cd
+	-$
+
 TODO: norminette
 	-src/ft_cd.c: OK!
 	-src/ft_echo.c: OK!

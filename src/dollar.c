@@ -1,29 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollar.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 17:13:31 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/03 20:49:54 by jkeitha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void dollarSign(t_msh *msh, char *dollar)
+void	dollarSign(t_msh *msh, char *dollar)
 {
 	char	*token;
 	char	*found;
 
-	while ((token = ft_strsep(&dollar, " $")) != NULL)
+	token = ft_strsep(&dollar, " $");
+	while (token != NULL)
 	{
-	//	write(1, "INSIDE\n", 7);
 		if (ft_strlen(token) > 0)
 		{
 			if (*token == '?')
 			{
-				// ft_putstr_fd("msh: ", 2);
 				ft_putnbr_fd(errno, 2);
 				ft_putendl_fd("", 2);
-				// ft_putendl_fd(": command not found", 2);
 			}
 			else
 			{
 				found = (char *)getValue(msh->export_list, token);
-				if (found)
+				printf("found: |%s|\n", found);
+				if (found != NULL)
 					printf("%s\n", found);
+				else
+					write(STDOUT_FILENO, "\n", 1);
 			}
+			token = ft_strsep(&dollar, " $");
 		}
 	}
-	write(1, "IsdfaweafsdasdfNSIDE\n", 7);
 }

@@ -97,18 +97,15 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			{
 				char *tmp;
 				char *p;
+				p = NULL;
 				tmp = cmd_s->cmdTokens[y];
 				p = (char *)getValue(msh->export_list, &cmd_s->cmdTokens[y][1]);
-				if (p!=NULL)
-				{
+				if (p != NULL)
 					cmd_s->cmdTokens[y] = ft_strdup(p);
-					free(tmp);
-				}
-				
-				//cmd_s->cmdTokens[y] = 
-			//	printf("%s\n", cmd_s->cmdTokens[y]);
+				else
+					cmd_s->cmdTokens[y] = NULL;
+				free(tmp);
 			}
-			
 			y++;
 		}
 		
@@ -120,6 +117,8 @@ void cerExec(t_msh *msh) // не весьchar **fd
 			cmd_s->fileOutFd = &(msh->fd[i + 1][1]);
 		j = 0;
 		int arrLen = ft_arrlen(cmd_s->cmdTokens);
+		if (!cmd_s->cmdTokens[0])
+			return ;
 		while (j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы

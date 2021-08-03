@@ -1,7 +1,7 @@
 /*
 	идём по всем токенам, пока не встретимся с NULL
 	каждый токен берем и смотрим, есть там равно или рнет.
-	если void ft_add_variable(t_msh *msh, char *name, char *value)
+	если void envAddVariable(t_msh *msh, char *name, char *value)
 
 	TODO: если ключь уже существует в экпорте, перезаписывается без команды экпорт т.е KEY=VALUE
 */
@@ -14,7 +14,7 @@ void exportHandler(t_msh *msh, int i)
 	{
 		if (!ft_strcmp(msh->cmd[i], "="))
 		{
-			ft_add_variable(msh, msh->cmd[i - 1], msh->cmd[i + 1]);
+			envAddVariable(msh, msh->cmd[i - 1], msh->cmd[i + 1]);
 			printf("=: %s i: %d\n", msh->cmd[i], i);
 		}
 		i++;
@@ -54,7 +54,7 @@ void cerExportHandler(t_msh *msh, char **execArr)
 			value = NULL;
 			printf("token = %s\n", execArr[i]);
 		}
-		ft_add_variable(msh, name, value);
+		envAddVariable(msh, name, value);
 		i++;
 	}
 }

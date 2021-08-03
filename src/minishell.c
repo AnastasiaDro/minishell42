@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
 
 int	ctrl_d(t_msh *msh)
 {

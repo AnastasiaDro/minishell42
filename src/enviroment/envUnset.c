@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envParsedLstNew.c                                  :+:      :+:    :+:   */
+/*   envUnset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/03 13:36:49 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 13:37:31 by cerebus          ###   ########.fr       */
+/*   Created: 2021/08/03 20:13:35 by cerebus           #+#    #+#             */
+/*   Updated: 2021/08/03 20:32:01 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_en_list	*envParsedLstNew(char *name, char *value)
+void	envUnset(t_msh *msh, char **names)
 {
-	t_en_list	*list;
+	t_en_list	*envTmp;
+	t_en_list	*expTmp;
 
-	list = (t_en_list *)malloc(sizeof(t_en_list));
-	if (!list)
-		return (NULL);
-	list->name = ft_strdup(name);
-	if (value)
-		list->value = ft_strdup(value);
-	else
-		list->value = NULL;
-	list->next = NULL;
-	return (list);
+	envTmp = msh->env_list;
+	expTmp = msh->export_list;
+	deleteInList(&envTmp, names);
+	deleteInList(&expTmp, names);
 }

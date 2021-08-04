@@ -35,7 +35,7 @@ TODO: bugs
 	-$: done
 
 TODO: norminette
-	-src/ft_cd.c: OK!
+	-src/ft_cd.c: OK!(fix: segFault then unset HOME, keys: cd work)
 	-src/ft_echo.c: OK!
 	-src/ft_exit.c: OK!
 	-src/ft_pwd.c: OK!

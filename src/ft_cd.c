@@ -6,7 +6,7 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:28:34 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/03 22:36:24 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/04 19:38:30 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,15 @@ int	ft_cd(t_msh *msh, const char *path)
 
 	dir = getcwd(NULL, 0);
 	if (path == NULL)
-		path = getExportVar(&msh->export_list, "HOME")->value;
-	if (chdir(path) == 0)
-		setPwd(msh, dir);
+		path = getValue(msh->export_list, "HOME");
+	if (path != NULL)
+	{
+		if (chdir(path) == 0)
+			setPwd(msh, dir);
+		else
+			printf("msh: cd: %s: No such file or directory\n", path);
+	}
 	else
-		printf("msh: cd: %s: No such file or directory\n", path);
+		printf("msh: cd: HOME not set\n");
 	return (1);
 }

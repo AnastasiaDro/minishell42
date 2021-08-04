@@ -16,7 +16,7 @@
 #include <errno.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
-#include "env/envList.h"
+#include "enviroment/enviroment.h"
 #include "utils/msh_utils.h"
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"
@@ -69,11 +69,12 @@ typedef struct s_msh // main struct
 	//добавила Настя
 	t_en_list 	*export_list;//отсортированный список переменных среды
 	t_en_list   *env_list; //несортированный список переменных среды
-	char 		**envp_arr;
+	char 		**envp;
     int     	envp_len;  //длина списка переменных среды
 	int			**fd;
 	int 		commands_num;
 	int			dollar;
+	char		c;
 }               t_msh;
 
 typedef struct  s_cmd
@@ -124,14 +125,14 @@ int parseHereDoc(int i,  int out, t_msh *msh);
 
 // handlers
 void	exportHandler(t_msh *msh, int i);
-void ft_add_variable(t_msh *msh, char *name, char *value);
+void envAddVariable(t_msh *msh, char *name, char *value);
 
 //ищем и выполянем контрольный символ
 int check_ctrl_symbol(t_cmd *cmd_s, int *j);
 //int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
 int execCerBuiltin(t_msh *msh, char **comArr);
 //void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
-void cerExportHandler(t_msh *msh, char **execArr);
+int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
@@ -145,4 +146,9 @@ char	*findCommand(char **pathList, char *command);
 void	printError(char *command, int flag);
 int 	initFds(t_msh *msh);
 void	closeAllFds(int **fd, int commands_num);
+
+void envInitEnvpList(t_msh *msh);
+int ft_print_export( t_msh *msh);
+int ft_print_env(t_msh *msh);
+void envUnset(t_msh *msh, char **names);
 #endif

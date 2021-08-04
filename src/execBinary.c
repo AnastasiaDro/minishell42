@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-//int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s)
 int execBinary(t_msh *msh, char **execArr)
 {
 	int pid;

@@ -6,12 +6,11 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:15 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/04 17:58:51 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/04 22:18:30 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env/envExportUnset.h"
 
 int	ctrl_d(t_msh *msh)
 {

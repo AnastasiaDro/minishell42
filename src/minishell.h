@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <ncurses.h>
 #include <errno.h>
+#include <sys/file.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
 #include "enviroment/enviroment.h"
@@ -96,9 +97,6 @@ typedef struct  s_cmd
 // parsing
 void parser(t_msh *msh, char *line);
 
-// lexer
-// char *lexer(t_msh *msh, char **line);
-
 //dollar
 int dollarSign(t_msh *msh, char *dollar);
 
@@ -136,7 +134,7 @@ int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
-char **lexer_again(char *s);
+char **lexer(char *s);
 t_en_list *getExportVar(t_en_list **export, char *key_name);
 //int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s);
 int execBinary(t_msh *msh, char **execArr);

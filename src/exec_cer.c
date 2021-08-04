@@ -6,28 +6,25 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 21:28:18 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/04 22:28:14 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/04 23:48:41 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int execEcho(t_msh *msh, char **comArr, int *i)
+int	execEcho(t_msh *msh, char **comArr, int i)
 {
-	if (comArr[*i + 1] && !ft_strncmp(comArr[*i + 1], "$", 1) && (ft_strlen(comArr[*i + 1]) > 1))
-		dollarSign(msh, comArr[++(*i)]);
+	if (comArr[i + 1] && !ft_strncmp(comArr[i + 1], "$", 1) && (ft_strlen(comArr[i + 1]) > 1))
+		dollarSign(msh, comArr[++i]);
 	else
 		ft_echo(comArr, 0);
 	return (1);
 }
 
-int execCerBuiltin(t_msh *msh, char **comArr)
+int	execCerBuiltin(t_msh *msh, char **comArr)
 {
-	int i;
-
-	i =  0;
 	if (!ft_strcmp(comArr[0], "echo"))
-		return (execEcho(msh, comArr, &i));
+		return (execEcho(msh, comArr, 0));
 	if (!ft_strncmp(comArr[0], "$", 1) && (ft_strlen(comArr[0]) > 1))
 		return (dollarSign(msh, comArr[0]));
 	if (!ft_strcmp(comArr[0], "pwd"))
@@ -51,10 +48,10 @@ int execCerBuiltin(t_msh *msh, char **comArr)
 	return (0);
 }
 
-void cerExec(t_msh *msh) // не весьchar **fd
+void	cerExec(t_msh *msh)
 {
 	int i;
-	int j; //индекс для прохода по строке
+	int j;
 	int end;
 	char **execArr;
 	i = -1;
@@ -71,7 +68,7 @@ void cerExec(t_msh *msh) // не весьchar **fd
 		cmd_s->fileInFd = &zero;
 		cmd_s->fileOutFd = &one;
 		cmd_s->com_num = i;
-		cmd_s->cmdTokens = lexer_again(msh->cmd[i]); //засовываем в лексер команду
+		cmd_s->cmdTokens = lexer(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
 
 		int y = 0;

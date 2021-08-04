@@ -6,12 +6,12 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 18:55:44 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/03 16:10:23 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/04 17:59:21 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
+#include "env/envExportUnset.h"
 
 static void	getCMD(t_msh *msh, t_list *token)
 {

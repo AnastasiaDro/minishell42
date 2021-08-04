@@ -5,7 +5,8 @@ CER	 = cerebus
 HOME = home
 
 SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c \
-		src/env_export_unset.c src/env_list.c src/handlers.c src/parse_command.c \
+		src/env/envExportUnset.c src/env/envList.c src/env/envParsedLstNew.c src/env/envSetNameVal.c \
+		src/handlers.c src/parse_command.c \
 		src/utils/move_index.c src/exec_cer.c src/waitChildren.c src/getExportVar.c src/execBinary.c \
 		src/findCommand.c src/pipexSplit.c src/printError.c src/getBinaryName.c src/closeAllFds.c \
 		src/initFds.c src/utils/ft_lstFree.c src/utils/ft_freeEnList.c src/utils/ft_freeStringsArr.c \

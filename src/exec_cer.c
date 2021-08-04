@@ -6,12 +6,12 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 21:28:18 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/03 22:37:25 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/04 17:57:55 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "enviroment/env_export_unset.h"
+#include "env/envExportUnset.h"
 
 int execEcho(t_msh *msh, char **comArr, int *i)
 {

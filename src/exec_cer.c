@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-int execEcho(t_msh *msh, char **comArr, int *i)
+int execEcho(t_msh *msh, char **comArr)
 {
-	if (comArr[*i + 1] && !ft_strncmp(comArr[*i + 1], "$", 1) && (ft_strlen(comArr[*i + 1]) > 1))
-		dollarSign(msh, comArr[++(*i)]);
+	if (comArr[1] && !ft_strncmp(comArr[1], "$", 1) && (ft_strlen(comArr[1]) > 1))
+		dollarSign(msh, comArr[1]);
 	else
 		ft_echo(comArr, 0);
 	return (1);
@@ -24,7 +24,7 @@ int execEcho(t_msh *msh, char **comArr, int *i)
 int execCerBuiltin(t_msh *msh, char **comArr)
 {
 	if (!ft_strcmp(comArr[0], "echo"))
-		return (execEcho(msh, comArr, &i));
+		return (execEcho(msh, comArr));
 	if (!ft_strncmp(comArr[0], "$", 1) && (ft_strlen(comArr[0]) > 1))
 		return (dollarSign(msh, comArr[0]));
 	if (!ft_strcmp(comArr[0], "pwd"))

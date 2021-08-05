@@ -20,3 +20,4 @@ TODO: norminette
 	-src/utils/*: OK!
 	-src/printError.c: OK!
 	-src/exportHandler.c: OK!
+	-src/getExportVar.c: OK!

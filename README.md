@@ -16,3 +16,4 @@ TODO: norminette
 	-src/lexer.c: OK!
 	-src/parseRedirects.c: OK!
 	-src/parseHereDoc.c: OK!
+	-src/checkControlSymbol.c: OK!

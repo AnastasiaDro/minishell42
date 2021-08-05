@@ -1,6 +1,4 @@
-//
-// Created by Cesar Erebus on 7/27/21.
-//
+
 #include <sys/file.h>
 #include "minishell.h"
 #include "utils/msh_utils.h"
@@ -123,55 +121,4 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		return (RED_LARG);
 	}
 	return (0);
-}
-
-char **lexer_again(char *s)
-{
-	t_list *lexer_list;
-
-	int start = 0;
-	int end;
-	lexer_list = NULL;
-	int lst_size = 0;
-	char *s1;
-
-	while (s[start])
-	{
-
-		move_index(s, &start, ' ');
-		char c = s[start];
-		if (c == '\"' || c == '\'')
-		{
-			start++;
-			end = start;
-			while (s[end] && s[end] != c)
-				end++;
-			s1 = ft_substr(s, start, end - start);
-			start = end + 1;
-		}
-		else
-		{
-			end = start;
-			while (s[end] && s[end] != ' ')
-				end++;
-			s1 = ft_substr(s, start, end - start);
-			start = end;
-		}
-		ft_lstadd_back(&lexer_list, ft_lstnew(s1));
-	}
-	t_list *tmp = lexer_list;
-	lst_size = ft_lstsize(tmp);
-	char **arr = malloc(sizeof(char *) * lst_size + 1);
-	arr[lst_size] = NULL;
-
-	int i = 0;
-	tmp = lexer_list;
-	while (tmp)
-	{
-		arr[i] = ft_strdup(tmp->content);
-		tmp = tmp->next;
-		i++;
-	}
-	ft_lstFree(lexer_list);
-	return (arr);
 }

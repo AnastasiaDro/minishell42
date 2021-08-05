@@ -70,7 +70,7 @@ void	cerExec(t_msh *msh)
 		cmd_s->com_num = i;
 		cmd_s->cmdTokens = lexer(msh->cmd[i]); //засовываем в лексер команду
 		//и получаем массив токенов команды
-
+		//cmd_s->cmdTokens = lexer_again(msh->cmd[i]);
 		int y = 0;
 		while (cmd_s->cmdTokens[y])
 		{

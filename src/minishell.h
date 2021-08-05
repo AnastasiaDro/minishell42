@@ -134,7 +134,7 @@ int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
 //int parse_command(t_msh *msh, int com_num);
-// char **lexer_again(char *s);
+ //char **lexer_again(char *s);
 char	**lexer(char *s);
 t_en_list *getExportVar(t_en_list **export, char *key_name);
 //int execBinary(t_msh *msh, char **execArr, t_cmd *cmd_s);
@@ -145,7 +145,7 @@ char	*findCommand(char **pathList, char *command);
 void	printError(char *command, int flag);
 int 	initFds(t_msh *msh);
 void	closeAllFds(int **fd, int commands_num);
-
+char *inQuotes(char *s, int *start);
 void envInitEnvpList(t_msh *msh);
 int ft_print_export( t_msh *msh);
 int ft_print_env(t_msh *msh);

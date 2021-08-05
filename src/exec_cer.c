@@ -6,16 +6,16 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 21:28:18 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/04 23:48:41 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/05 13:41:35 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execEcho(t_msh *msh, char **comArr, int i)
+int	execEcho(t_msh *msh, char **comArr)
 {
-	if (comArr[i + 1] && !ft_strncmp(comArr[i + 1], "$", 1) && (ft_strlen(comArr[i + 1]) > 1))
-		dollarSign(msh, comArr[++i]);
+	if (comArr[1] && !ft_strncmp(comArr[1], "$", 1) && (ft_strlen(comArr[1]) > 1))
+		dollarSign(msh, comArr[1]);
 	else
 		ft_echo(comArr, 0);
 	return (1);
@@ -24,7 +24,7 @@ int	execEcho(t_msh *msh, char **comArr, int i)
 int	execCerBuiltin(t_msh *msh, char **comArr)
 {
 	if (!ft_strcmp(comArr[0], "echo"))
-		return (execEcho(msh, comArr, 0));
+		return (execEcho(msh, comArr));
 	if (!ft_strncmp(comArr[0], "$", 1) && (ft_strlen(comArr[0]) > 1))
 		return (dollarSign(msh, comArr[0]));
 	if (!ft_strcmp(comArr[0], "pwd"))

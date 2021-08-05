@@ -26,3 +26,4 @@ TODO: norminette
 	-src/closeAllFds.c: OK!
 	-src/findCommand.c: OK!
 	-src/execArrSplit.c: OK!
+	-src/waitChildren.c: OK!

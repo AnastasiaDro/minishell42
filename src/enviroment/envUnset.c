@@ -14,11 +14,6 @@
 
 void	envUnset(t_msh *msh, char **names)
 {
-	t_en_list	*envTmp;
-	t_en_list	*expTmp;
-
-	envTmp = msh->env_list;
-	expTmp = msh->export_list;
-	deleteInList(&envTmp, names);
-	deleteInList(&expTmp, names);
+	deleteInList(&msh->env_list, names);
+	deleteInList(&msh->export_list, names);
 }

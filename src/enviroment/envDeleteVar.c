@@ -41,7 +41,12 @@ void	deleteInList(t_en_list **list, char **names)
 				if (prev)
 					delete_var(tmp, prev);
 				else
+				{
+					printf("here ");
 					*list = (*list)->next;
+					printf("*lst = %s\n", (*list)->name);
+				}
+
 				break ;
 			}
 			prev = tmp;

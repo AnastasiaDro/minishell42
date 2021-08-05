@@ -35,7 +35,7 @@ char	**hasTokens(t_cmd *cmd_s)
 	arrLen = ft_arrlen(cmd_s->cmdTokens);
 	while (j < arrLen)
 	{
-		while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+		while (cmd_s->cmdTokens[j] && checkCtrlSymbol(cmd_s, &j))
 			j++;
 		end = j;
 		while (findControlSym(cmd_s->cmdTokens[end]))
@@ -45,7 +45,7 @@ char	**hasTokens(t_cmd *cmd_s)
 		while (++u < (end - j))
 			execArr[u] = ft_strdup(cmd_s->cmdTokens[u + j]);
 		j = end;
-		while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+		while (cmd_s->cmdTokens[j] && checkCtrlSymbol(cmd_s, &j))
 			j++;
 	}
 	return (execArr);

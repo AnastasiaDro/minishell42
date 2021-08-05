@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:12:05 by cerebus           #+#    #+#             */
-/*   Updated: 2021/04/27 16:09:00 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 22:32:56 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	get_next_line(int fd, char **line)
 	char		*pn;
 	int			start;
 
-	system("leaks minishell");
 	read_bytes = -2;
 	start = 0;
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));

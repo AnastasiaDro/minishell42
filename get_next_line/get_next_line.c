@@ -67,6 +67,7 @@ int	get_next_line(int fd, char **line)
 	char		*pn;
 	int			start;
 
+	system("leaks minishell");
 	read_bytes = -2;
 	start = 0;
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));

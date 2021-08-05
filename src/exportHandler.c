@@ -42,6 +42,8 @@ int	cerExportHandler(t_msh *msh, char **execArr)
 	{
 		getNameValue(execArr, i, &name, &value);
 		envAddVariable(msh, name, value);
+		free(name);
+		free(value);
 		i++;
 	}
 	return (1);

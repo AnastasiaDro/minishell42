@@ -35,6 +35,7 @@ int	getTmpFile(char **tokens, int *j)
 		free(tmp);
 	}
 	free(line);
+	free(limiter);
 	close(tFileFd);
 	return (tFileFd);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/05 11:22:16 by cerebus           #+#    #+#              #
-#    Updated: 2020/11/22 16:51:05 by cerebus          ###   ########.fr        #
+#    Updated: 2021/08/05 23:00:55 by jkeitha          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC		=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c\
 BONUS	= 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 			ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 			bonus.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
-			get_next_line/gnl_wrap_utils.c
+			get_next_line/gnl_wrap_utils.c ft_arrlen.c ft_strcspn.c ft_strsep.c
 
 CC		=	gcc
 OBJS	=	$(SRC:.c=.o)
@@ -40,7 +40,7 @@ all:		$(NAME)
 clean:
 			@rm -f $(OBJS)
 
-fclean:		clean
+fclean:		clean bfclean
 			@rm -f $(NAME)
 
 re:			fclean all
@@ -48,7 +48,7 @@ re:			fclean all
 bonus:		$(OBJS) $(BOBJS)
 			@ar rc libft.a $(OBJS) $(BOBJS)
 
-bfclean:	fclean
+bfclean:
 			@rm -f $(BOBJS)
 
 

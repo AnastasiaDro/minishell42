@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printError.c                                       :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 16:21:33 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/05 23:05:13 by jkeitha          ###   ########.fr       */
+/*   Created: 2021/08/05 22:46:22 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/05 22:46:23 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <stdio.h>
-#include "minishell.h"
+#include "bonus.h"
 
-void	printError(char *command, int flag)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*prefix;
+	int	s1_len;
+	int	s2_len;
+	int	max_len;
 
-	if (flag == 0)
-	{
-		prefix = ft_strjoin(NAME, command);
-		perror(prefix);
-		free(prefix);
-		return ;
-	}
-	if (flag == 1)
-	{
-		errno = 127;
-		write(2, command, ft_strlen(command));
-		write(2, ": ", 2);
-		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));
-		write(2, "\n", 1);
-	}
+	s1_len = (int)ft_strlen(s1);
+	s2_len = (int)ft_strlen(s2);
+	if (s1_len > s2_len)
+		max_len = s1_len;
+	else
+		max_len = s2_len;
+	return (ft_strncmp(s1, s2, max_len));
 }

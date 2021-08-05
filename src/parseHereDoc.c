@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseHereDoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 16:16:51 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/05 16:16:56 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 23:03:28 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	getTmpFile(char **tokens, int *j)
 	limiter = ft_strdup(tokens[(*j) + 1]);
 	line = NULL;
 	tFileFd = open("tmpFile", O_CREAT | O_RDWR, 0644);
-	printf("fd = %d\n", tFileFd);
 	write(1, "> ", 2);
 	get_next_line(STDIN_FILENO, &line);
 	while (ft_strcmp(line, limiter))

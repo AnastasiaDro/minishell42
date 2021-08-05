@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printError.c                                       :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 16:21:33 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/05 23:05:13 by jkeitha          ###   ########.fr       */
+/*   Created: 2021/03/04 11:46:00 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/05/25 16:50:51 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <stdio.h>
-#include "minishell.h"
+#include "libft.h"
 
-void	printError(char *command, int flag)
+size_t	ft_arrlen(char **arr)
 {
-	char	*prefix;
+	size_t	len;
 
-	if (flag == 0)
-	{
-		prefix = ft_strjoin(NAME, command);
-		perror(prefix);
-		free(prefix);
-		return ;
-	}
-	if (flag == 1)
-	{
-		errno = 127;
-		write(2, command, ft_strlen(command));
-		write(2, ": ", 2);
-		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));
-		write(2, "\n", 1);
-	}
+	len = 0;
+	while (arr[len])
+		len++;
+	return (len);
 }

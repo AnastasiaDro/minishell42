@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 15:52:07 by cerebus           #+#    #+#             */
-/*   Updated: 2021/04/27 02:28:21 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 22:41:45 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	calc_coef(char c)
 	return (coef);
 }
 
-int	ft_atoi(char *str)
+int	ft_atoi(char *s)
 {
 	int		i;
 	int		coef;
@@ -30,17 +30,17 @@ int	ft_atoi(char *str)
 	i = 0;
 	coef = 1;
 	result = 0;
-	while ((str[i] != '\0' && (str[i] >= '\t' && str[i] <= '\r')) || str[i] == ' ')
+	while ((s[i] != '\0' && (s[i] >= '\t' && s[i] <= '\r')) || s[i] == ' ')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == '-' || s[i] == '+')
 	{
-		coef = calc_coef(str[i]);
+		coef = calc_coef(s[i]);
 		i++;
 	}
-	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
+	while (s[i] != '\0' && s[i] >= '0' && s[i] <= '9')
 	{
 		result *= 10;
-		result += (str[i] - '0') * coef;
+		result += (s[i] - '0') * coef;
 		if (coef > 0 && result < 0)
 			return (-1);
 		if (coef < 0 && result > 0)

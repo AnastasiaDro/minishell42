@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftCer.h                                            :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/06 21:58:53 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/27 02:03:29 by cerebus          ###   ########.fr       */
+/*   Created: 2021/08/05 22:43:44 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/05 22:53:33 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include "bonus.h"
+# include <stdlib.h>
+# include "get_next_line/get_next_line.h"
 
 typedef struct s_list
 {
@@ -107,5 +110,11 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 								void (*del)(void *));
+								
+size_t			ft_arrlen(char **arr);
+
+size_t			ft_strcspn(const char *s, const char *charset);
+
+char			*ft_strsep(char **stringp, const char *delim);
 
 #endif

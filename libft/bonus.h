@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printError.c                                       :+:      :+:    :+:   */
+/*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 16:21:33 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/05 23:05:13 by jkeitha          ###   ########.fr       */
+/*   Created: 2021/08/05 22:44:33 by jkeitha           #+#    #+#             */
+/*   Updated: 2021/08/05 22:44:36 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <stdio.h>
-#include "minishell.h"
+#ifndef BONUS_H
+# define BONUS_H
+# include "libft.h"
 
-void	printError(char *command, int flag)
-{
-	char	*prefix;
+int		ft_strcmp(const char *s1, const char *s2);
+char	*_bonusThreeStr_join(char const *s1, char const *s2, char const *s3);
 
-	if (flag == 0)
-	{
-		prefix = ft_strjoin(NAME, command);
-		perror(prefix);
-		free(prefix);
-		return ;
-	}
-	if (flag == 1)
-	{
-		errno = 127;
-		write(2, command, ft_strlen(command));
-		write(2, ": ", 2);
-		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));
-		write(2, "\n", 1);
-	}
-}
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 14:15:29 by cerebus           #+#    #+#             */
-/*   Updated: 2021/04/27 16:09:58 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 22:56:36 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <libc.h>
+# include "../libft.h"
 
 int		get_next_line(int fd, char **line);
 
@@ -33,13 +34,5 @@ int		m_read(int *read_bytes, int fd, char *buff);
 char	*find_char(char **pn, char *s);
 
 char	*ft_gstrjoin(char *s1, char *s2);
-
-char	*ft_strchr(const char *s, int c);
-
-size_t	ft_strlen(const char *s);
-
-char	*ft_strdup(const char *s);
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 #endif

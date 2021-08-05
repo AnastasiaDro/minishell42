@@ -106,7 +106,7 @@ void	cerExec(t_msh *msh)
 		while (j < arrLen) //пока у нас есть токены
 		{
 			//чекаем управляющие символы
-			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+			while (cmd_s->cmdTokens[j] && checkCtrlSymbol(cmd_s, &j))
 				j += 1;
 			end = j;
 			//			//беру массив команды с аргументами
@@ -123,7 +123,7 @@ void	cerExec(t_msh *msh)
 				u++;
 			}
 			j = end;
-			while (cmd_s->cmdTokens[j] && check_ctrl_symbol(cmd_s, &j))
+			while (cmd_s->cmdTokens[j] && checkCtrlSymbol(cmd_s, &j))
 			{
 				j += 1;
 			}

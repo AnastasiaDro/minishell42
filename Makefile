@@ -4,13 +4,42 @@ CER	 = cerebus
 
 HOME = home
 
-SRCS =	src/minishell.c src/parser.c src/errors.c src/init.c \
-		src/enviroment/enviroment.c src/enviroment/envUnset.c src/enviroment/envInitEnvpList.c src/enviroment/envParsedLstNew.c src/enviroment/envSetNameVal.c src/enviroment/envAddNew.c src/enviroment/envDeleteVar.c src/enviroment/envPrintLists.c \
-		src/handlers.c src/parse_command.c src/lexer.c src/hasTokens.c \
-		src/utils/move_index.c src/exec_cer.c src/waitChildren.c src/getExportVar.c src/execBinary.c \
-		src/findCommand.c src/pipexSplit.c src/printError.c src/getBinaryName.c src/closeAllFds.c \
-		src/initFds.c src/utils/ft_lstFree.c src/utils/ft_freeEnList.c src/utils/ft_freeStringsArr.c \
-		src/ft_exit.c src/ft_echo.c src/ft_pwd.c src/ft_cd.c src/dollar.c
+SRCS =	src/environment/envAddNew.c \
+		src/environment/envDeleteVar.c \
+		src/environment/envInitEnvpList.c \
+		src/environment/envParsedLstNew.c \
+		src/environment/envPrintLists.c \
+		src/environment/envSetNameVal.c \
+		src/environment/envUnset.c \
+		src/environment/environment.c \
+		src/utils/ft_freeStringsArr.c \
+		src/utils/ft_lstFree.c \
+		src/utils/move_index.c \
+		src/checkControlSymbol.c \
+		src/closeAllFds.c \
+		src/dollar.c \
+		src/execArrSplit.c \
+		src/execBinary.c \
+		src/exec_cer.c \
+		src/exportHandler.c \
+		src/findCommand.c \
+		src/ft_cd.c \
+		src/ft_echo.c \
+		src/ft_exit.c \
+		src/ft_pwd.c \
+		src/getBinaryName.c \
+		src/getExportVar.c \
+		src/hasTokens.c \
+		src/init.c \
+		src/initFds.c \
+		src/lexer.c \
+		src/minishell.c \
+		src/parseHereDoc.c \
+		src/parseRedirects.c \
+		src/parser.c \
+		src/pipexSplit.c \
+		src/printError.c \
+		src/waitChildren.c 
 
 OBJS = $(SRCS:.c=.o)
 

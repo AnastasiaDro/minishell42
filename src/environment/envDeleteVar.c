@@ -6,7 +6,7 @@
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:14:13 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 20:20:18 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 20:26:28 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,9 @@ void	deleteInList(t_en_list **list, char **names)
 			if (!ft_strcmp(names[i], tmp->name))
 			{
 				if (prev)
-				{
 					delete_var(tmp, prev);
-				}
 				else
-				{
 					*list = (*list)->next;
-					tmp = NULL;
-				}
 				break ;
 			}
 			prev = tmp;

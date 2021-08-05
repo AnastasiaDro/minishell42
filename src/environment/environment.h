@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enviroment.h                                       :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:16:56 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 20:30:49 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 20:24:01 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIROMENT_H
-# define ENVIROMENT_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 # include "../minishell.h"
 
 typedef struct s_en_list

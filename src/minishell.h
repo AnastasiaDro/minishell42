@@ -17,7 +17,7 @@
 #include <sys/file.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
-#include "enviroment/environment.h"
+#include "environment/environment.h"
 #include "utils/msh_utils.h"
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"

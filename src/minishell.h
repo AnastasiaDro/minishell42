@@ -106,13 +106,9 @@ void parser(t_msh *msh, char *line);
 int dollarSign(t_msh *msh, char *dollar);
 
 // exec
-void	exec(t_msh *msh);
 
 // errors
 void ft_error(ssize_t err_no, const char *msg);
-
-// init
-//void	ft_init(t_msh *msh);
 void ft_init(t_msh *msh, char **envp);
 const char	*getValue(t_en_list *export_list, const char *key);
 // builtin
@@ -126,14 +122,11 @@ int ft_cd(t_msh *msh, const char *path);
 void rl_replace_line();
 
 // handlers
-void	exportHandler(t_msh *msh, int i);
 void envAddVariable(t_msh *msh, char *name, char *value);
 
 //ищем и выполянем контрольный символ
 int checkCtrlSymbol(t_cmd *cmd_s, int *j);
-//int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
 int execCerBuiltin(t_msh *msh, char **comArr);
-//void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
 int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);

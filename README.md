@@ -17,3 +17,5 @@ TODO: norminette
 	-src/parseRedirects.c: OK!
 	-src/parseHereDoc.c: OK!
 	-src/checkControlSymbol.c: OK!
+	-src/utils/*: OK!
+	-src/printError.c: OK!

@@ -4,29 +4,42 @@ TODO: bugs
 	-$: done(cerebus)
 TODO: Dublicates
 	-getValue() & getExportVar()
-TODO: norminette
-	-src/ft_cd.c: OK!(fix: segFault then unset HOME, keys: cd work)
+TODO: norminette:
+	-src/checkControlSymbol.c: OK!
+	-src/closeAllFds.c: OK!
+	-src/dollar.c: OK!
+	-src/execArrSplit.c: OK!
+	-src/execBinary.c: OK!
+	-src/exec_cer.c: OK!
+	-src/exportHandler.c: OK!
+	-src/findCommand.c: OK!
+	-src/ft_cd.c: OK!
 	-src/ft_echo.c: OK!
 	-src/ft_exit.c: OK!
 	-src/ft_pwd.c: OK!
-	-src/parser.c: OK!
-	-src/parser.c: OK!
-	-src/initFds.c: OK!
-	-src/exec_cer.c: before func cerExec() norm and work
-	-src/lexer.c: OK!
-	-src/hasTokens.c: OK!
-	-src/exec_cer.c: OK!
-
-	-src/parseRedirects.c: OK!
-	-src/parseHereDoc.c: OK!
-	-src/checkControlSymbol.c: OK!
-	-src/utils/*: OK!
-	-src/printError.c: OK!
-	-src/exportHandler.c: OK!
-	-src/getExportVar.c: OK!
 	-src/getBinaryName.c: OK!
-	-src/execBinary.c: OK!
-	-src/closeAllFds.c: OK!
-	-src/findCommand.c: OK!
-	-src/execArrSplit.c: OK!
+	-src/getExportVar.c: OK!
+	-src/hasTokens.c: OK!
+	-src/init.c: OK!
+	-src/initFds.c: OK!
+	-src/lexer.c: OK!
+	-src/minishell.c: OK!
+	-src/parseHereDoc.c: OK!
+	-src/parseRedirects.c: OK!
+	-src/parser.c: OK!
+	-src/pipexSplit.c: OK!
+	-src/printError.c: OK!
 	-src/waitChildren.c: OK!
+	-src/utils/ft_freeStringsArr.c: OK!
+	-src/utils/ft_lstFree.c: OK!
+	-src/utils/move_index.c: OK!
+	-src/utils/msh_utils.h: OK!
+	-src/environment/envAddNew.c: OK!
+	-src/environment/envDeleteVar.c: OK!
+	-src/environment/envInitEnvpList.c: OK!
+	-src/environment/envParsedLstNew.c: OK!
+	-src/environment/envPrintLists.c: OK!
+	-src/environment/envSetNameVal.c: OK!
+	-src/environment/envUnset.c: OK!
+	-src/environment/environment.c: OK!
+	-src/environment/environment.h: OK!

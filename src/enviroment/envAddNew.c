@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include "../../libft/libft.h"
 #include "../minishell.h"
-#include "enviroment.h"
+#include "environment.h"
 #define EXP_PREFIX "declare -x "
 
 void	envInsertToList(t_en_list *prev, t_en_list *fol, t_en_list *new)

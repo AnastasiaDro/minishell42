@@ -6,15 +6,15 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:41:07 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/05 18:31:41 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/05 20:55:52 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int execEcho(t_msh *msh, char **comArr)
+int	execEcho(t_msh *msh, char **comArr)
 {
-	if (comArr[1] && !ft_strncmp(comArr[1], "$", 1) &&
+	if (comArr[1] && !ft_strncmp(comArr[1], "$", 1) && \
 		(ft_strlen(comArr[1]) > 1))
 	{
 		dollarSign(msh, comArr[1]);
@@ -24,9 +24,9 @@ int execEcho(t_msh *msh, char **comArr)
 	return (1);
 }
 
-void ft_echo(char **av, int nflag)
+void	ft_echo(char **av, int nflag)
 {
-	int i;
+	int	i;
 
 	while (*++av && !ft_strncmp(*av, "-n", 2))
 	{
@@ -39,7 +39,7 @@ void ft_echo(char **av, int nflag)
 		{
 			if (nflag != 1)
 				nflag = 0;
-			break;
+			break ;
 		}
 	}
 	while (*av)

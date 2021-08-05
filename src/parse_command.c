@@ -1,14 +1,10 @@
 
 #include <sys/file.h>
 #include "minishell.h"
-#include "utils/msh_utils.h"
-
 #define RED_SMALL 1
 #define RED_LARG 2
 #define DOUBLE_LARG 3
 #define HERE_DOC 4
-#define CREATE_FILE O_CREAT | O_RDWR, 0644
-
 
 int getTmpFile(char **tokens, int *j) //here_doc
 {
@@ -78,38 +74,18 @@ int parseRedLarge(t_cmd *cmd_s, int *j)
 	return (RED_LARG);
 }
 
-
 int parseDoubleLarge(t_cmd *cmd_s, int *j)
 {
-	//int fileFd;
-	//char *fileName;
-
-//	fileName = ft_strdup(tokens[(*j) + 1]);
 	cmd_s->double_larg = 1;
 	*cmd_s->fileOutFd = open(cmd_s->cmdTokens[(*j) + 1], O_CREAT | O_RDWR | O_APPEND, 0644);
 	(*j) += 1;
 	return (DOUBLE_LARG);
 }
 
-//int parseRedSmall(char **tokens, int *j)
-//{
-//	int fileFd;
-//	char *fileName;
-//
-//	fileName = ft_strdup(tokens[(*j) + 1]);
-//	fileFd = open(fileName, O_RDONLY);
-//	free(fileName);
-//	return (fileFd);
-//}
-
 int parseRedSmall(t_cmd *cmd_s, int *j)
 {
-	//char *fileName;
-
 	cmd_s->red_smal = 1;
-	//fileName = ft_strdup(cmd_s->cmdTokens[(*j) + 1]);
 	*cmd_s->fileInFd = open(cmd_s->cmdTokens[(*j) + 1], O_RDONLY);
-	//free(fileName);
 	(*j) += 1;
 	return (RED_SMALL);
 }

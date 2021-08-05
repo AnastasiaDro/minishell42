@@ -29,10 +29,10 @@ void	deleteInList(t_en_list **list, char **names)
 	t_en_list	*prev;
 	t_en_list	*tmp;
 
-	prev = NULL;
 	i = -1;
 	while (names[++i])
 	{
+		prev = NULL;
 		tmp = *list;
 		while (tmp)
 		{

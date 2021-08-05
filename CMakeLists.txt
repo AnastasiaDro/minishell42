@@ -12,7 +12,7 @@ file(GLOB helloworld_SRC
 file(GLOB msh_SRC
         "*.h"
         "src/*.c"
-        "src/enviroment/*.c"
+        "src/environment/*.c"
         "src/utils/*.c"
         )
 

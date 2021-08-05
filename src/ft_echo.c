@@ -6,11 +6,23 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 12:41:07 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/02 13:09:25 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/05 18:14:41 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	execEcho(t_msh *msh, char **comArr)
+{
+	int	len;
+
+	len = ft_strlen(comArr[1]);
+	if (comArr[1] && !ft_strncmp(comArr[1], "$", 1) && (len > 1))
+		dollarSign(msh, comArr[1]);
+	else
+		ft_echo(comArr, 0);
+	return (1);
+}
 
 void	ft_echo(char **av, int nflag)
 {

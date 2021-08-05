@@ -60,8 +60,9 @@
 
 typedef struct s_msh // main struct
 {
-//	int		fd;
+	int		one;
 	int		len;
+	int		zero;
 	int		quote;
 	char	**cmd;
 	int		cntPipes;
@@ -102,6 +103,8 @@ int dollarSign(t_msh *msh, char *dollar);
 
 // exec
 void	exec(t_msh *msh);
+char	**hasTokens(t_cmd *cmd_s);
+int	execEcho(t_msh *msh, char **comArr);
 
 // errors
 void ft_error(ssize_t err_no, const char *msg);

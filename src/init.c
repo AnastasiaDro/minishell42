@@ -20,6 +20,8 @@ void	ft_init(t_msh *msh, char **envp)
 	char	*s1;
 
 	msh->fd = 0;
+	msh->one = 1;
+	msh->zero = 0;
 	msh->len = 0;
 	msh->quote = 0;
 	msh->cntPipes = 0;

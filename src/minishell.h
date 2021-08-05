@@ -119,7 +119,6 @@ int ft_cd(t_msh *msh, const char *path);
 
 // readline
 void rl_replace_line();
-int parseHereDoc(int i,  int out, t_msh *msh);
 
 // handlers
 void	exportHandler(t_msh *msh, int i);

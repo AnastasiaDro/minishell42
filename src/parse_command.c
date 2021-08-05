@@ -9,6 +9,7 @@
 #define HERE_DOC 4
 #define CREATE_FILE O_CREAT | O_RDWR, 0644
 
+
 int getTmpFile(char **tokens, int *j) //here_doc
 {
 	char *line;
@@ -36,16 +37,15 @@ int getTmpFile(char **tokens, int *j) //here_doc
 	return (tFileFd);
 }
 
-//int getRedLargFd(char **tokens, int *j)
-//{
-//	int fileFd;
-//	char *fileName;
-//
-//	fileName = ft_strdup(tokens[(*j) + 1]);
-//	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
-//	free(fileName);
-//	return (fileFd);
-//}
+int	parseHereDoc(t_cmd *cmd_s, int *j)
+{
+	cmd_s->here_doc = 1;
+	getTmpFile(cmd_s->cmdTokens, j);
+	*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
+	(*j) += 1;
+	return (HERE_DOC);
+}
+
 
 int getRedLargFd(char **tokens, int *j)
 {
@@ -107,11 +107,11 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 {
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<<"))
 	{
-		cmd_s->here_doc = 1;
-		getTmpFile(cmd_s->cmdTokens, j);
-		*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
-		(*j) += 1; //сдвигаем указатель за лимитер
-		return (HERE_DOC);
+//		cmd_s->here_doc = 1;
+//		getTmpFile(cmd_s->cmdTokens, j);
+//		*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
+//		(*j) += 1; //сдвигаем указатель за лимитер
+		return (parseHereDoc(cmd_s, j));
 	}
 
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<"))

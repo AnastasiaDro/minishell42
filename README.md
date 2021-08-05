@@ -14,3 +14,4 @@ TODO: norminette
 	-src/initFds.c: OK!
 	-src/exec_cer.c: before func cerExec() norm and work
 	-src/lexer.c: OK!
+	-src/parseRedirects.c: OK!

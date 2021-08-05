@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parseRedirects.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/05 16:14:40 by cerebus           #+#    #+#             */
+/*   Updated: 2021/08/05 16:15:52 by cerebus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/file.h>
 #include "minishell.h"
 
 int	getRedLargeFd(char **tokens, int *j)
 {
-	int fileFd;
-	char *fileName;
+	int		fileFd;
+	char	*fileName;
 
 	fileName = ft_strdup(tokens[(*j) + 1]);
 	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
@@ -35,7 +47,8 @@ int	parseRedLarge(t_cmd *cmd_s, int *j)
 int	parseDoubleLarge(t_cmd *cmd_s, int *j)
 {
 	cmd_s->double_larg = 1;
-	*cmd_s->fileOutFd = open(cmd_s->cmdTokens[(*j) + 1], O_CREAT | O_RDWR | O_APPEND, 0644);
+	*cmd_s->fileOutFd = open(cmd_s->cmdTokens[(*j) + 1], \
+			O_CREAT | O_RDWR | O_APPEND, 0644);
 	(*j) += 1;
 	return (DOUBLE_LARG);
 }

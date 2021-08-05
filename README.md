@@ -23,3 +23,5 @@ TODO: norminette
 	-src/getExportVar.c: OK!
 	-src/getBinaryName.c: OK!
 	-src/execBinary.c: OK!
+	-src/closeAllFds.c: OK!
+	-src/findCommand.c: OK!

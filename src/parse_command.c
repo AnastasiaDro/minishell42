@@ -36,7 +36,7 @@ int getTmpFile(char **tokens, int *j) //here_doc
 	return (tFileFd);
 }
 
-//int parse_red_larg(char **tokens, int *j)
+//int getRedLargFd(char **tokens, int *j)
 //{
 //	int fileFd;
 //	char *fileName;
@@ -47,7 +47,7 @@ int getTmpFile(char **tokens, int *j) //here_doc
 //	return (fileFd);
 //}
 
-int parse_red_larg(char **tokens, int *j)
+int getRedLargFd(char **tokens, int *j)
 {
 	int fileFd;
 	char *fileName;
@@ -57,6 +57,27 @@ int parse_red_larg(char **tokens, int *j)
 	free(fileName);
 	return (fileFd);
 }
+
+int parseRedLarge(t_cmd *cmd_s, int *j)
+{
+	int	tmp;
+
+	if (cmd_s->red_larg != 1)
+	{
+		cmd_s->red_larg = 1;
+		*cmd_s->fileOutFd = getRedLargFd(cmd_s->cmdTokens, j);
+		(*j) += 1;
+	}
+	else
+	{
+		tmp = *cmd_s->fileOutFd;
+		*cmd_s->fileOutFd = getRedLargFd(cmd_s->cmdTokens, j);
+		close(tmp);
+		(*j) += 1;
+	}
+	return (RED_LARG);
+}
+
 
 int parse_double_larg(char **tokens, int *j)
 {
@@ -114,21 +135,6 @@ int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 		return (DOUBLE_LARG);
 	}
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
-	{
-		if (cmd_s->red_larg != 1)
-		{
-			cmd_s->red_larg = 1;
-			*cmd_s->fileOutFd = parse_red_larg(cmd_s->cmdTokens, j);
-			(*j) += 1;
-		}
-		else
-		{
-			int tmp = *cmd_s->fileOutFd;
-			*cmd_s->fileOutFd = parse_red_larg(cmd_s->cmdTokens, j);
-			close(tmp);
-			(*j) += 1;
-		}
-		return (RED_LARG);
-	}
+		return (parseRedLarge(cmd_s, j));
 	return (0);
 }

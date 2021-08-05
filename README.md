@@ -19,3 +19,4 @@ TODO: norminette
 	-src/checkControlSymbol.c: OK!
 	-src/utils/*: OK!
 	-src/printError.c: OK!
+	-src/exportHandler.c: OK!

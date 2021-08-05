@@ -10,7 +10,6 @@ const char	*getValue(t_en_list *export_list, const char *key)
 		if (!ft_strcmp(tmp->name, key))
 			return (tmp->value);
 		tmp = tmp->next;
-		
 	}
 	return (NULL);
 }
@@ -34,5 +33,6 @@ void	ft_init(t_msh *msh, char **envp)
 	envInitEnvpList(msh);
 	s1 = "HOME";
 	envUnset(msh, &s1);
-	envAddVariable(msh, ft_strdup(s1), ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));
+	envAddVariable(msh, s1, ft_strjoin("/Users/", getValue(msh->export_list, "LOGNAME")));
+	//system("leaks minishell");
 }

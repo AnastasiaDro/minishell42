@@ -64,8 +64,7 @@ char	**lexer(char *s)
 	t_list	*tmp;
 
 	lexLst = addLexLst(s);
-	tmp = addLexLst(s);
-	lst_size = ft_lstsize(tmp);
+	lst_size = ft_lstsize(lexLst);
 	arr = malloc(sizeof(char *) * lst_size + 1);
 	if (!arr)
 		return (NULL);

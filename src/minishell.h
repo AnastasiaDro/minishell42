@@ -15,7 +15,6 @@
 #include <ncurses.h>
 #include <errno.h>
 #include <sys/file.h>
-#include "exit_codes.h"
 #include "../libft/libft.h"
 #include "environment/environment.h"
 #include "utils/msh_utils.h"

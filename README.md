@@ -16,3 +16,17 @@ TODO: norminette
 	-src/lexer.c: OK!
 	-src/hasTokens.c: OK!
 	-src/exec_cer.c: OK!
+
+	-src/parseRedirects.c: OK!
+	-src/parseHereDoc.c: OK!
+	-src/checkControlSymbol.c: OK!
+	-src/utils/*: OK!
+	-src/printError.c: OK!
+	-src/exportHandler.c: OK!
+	-src/getExportVar.c: OK!
+	-src/getBinaryName.c: OK!
+	-src/execBinary.c: OK!
+	-src/closeAllFds.c: OK!
+	-src/findCommand.c: OK!
+	-src/execArrSplit.c: OK!
+	-src/waitChildren.c: OK!

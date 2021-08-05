@@ -17,11 +17,16 @@
 #include <sys/file.h>
 #include "exit_codes.h"
 #include "../libft/libft.h"
-#include "enviroment/enviroment.h"
+#include "enviroment/environment.h"
 #include "utils/msh_utils.h"
 # define NAME "msh: "
 # define ARGNUM_ERR "Invalid arguments number!\n"
 # define COMMAND_ERR "command not found"
+
+#define RED_SMALL 1
+#define RED_LARG 2
+#define DOUBLE_LARG 3
+#define HERE_DOC 4
 # define SYNTAX_ERR "syntax error near unexpected token"
 #define NEW_LINE	"newline"
 
@@ -122,17 +127,13 @@ int ft_cd(t_msh *msh, const char *path);
 
 // readline
 void rl_replace_line();
-int parseHereDoc(int i,  int out, t_msh *msh);
 
 // handlers
-void	exportHandler(t_msh *msh, int i);
 void envAddVariable(t_msh *msh, char *name, char *value);
 
 //ищем и выполянем контрольный символ
-int check_ctrl_symbol(t_cmd *cmd_s, int *j);
-//int execCerBuiltin(t_msh *msh, t_cmd *cmd_s, int *j);
+int checkCtrlSymbol(t_cmd *cmd_s, int *j);
 int execCerBuiltin(t_msh *msh, char **comArr);
-//void cerExportHandler(t_msh *msh, t_cmd *cmd_s, int *j);
 int cerExportHandler(t_msh *msh, char **execArr);
 void cerExec(t_msh *msh);
 void	waitChildren(void);
@@ -153,4 +154,10 @@ void envInitEnvpList(t_msh *msh);
 int ft_print_export( t_msh *msh);
 int ft_print_env(t_msh *msh);
 void envUnset(t_msh *msh, char **names);
+int	parseHereDoc(t_cmd *cmd_s, int *j);
+
+
+int parseRedLarge(t_cmd *cmd_s, int *j);
+int parseDoubleLarge(t_cmd *cmd_s, int *j);
+int parseRedSmall(t_cmd *cmd_s, int *j);
 #endif

@@ -31,7 +31,6 @@ void	ft_init(t_msh *msh, char **envp)
 	msh->env_list = NULL;
 	msh->c = (char)255;
 	msh->envp_len = (int)ft_arrlen(envp);
-	//msh->envp_len = envInitEnvpList(envp, &(msh->export_list), &(msh->env_list));
 	envInitEnvpList(msh);
 	s1 = "HOME";
 	envUnset(msh, &s1);

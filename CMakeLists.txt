@@ -9,9 +9,15 @@ file(GLOB helloworld_SRC
         "src/enviroment/*.c"
         "src/utils/*.c"
         )
+file(GLOB msh_SRC
+        "*.h"
+        "src/*.c"
+        "src/enviroment/*.c"
+        "src/utils/*.c"
+        )
 
 
 
-add_executable(msh_42 ${helloworld_SRC})
+add_executable(msh_42 ${msh_SRC} src/parseHereDoc.c src/checkControlSymbol.c)
 
 target_link_libraries(msh_42 "/Users/cerebus/CLionProjects/msh-42/libft/libft.a" -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline)

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parseHereDoc.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/05 16:16:51 by cerebus           #+#    #+#             */
+/*   Updated: 2021/08/05 16:16:56 by cerebus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int getTmpFile(char **tokens, int *j) //here_doc
+int	getTmpFile(char **tokens, int *j)
 {
-	char *line;
-	int tFileFd;
-	char *tmp;
-	char *limiter;
+	char	*line;
+	int		tFileFd;
+	char	*tmp;
+	char	*limiter;
 
 	limiter = ft_strdup(tokens[(*j) + 1]);
 	line = NULL;

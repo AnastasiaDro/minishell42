@@ -25,3 +25,4 @@ TODO: norminette
 	-src/execBinary.c: OK!
 	-src/closeAllFds.c: OK!
 	-src/findCommand.c: OK!
+	-src/execArrSplit.c: OK!

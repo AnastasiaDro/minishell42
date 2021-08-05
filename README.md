@@ -22,3 +22,4 @@ TODO: norminette
 	-src/exportHandler.c: OK!
 	-src/getExportVar.c: OK!
 	-src/getBinaryName.c: OK!
+	-src/execBinary.c: OK!

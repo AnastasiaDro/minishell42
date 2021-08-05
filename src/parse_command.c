@@ -17,7 +17,6 @@ int getTmpFile(char **tokens, int *j) //here_doc
 	char *limiter;
 
 	limiter = ft_strdup(tokens[(*j) + 1]);
-
 	line = NULL;
 	tFileFd = open("tmpFile", O_CREAT | O_RDWR, 0644);
 	printf("fd = %d\n", tFileFd);
@@ -36,6 +35,17 @@ int getTmpFile(char **tokens, int *j) //here_doc
 	close(tFileFd);
 	return (tFileFd);
 }
+
+//int parse_red_larg(char **tokens, int *j)
+//{
+//	int fileFd;
+//	char *fileName;
+//
+//	fileName = ft_strdup(tokens[(*j) + 1]);
+//	fileFd = open(fileName, O_TRUNC | O_CREAT | O_RDWR, 0644);
+//	free(fileName);
+//	return (fileFd);
+//}
 
 int parse_red_larg(char **tokens, int *j)
 {
@@ -56,7 +66,6 @@ int parse_double_larg(char **tokens, int *j)
 	fileName = ft_strdup(tokens[(*j) + 1]);
 
 	fileFd = open(fileName, O_CREAT | O_RDWR | O_APPEND, 0644);
-	//printf("file fd = %d\n", fileFd);
 	free(fileName);
 	return (fileFd);
 }
@@ -71,6 +80,7 @@ int parse_red_small(char **tokens, int *j)
 	free(fileName);
 	return (fileFd);
 }
+
 
 int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 {

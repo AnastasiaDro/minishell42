@@ -100,7 +100,7 @@ void	cerExec(t_msh *msh)
 		if (i != msh->commands_num - 1)
 			cmd_s->fileOutFd = &(msh->fd[i + 1][1]);
 		j = 0;
-		int arrLen = ft_arrlen(cmd_s->cmdTokens);
+		int arrLen = (int)ft_arrlen(cmd_s->cmdTokens);
 		if (!cmd_s->cmdTokens[0])
 			return;
 		while (j < arrLen) //пока у нас есть токены

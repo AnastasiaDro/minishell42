@@ -22,7 +22,6 @@ const char	*getValue(t_en_list *export_list, const char *key)
 		if (!ft_strcmp(tmp->name, key))
 			return (tmp->value);
 		tmp = tmp->next;
-		
 	}
 	return (NULL);
 }

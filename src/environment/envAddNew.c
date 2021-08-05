@@ -50,6 +50,7 @@ void	envExportAddNew(t_en_list **export_list, char *name, char *value)
 t_en_list	*envAddExportList(t_msh *msh, char *name, char *value)
 {
 	t_en_list	*p;
+
 	p = getExportVar(&msh->export_list, name);
 	if (p)
 	{
@@ -63,7 +64,7 @@ t_en_list	*envAddExportList(t_msh *msh, char *name, char *value)
 void	envAddEnvList(t_msh *msh, char *name, char *value, t_en_list *flag)
 {
 	t_en_list	*p;
-	char 	*tmp;
+	char		*tmp;
 
 	if (!flag)
 		env_lstadd_back(&(msh->env_list), envParsedLstNew(name, value));

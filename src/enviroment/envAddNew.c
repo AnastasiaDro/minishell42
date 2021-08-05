@@ -6,7 +6,7 @@
 /*   By: cerebus <cerebus@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:14:22 by cerebus           #+#    #+#             */
-/*   Updated: 2021/08/03 20:18:49 by cerebus          ###   ########.fr       */
+/*   Updated: 2021/08/05 16:54:31 by cerebus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	envExportAddNew(t_en_list **export_list, char *name, char *value)
 	tmp = (*export_list)->next;
 	if (ft_strcmp(previous->name, name) >= 0)
 	{
-		printf("res1 = %d\n", ft_strncmp(previous->name, name, ft_strlen(name)));
-		printf("res2 = %d\n", ft_strncmp(previous->name, name, ft_strlen(previous->name)));
 		env_lstadd_front(export_list, envParsedLstNew(name, value));
 		return ;
 	}

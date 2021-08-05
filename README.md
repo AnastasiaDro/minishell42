@@ -8,6 +8,15 @@ TODO: norminette:
 	-src/checkControlSymbol.c: OK!
 	-src/closeAllFds.c: OK!
 	-src/dollar.c: OK!
+	-src/environment/envAddNew.c: OK!
+	-src/environment/envDeleteVar.c: OK!
+	-src/environment/envInitEnvpList.c: OK!
+	-src/environment/environment.c: OK!
+	-src/environment/environment.h: OK!
+	-src/environment/envParsedLstNew.c: OK!
+	-src/environment/envPrintLists.c: OK!
+	-src/environment/envSetNameVal.c: OK!
+	-src/environment/envUnset.c: OK!
 	-src/execArrSplit.c: OK!
 	-src/execBinary.c: OK!
 	-src/exec_cer.c: OK!
@@ -24,22 +33,14 @@ TODO: norminette:
 	-src/initFds.c: OK!
 	-src/lexer.c: OK!
 	-src/minishell.c: OK!
+	-src/minishell.h: OK!
 	-src/parseHereDoc.c: OK!
 	-src/parseRedirects.c: OK!
 	-src/parser.c: OK!
 	-src/pipexSplit.c: OK!
 	-src/printError.c: OK!
-	-src/waitChildren.c: OK!
 	-src/utils/ft_freeStringsArr.c: OK!
 	-src/utils/ft_lstFree.c: OK!
 	-src/utils/move_index.c: OK!
 	-src/utils/msh_utils.h: OK!
-	-src/environment/envAddNew.c: OK!
-	-src/environment/envDeleteVar.c: OK!
-	-src/environment/envInitEnvpList.c: OK!
-	-src/environment/envParsedLstNew.c: OK!
-	-src/environment/envPrintLists.c: OK!
-	-src/environment/envSetNameVal.c: OK!
-	-src/environment/envUnset.c: OK!
-	-src/environment/environment.c: OK!
-	-src/environment/environment.h: OK!
+	-src/waitChildren.c: OK!

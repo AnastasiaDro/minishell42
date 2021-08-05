@@ -6,7 +6,7 @@
 /*   By: jkeitha <jkeitha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:15 by jkeitha           #+#    #+#             */
-/*   Updated: 2021/08/04 22:18:30 by jkeitha          ###   ########.fr       */
+/*   Updated: 2021/08/05 21:43:38 by jkeitha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ctrl_c(int num)
 		tcgetattr(0, &term);
 		term.c_lflag = 0x2020010d;
 		tcsetattr(0, TCSANOW, &term);
-		rl_replace_line("", 0);
+		rl_replace_line();
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();

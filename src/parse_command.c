@@ -47,7 +47,7 @@ int	parseHereDoc(t_cmd *cmd_s, int *j)
 }
 
 
-int getRedLargFd(char **tokens, int *j)
+int getRedLargeFd(char **tokens, int *j)
 {
 	int fileFd;
 	char *fileName;
@@ -65,13 +65,13 @@ int parseRedLarge(t_cmd *cmd_s, int *j)
 	if (cmd_s->red_larg != 1)
 	{
 		cmd_s->red_larg = 1;
-		*cmd_s->fileOutFd = getRedLargFd(cmd_s->cmdTokens, j);
+		*cmd_s->fileOutFd = getRedLargeFd(cmd_s->cmdTokens, j);
 		(*j) += 1;
 	}
 	else
 	{
 		tmp = *cmd_s->fileOutFd;
-		*cmd_s->fileOutFd = getRedLargFd(cmd_s->cmdTokens, j);
+		*cmd_s->fileOutFd = getRedLargeFd(cmd_s->cmdTokens, j);
 		close(tmp);
 		(*j) += 1;
 	}
@@ -79,61 +79,49 @@ int parseRedLarge(t_cmd *cmd_s, int *j)
 }
 
 
-int parse_double_larg(char **tokens, int *j)
+int parseDoubleLarge(t_cmd *cmd_s, int *j)
 {
-	int fileFd;
-	char *fileName;
+	//int fileFd;
+	//char *fileName;
 
-	fileName = ft_strdup(tokens[(*j) + 1]);
-
-	fileFd = open(fileName, O_CREAT | O_RDWR | O_APPEND, 0644);
-	free(fileName);
-	return (fileFd);
+//	fileName = ft_strdup(tokens[(*j) + 1]);
+	cmd_s->double_larg = 1;
+	*cmd_s->fileOutFd = open(cmd_s->cmdTokens[(*j) + 1], O_CREAT | O_RDWR | O_APPEND, 0644);
+	(*j) += 1;
+	return (DOUBLE_LARG);
 }
 
-int parse_red_small(char **tokens, int *j)
+//int parseRedSmall(char **tokens, int *j)
+//{
+//	int fileFd;
+//	char *fileName;
+//
+//	fileName = ft_strdup(tokens[(*j) + 1]);
+//	fileFd = open(fileName, O_RDONLY);
+//	free(fileName);
+//	return (fileFd);
+//}
+
+int parseRedSmall(t_cmd *cmd_s, int *j)
 {
-	int fileFd;
-	char *fileName;
+	//char *fileName;
 
-	fileName = ft_strdup(tokens[(*j) + 1]);
-	fileFd = open(fileName, O_RDONLY);
-	free(fileName);
-	return (fileFd);
+	cmd_s->red_smal = 1;
+	//fileName = ft_strdup(cmd_s->cmdTokens[(*j) + 1]);
+	*cmd_s->fileInFd = open(cmd_s->cmdTokens[(*j) + 1], O_RDONLY);
+	//free(fileName);
+	(*j) += 1;
+	return (RED_SMALL);
 }
-
 
 int check_ctrl_symbol(t_cmd *cmd_s, int *j)
 {
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<<"))
-	{
-//		cmd_s->here_doc = 1;
-//		getTmpFile(cmd_s->cmdTokens, j);
-//		*cmd_s->fileInFd = open("tmpFile", O_RDONLY, 0644);
-//		(*j) += 1; //сдвигаем указатель за лимитер
 		return (parseHereDoc(cmd_s, j));
-	}
-
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], "<"))
-	{
-		cmd_s->red_smal = 1;
-		*cmd_s->fileInFd = parse_red_small(cmd_s->cmdTokens, j);
-		if (*cmd_s->fileInFd == -1)
-		{
-			printError(cmd_s->cmdTokens[*j + 1], 0); //доделать
-			(*j) += 1;
-			return (-1);
-		}
-		(*j) += 1;
-		return (RED_SMALL);
-	}
+		return (parseRedSmall(cmd_s, j));
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], ">>"))
-	{
-		*cmd_s->fileOutFd = parse_double_larg(cmd_s->cmdTokens, j); //
-		cmd_s->double_larg = 1;
-		(*j) += 1;
-		return (DOUBLE_LARG);
-	}
+		return parseDoubleLarge(cmd_s, j);
 	if (!ft_strcmp(cmd_s->cmdTokens[*j], ">"))
 		return (parseRedLarge(cmd_s, j));
 	return (0);

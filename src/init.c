@@ -2,7 +2,7 @@
 
 const char	*getValue(t_en_list *export_list, const char *key)
 {
-	t_en_list *tmp;
+	t_en_list	*tmp;
 
 	tmp = export_list;
 	while (tmp)
@@ -17,7 +17,7 @@ const char	*getValue(t_en_list *export_list, const char *key)
 void	ft_init(t_msh *msh, char **envp)
 {
 	char	*s1;
-	char 	*val;
+	char	*val;
 
 	msh->fd = 0;
 	msh->one = 1;

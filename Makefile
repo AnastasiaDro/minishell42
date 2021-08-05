@@ -60,7 +60,7 @@ $(NAME):	$(OBJS)
 
 $(CER):		$(OBJS)
 			@make bonus -C libft
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libftCer/libft.a -L/Users/cerebus/.brew/Cellar/readline/8.1/lib/ -I/Users/cerebus/.brew/Cellar/readline/8.1/include -lreadline
 
 $(HOME):	$(OBJS)
 			@make bonus -C libft
